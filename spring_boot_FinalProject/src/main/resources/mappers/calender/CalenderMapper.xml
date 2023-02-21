@@ -13,6 +13,7 @@
 	  		<result property="dataID"  column="dataID"  />
 	  		<result property="prdType"  column="prdType"  />
 	  		<result property="calPayment"  column="calPayment"  />
+	  		<result property="calDeposit"  column="calDeposit"  />
 	  </resultMap>
 	  <resultMap type="com.spring_boot_momentor.model.CardVO" id="cardResult">
 		  <result column="cardId" property="cardId"/>
@@ -46,6 +47,7 @@
 	  		<result property="cardName"  column="cardName"  />
 	  		<result property="insuName"  column="insuName"  />
 	  		<result property="calPayment"  column="calPayment"  />
+	  		<result property="calDeposit"  column="calDeposit"  />
 	  		<result property="userID"  column="userID"  />
 	  </resultMap>
 	  <resultMap id="prdResult" type="com.spring_boot_momentor.model.CalenderProductVO">
@@ -61,8 +63,8 @@
 	  		<result property="prdComImg"  column="prdComImg"  />
 	  </resultMap>
 	  <insert id="insertPlan" parameterType="com.spring_boot_momentor.model.CalenderVO">
-			INSERT INTO calender(calSubDate, calTransfer, calMaturity, prdID, userID, prdType, calPayment, prdName)
-			VALUES (#{calSubDate}, #{calTransfer}, #{calMaturity},#{prdID}, #{userID}, #{prdType}, #{calPayment}, #{prdName})	
+			INSERT INTO calender(calSubDate, calTransfer, calMaturity, prdID, userID, prdType, calPayment, prdName, calDeposit)
+			VALUES (#{calSubDate}, #{calTransfer}, #{calMaturity},#{prdID}, #{userID}, #{prdType}, #{calPayment}, #{prdName}, #{calDeposit})	
 	  </insert>
 		<select id="calenderPrdList" resultMap="prdResult">
 			<choose>
@@ -92,6 +94,28 @@
 						WHERE insuCtg=#{kindDetail} 
 					</if>
 				</when>
+				<when test="kind == 'saving'">
+					SELECT 
+						savingID AS prdID,
+						comName AS prdCom,
+						prdName AS prdName,
+						maxLimit AS prdPrice
+					FROM savingbase 
+					<if test="kindDetail != 'default'">
+						WHERE comName=#{kindDetail} 
+					</if>
+				</when>
+				<when test="kind == 'deposit'">
+					SELECT 
+						depositID AS prdID,
+						prdName AS prdName,
+						comName AS prdCom,
+						maxLimit AS prdPrice
+					FROM depositbase 
+					<if test="kindDetail != 'default'">
+						WHERE comName=#{kindDetail} 
+					</if>
+				</when>
 			</choose>
 			<choose>
 				<when test="order == 'name'">
@@ -116,9 +140,8 @@
 	  <select id="changePrdName" parameterType="com.spring_boot_momentor.model.CalenderVO">
 			UPDATE calender 
 			SET prdName = #{prdName}  
-			WHERE prdID=#{prdID} 
-			AND userID=#{userID} 
-			AND prdType=#{prdType};
+			WHERE dataID=#{dataID} 
+			AND userID=#{userID} ;
 	  </select>
 	  <delete id="deletePlan" parameterType="int">
 	  	DELETE FROM calender
@@ -139,4 +162,76 @@
 			WHERE dataID = #{dataID}
 			AND	userID = #{userID};
 	  </update>
+	  <select id="prdTotalFee" resultType="String">
+			SELECT SUM(calPayment) FROM calender 
+			WHERE userID=#{userID} 
+			AND prdType=#{prdType};
+	  </select>
+	  <select id="prdTotalDeposit" resultType="int">
+			SELECT SUM(calDeposit) FROM calender 
+			WHERE userID=#{userID} ;
+	  </select>
+	  <select id="insertPrdCategory" resultType="String">
+	  	<choose>
+				<when test="kind == 'card'">
+					SELECT comCtg FROM cards GROUP BY comCtg
+				</when>
+				<when test="kind == 'insu'">
+					SELECT insuCtg FROM insu GROUP BY insuCtg
+				</when>
+				<when test="kind == 'saving'">
+					SELECT comName FROM savingbase GROUP BY comName
+				</when>
+				<when test="kind == 'deposit'">
+					SELECT comName FROM depositbase GROUP BY comName
+				</when>
+		</choose>
+	  </select>
+	  
+		<select id="calenderSearch" resultMap="prdResult">
+			<choose>
+				<when test="kind == 'card'">
+			<![CDATA[
+					SELECT 
+						cardId AS prdID,
+						cardName AS prdName,
+						cardDes AS prdDes,
+						cardImgUrl AS prdImg,
+						cardFee AS prdPrice,
+						cardUrl AS prdURL,
+						comCtg AS prdCom
+					FROM cards 
+	  				WHERE cardName like CONCAT('%',#{text},'%')
+	  		]]>
+				</when>
+				<when test="kind == 'insu'">
+					SELECT 
+						id AS prdID,
+						insuName AS prdName,
+						insuJoinURL AS prdURL,
+						prdName AS prdCom,
+						prdLogo AS prdComImg
+					FROM insu 
+	  				WHERE insuName like CONCAT('%',#{text},'%')
+				</when>
+				<when test="kind == 'saving'">
+					SELECT 
+						savingID AS prdID,
+						comName AS prdCom,
+						prdName AS prdName,
+						maxLimit AS prdPrice
+					FROM savingbase 
+	  				WHERE prdName like CONCAT('%',#{text},'%')
+				</when>
+				<when test="kind == 'deposit'">
+					SELECT 
+						savingID AS prdID,
+						comName AS prdCom,
+						prdName AS prdName,
+						maxLimit AS prdPrice
+					FROM depositbase 
+	  				WHERE prdName like CONCAT('%',#{text},'%')
+				</when>
+			</choose>
+		</select>
   </mapper>

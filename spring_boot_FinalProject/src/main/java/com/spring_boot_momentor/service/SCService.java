@@ -6,7 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.spring_boot_momentor.dao.IAnnuitySavingDAO;
+import com.spring_boot_momentor.dao.ICardDAO;
+import com.spring_boot_momentor.dao.IInsuDAO;
 import com.spring_boot_momentor.dao.ISCDAO;
+import com.spring_boot_momentor.dao.ISavingDAO;
+import com.spring_boot_momentor.model.AnnuitySavingBaseVO;
+import com.spring_boot_momentor.model.InsuVO;
+import com.spring_boot_momentor.model.SavingBaseVO;
 import com.spring_boot_momentor.model.ServiceCenterVO;
 
 @Service
@@ -46,6 +53,24 @@ public class SCService implements ISCService {
 	public void deleteQuestion(int qusNum) {
 		// TODO Auto-generated method stub
 		dao.deleteQuestion(qusNum);
+	}
+
+	@Override
+	public ArrayList<InsuVO> insuRandom() {
+		// TODO Auto-generated method stub
+		return dao.insuRandom();
+	}
+
+	@Override
+	public ArrayList<SavingBaseVO> savRandom() {
+		// TODO Auto-generated method stub
+		return dao.savRandom();
+	}
+
+	@Override
+	public ArrayList<AnnuitySavingBaseVO> annRandom() {
+		// TODO Auto-generated method stub
+		return dao.annRandom();
 	}
 
 	

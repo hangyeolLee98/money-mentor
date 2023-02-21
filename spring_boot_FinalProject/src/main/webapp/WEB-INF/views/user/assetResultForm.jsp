@@ -41,16 +41,45 @@
 						<td id="title" colspan="4">${userAge }가 선호하는 상품 보러가기</td>
 					</tr>
 					<tr>
-						<td><div class="product p1">바로가기 - 금융상품추가예정</div></td>
-						<td><div class="product p2">바로가기 - 금융상품추가예정</div></td>
-						<td><div class="product p1">바로가기 - 금융상품추가예정</div></td>
-						<td><div class="product p2">바로가기 - 금융상품추가예정</div></td>
+						<c:forEach var="card" items='${cardList}'>
+							<td>
+								<div class ="card">
+									<div>
+										<img class="cardImg" src='<c:url value='${card.cardImgUrl}'/>'>
+									</div>
+									<div class="product p1">
+										<h4>${card.cardName }</h4> <br>
+										${card.cardDes } <br><br>
+										<c:if test="${card.comCtg eq '현대'}">
+											<a href="https://www.hyundaicard.com/cpc/cr/CPCCR0201_01.hc?cardWcd=${card.cardUrl}">해당 사이트 바로가기</a>
+										</c:if>
+										<c:if test="${card.comCtg eq 'KB'}">
+											<a href="https://card.kbcard.com/CRD/DVIEW/HCAMCXPRICAC0076?mainCC=a&cooperationcode=${card.cardUrl}">해당 사이트 바로가기</a>
+										</c:if>
+										<c:if test="${card.comCtg eq 'lotte'}">
+											<a href="${card.cardUrl}">해당 사이트 바로가기</a>
+										</c:if>
+										<c:if test="${card.comCtg eq 'hana'}">
+											<a href="${card.cardUrl}">해당 사이트 바로가기</a>
+										</c:if>
+									</div>
+								</div>
+							</td>
+						</c:forEach>
 					</tr>
 					<tr>
-						<td><div class="product p2">바로가기 - 금융상품추가예정</div></td>
-						<td><div class="product p1">바로가기 - 금융상품추가예정</div></td>
-						<td><div class="product p2">바로가기 - 금융상품추가예정</div></td>
-						<td><div class="product p1">바로가기 - 금융상품추가예정</div></td>
+						<td><br></td>
+					</tr>
+					<tr>
+						<c:forEach var="saving" items='${savingList}'>
+							<td>
+								<div class="product p2">
+									${saving.comName } <br>					
+									<h4>${saving.prdName }</h4> <br>
+									최고 ${saving.saveTrm }개월 기준 연 <strong>${saving.intrRate2}%</strong>
+								</div>
+							</td>
+						</c:forEach>
 					</tr>
 				</table>
 			</div>

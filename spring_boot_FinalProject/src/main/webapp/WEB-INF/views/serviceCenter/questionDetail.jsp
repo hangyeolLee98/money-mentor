@@ -47,20 +47,20 @@
 				</c:choose>
 				<div class="answer_div answer_btnDiv">
 					<input type="hidden" name="qusNum" class="qusNum" value="${ques.qusNum}">
-					<c:if test="${ques.userId eq sessionScope.sid}  ">
+					<c:if test="${(ques.userId eq sessionScope.sid) && (sessionScope.sid != 'admin')}">
 					 	<a id="answer_A" href="<c:url value='/deleteQuestion/${ques.qusNum}' />">
 					 		<button id="qus_btn_delete" value="삭제">삭제</button>
 					 	</a>
-					 	<div>누르면 바로 삭제됨</div>
 					</c:if>
 					<c:if test="${sessionScope.sid eq 'admin'}">
 					 	<a id="answer_A" href="<c:url value='/deleteQuestion/${ques.qusNum}' />">
 					 		<button id="qus_btn_delete" value="삭제">삭제</button>
 					 	</a>
+					 	<c:if test="${empty ques.answer}">
 					 	<a id="answer_A" href="<c:url value='/questionUpload/${ques.qusNum}' />">
 					 		<button id="qus_btn_update" value="답변">답변</button>
 					 	</a>
-					 	<div>누르면 바로 삭제됨</div>
+					 	</c:if>
 					</c:if>
 				</div>
 				

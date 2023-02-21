@@ -1,12 +1,28 @@
 package com.spring_boot_momentor.model;
 
 public class DepositOptionVO {
+	private String depositID;
+	private String dclsMonth;
 	private String comNum;
 	private String prdNum;
+//	private String comName;
+//	private String prdName;
 	private double intrRate;
 	private double intrRate2;
 	private String saveTrm;
 	private String intrRateTypeName;
+	public String getDepositID() {
+		return depositID;
+	}
+	public void setDepositID(String depositID) {
+		this.depositID = depositID;
+	}
+	public String getDclsMonth() {
+		return dclsMonth;
+	}
+	public void setDclsMonth(String dclsMonth) {
+		this.dclsMonth = dclsMonth;
+	}
 	public String getComNum() {
 		return comNum;
 	}
@@ -19,6 +35,18 @@ public class DepositOptionVO {
 	public void setPrdNum(String prdNum) {
 		this.prdNum = prdNum;
 	}
+//	public String getComName() {
+//		return comName;
+//	}
+//	public void setComName(String comName) {
+//		this.comName = comName;
+//	}
+//	public String getPrdName() {
+//		return prdName;
+//	}
+//	public void setPrdName(String prdName) {
+//		this.prdName = prdName;
+//	}
 	public double getIntrRate() {
 		return intrRate;
 	}
@@ -43,5 +71,6 @@ public class DepositOptionVO {
 	public void setIntrRateTypeName(String intrRateTypeName) {
 		this.intrRateTypeName = intrRateTypeName;
 	}
+	
 	
 }

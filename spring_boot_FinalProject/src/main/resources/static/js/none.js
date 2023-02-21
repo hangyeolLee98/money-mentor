@@ -3,13 +3,7 @@
  */
 // 상품 비교 데이터 넣기
 function toggleBtn1(cardId){  
-   // alert(cardId);
-// alert($(".lists__item").val());
-  $.ajax({
- 			type:"post",
- 			url:"/cardallList",
 
- 			success:function(result){
  			
  			 // 토글 할 버튼 선택 (btn1)
 			  const btn1 = document.getElementById('btn1');
@@ -20,9 +14,7 @@ function toggleBtn1(cardId){
 			    btn1.style.display = 'block';
  												
  			}
-  }
 
-}); // ajax 종료 
 
  		$.ajax({
  			type:"post",
@@ -106,6 +98,7 @@ function toggleBtn1(cardId){
  		 for(var i=$('.chkDelete').length-1; i>-1; i--){ 
 
 ﻿                    $('.chkDelete').eq(i).closest('.oo').remove(); 
+					$("#allCheck").prop("checked", false); // 해제
  		
  		
  		}
@@ -124,7 +117,6 @@ function toggleBtn1(cardId){
     });
 
 
- 
  function productCompare12(){
  		
  		    const btn1 = document.getElementById('btn1');
@@ -136,97 +128,3 @@ function toggleBtn1(cardId){
  		 
  		  
  		
- 
-/*
-var del = document.querySelector("#deleteCardBtn");
-var list = document.querySelector(".chkDelete");
-
-del.onclick = () => {
-
-	for(var i=0; i<list.length; i++){
-		if(list[i].checked){
-			list[i].parentElement.parentElement.remove(); 
-		
-		}
-	
-	}
-}
- */
- 
-
- 
-/*  $(document).ready(function() {
-        $(".sel_prod_comp").click(function() {
-            $.ajax({
-                url : "menu.html",
-                success : function(result) {
-                    var refine = $("#message2").html(result).find('li');
-                    console.log(result);
-                    console.log(refine);
-                    console.log(typeof(refine));
-                    $('#message2').html(refine);
-                }
-            });
-        });
-    });
-    
-    */
-    
-    
-    
-    
-    
-    
-    
-    
-    
- /* 	
- 	// [삭제] 버튼을 클릭했을 때 장바구니에서 선택된 상품 삭제
- 	$('#deleteCardBtn').on('click', function(){
- 		// 선택 여부 확인 : 하나라도 선택하면 ture, 아무것도 선택하지 않으면 false
- 		var checked = $('.chkDelete').is(':checked');
- 		
- 		if(checked){ // 하나라고 선택한 경우
- 			var answer = confirm("선택된 상품을 삭제하시겠습니까?");
- 			
- 			if(answer){
- 			// 체크된 체크박스의 cartNo를 배열에 추가
- 			var checkArr = new Array();
- 			$('.chkDelete:checked').each(function(){
- 				// checkArr.push($(this).val()); // value=${prd.cartNo} 한 경우
- 				checkArr.push($(this).attr("data-cartNo")); // 태그에 사용자 정의 속성을 사용한 경우 :  data-cartNo="${prd.cartNo}
- 				
- 			});
- 			
- 			// 서버로 전송
- 			$.ajax({
- 			type:"post",
- 			url:"/deleteCard",
- 			data: {"chbox":checkArr},
- 			dataType:'text',
- 			success:function(result){
- 				if(result == 1){
- 					location.href="/CardCompare";
- 				}
- 				},
- 				error:function(){
- 				alert("실패");
- 				},
- 				complete:function(){
- 				//alert("작업 완료");
- 				}
- 			}); // ajax 종료 	
- 					
- 			}
- 					
- 		}else{ //아무것도 선택하지 않은 경우
- 		alert("선택된 상품이 없습니다.");		
- 		
- 		}
- 	
- 	 });
- 	
- 	
-
-
-*/

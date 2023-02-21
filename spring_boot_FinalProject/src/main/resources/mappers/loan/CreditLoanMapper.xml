@@ -6,6 +6,7 @@
   
     <mapper namespace="com.spring_boot_momentor.dao.ICreditLoanDAO">
     <resultMap id="CreditLoanResult" type="com.spring_boot_momentor.model.CreditLoanBaseVO">
+		<result property="creditLoanID" column="creditLoanID"/>
 		<result property="dclsMonth" column="dclsMonth"/>
 		<result property="comNum" column="comNum"/>
 		<result property="prdNum" column="prdNum"/>
@@ -15,33 +16,65 @@
 		<result property="crdtTypeName" column="crdtTypeName"/>
 		<result property="cbName" column="cbName"/>
 		<result property="dclsStart" column="dclsStart"/>
+		<result property="crdtLendRateTypeName" column="crdtLendRateTypeName"/>
+		<result property="crdtGrade9Up" column="crdtGrade9Up"/>
+		<result property="crdtGrade8Up" column="crdtGrade8Up"/>
+		<result property="crdtGrade7Up" column="crdtGrade7Up"/>
+		<result property="crdtGrade6Up" column="crdtGrade6Up"/>
+		<result property="crdtGrade5Up" column="crdtGrade5Up"/>
+		<result property="crdtGrade4Up" column="crdtGrade4Up"/>
+		<result property="crdtGrade3Up" column="crdtGrade3Up"/>
+		<result property="crdtGrade3Down" column="crdtGrade3Down"/>
+		<result property="crdtGradeAvg" column="crdtGradeAvg"/>
 	</resultMap>
+		
 	
   	<insert id="insertCreditLoanBase" parameterType="com.spring_boot_momentor.model.CreditLoanBaseVO" timeout="3">
-  		insert into CreditLoanBase (dclsMonth, comNum, prdNum, comName, prdName, joinWay, crdtTypeName, cbName, dclsStart)
-  		values (#{dclsMonth}, #{comNum}, #{prdNum}, #{comName}, #{prdName}, #{joinWay}, #{crdtTypeName}, #{cbName}, #{dclsStart})
+  		insert into CreditLoanBase (creditLoanID, dclsMonth, comNum, prdNum, comName, prdName, joinWay, crdtTypeName, cbName, dclsStart)
+  		values (#{creditLoanID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{comName}, #{prdName}, #{joinWay}, #{crdtTypeName}, #{cbName}, #{dclsStart})
   	</insert>
   	<insert id="insertCreditLoanOption" parameterType="com.spring_boot_momentor.model.CreditLoanOptionVO">
-  		insert into CreditLoanOption (comNum, prdNum, crdtLendRateTypeName, crdtGrade9Up, crdtGrade8Up,
+  		insert into CreditLoanOption (creditLoanID, dclsMonth, comNum, prdNum, crdtLendRateTypeName, crdtGrade9Up, crdtGrade8Up,
   									  crdtGrade7Up, crdtGrade6Up, crdtGrade5Up, crdtGrade4Up, crdtGrade3Up, crdtGrade3Down, crdtGradeAvg)
-  		values (#{comNum}, #{prdNum}, #{crdtLendRateTypeName}, #{crdtGrade9Up}, #{crdtGrade8Up}, 
+  		values (#{creditLoanID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{crdtLendRateTypeName}, #{crdtGrade9Up}, #{crdtGrade8Up}, 
   				#{crdtGrade7Up}, #{crdtGrade6Up}, #{crdtGrade5Up}, #{crdtGrade4Up}, #{crdtGrade3Up}, #{crdtGrade3Down}, #{crdtGradeAvg})
   	</insert>
   	
   	<!--  전체 대출 조회  -->
 	<select id="listAllCreditLoan" resultMap="CreditLoanResult"> 
-		SELECT * FROM creditLoanBase ORDER BY prdNum 
+		SELECT b.creditLoanID, comName, prdName, joinWay, crdtTypeName, cbName, crdtLendRateTypeName, crdtGrade9Up, crdtGrade8Up, crdtGrade7Up, crdtGrade6Up, crdtGrade5Up, crdtGrade4Up,
+		crdtGrade3Up, crdtGrade3Down, crdtGradeAvg
+		
+		FROM creditLoanBase as b 
+		inner join creditLoanOption as o
+		on b.creditLoanID = o.creditLoanID
 	</select>
 
 	<!--  대출 검색  -->
 	<select id="creditLoanSearch" parameterType="hashmap" resultMap="CreditLoanResult"> 
 		<![CDATA[
 		SELECT * FROM creditLoanBase 
-		WHERE prdName like CONCAT('%', #{prdName}, '%') OR
+		WHERE 
 			  comName like CONCAT('%', #{prdName}, '%') and 
 			  joinWay like CONCAT('%', #{joinWay}, '%') and
 			  crdtTypeName like CONCAT('%', #{crdtTypeName}, '%')
 		]]> 
+	</select>
+	
+	<!-- 신용 대출 비교 넣기-->
+	<select id="CreditLoanCompare" resultMap="CreditLoanResult" parameterType="string">
+		SELECT b.comName, b.prdName, joinWay, crdtTypeName, cbName, crdtLendRateTypeName, crdtGrade9Up, crdtGrade8Up, crdtGrade7Up, crdtGrade6Up, crdtGrade5Up, crdtGrade4Up,
+		crdtGrade3Up, crdtGrade3Down, crdtGradeAvg
+		FROM CreditLoan b, CreditLoan o
+		where b.creditLoanID = o.creditLoanID AND b.creditLoanID = #{creditLoanID}
+	</select>
+	
+		<!-- 신용 대출 비교 모달-->
+	<select id="CreditLoanCompareModal" resultMap="CreditLoanResult" parameterType="string">
+		SELECT b.comName, b.prdName, joinWay, crdtTypeName, cbName, crdtLendRateTypeName, crdtGrade9Up, crdtGrade8Up, crdtGrade7Up, crdtGrade6Up, crdtGrade5Up, crdtGrade4Up,
+		crdtGrade3Up, crdtGrade3Down, crdtGradeAvg
+		FROM CreditLoan b, CreditLoan o
+		where b.creditLoanID = o.creditLoanID AND b.creditLoanID = #{creditLoanID}
 	</select>
   	</mapper>
   	

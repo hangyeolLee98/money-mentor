@@ -84,8 +84,8 @@
 			 	<div class="fin_main_div">
 			 		<div class="fin_tag">
 			 			<button class="finBtn" id="fin_card">카드</button>
-			 			<button class="finBtn" id="fin_loan">대출</button>
-			 			<button class="finBtn" id="fin_sd">예৹적금</button>
+			 			<button class="finBtn" id="fin_loan">보험</button>
+			 			<button class="finBtn" id="fin_sd">적금</button>
 			 			<button class="finBtn" id="fin_ann">연금</button>
 			 		</div>
 			 		<div class="fin_tag_see">
@@ -102,11 +102,11 @@
 			 				</div>
 			 			</div>
 						<div class="fin_see loanSee">
-			 				<div class="fin_see_title">대출 카테고리</div>
+			 				<div class="fin_see_title">보험 카테고리</div>
 			 				<div class="see_sec">
 			 					<div  class="see_sec1">
 			 						<div class="img_section">
-			 							<div  class="loan_Img_div">추후 추가 예정입니다.
+			 							<div  class="loan_Img_div">
 			 							
 			 							</div>
 			 						</div>
@@ -114,11 +114,11 @@
 			 				</div>
 			 			</div>
 			 			<div class="fin_see sdSee">
-			 				<div class="fin_see_title">예৹적금 카테고리</div>
+			 				<div class="fin_see_title">적금 카테고리</div>
 			 				<div class="see_sec">
 			 					<div  class="see_sec1">
 			 						<div class="img_section">
-			 							<div  class="sd_Img_div">추후 추가 예정입니다.
+			 							<div  class="sd_Img_div">
 			 							
 			 							</div>
 			 						</div>

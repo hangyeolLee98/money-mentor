@@ -23,30 +23,41 @@ $(document).ready(function(){
     $.ajax({
         type:"post",
         url:"/cardRandom",
-        
         data:{"cardId" : $("#cardId").val()},
         success:function(result){
         $('.card_Img_div').html(result);
                                    
         },
         error:function(){
-           alert("실패");
+           alert("카드실패");
         }
   }); // 카드 ranking 종료 
   
-//    // 대출 ranking
-//   $.ajax({
-//        type:"post",
-//        url:"/cardRandom",
-        
-//        data:{"cardId" : $("#cardId").val()},
-//        success:function(result){
-//        $('.loan_Img_div').html(result);
+    // 보험 ranking
+    $.ajax({
+        type:"post",
+        url:"/insuRandom",
+        data:{"insuId" : $("#insuId").val()},
+        success:function(result){
+        $('.loan_Img_div').html(result);
                                    
-//        },
-//        error:function(){
-//           alert("실패");
-//        }
-//  }); // 대출 ranking end
+        },
+        error:function(){
+           alert("보험실패");
+        }
+  }); // 보험 ranking end
+    // 적금 ranking
+    $.ajax({
+        type:"post",
+        url:"/savRandom",
+        data:{"savingID" : $("#savingID").val()},
+        success:function(result){
+        $('.sd_Img_div').html(result);
+                                   
+        },
+        error:function(){
+           alert("적금실패");
+        }
+  }); // 적금 ranking end
 
 });

@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring_boot_momentor.model.SavingBaseVO;
 import com.spring_boot_momentor.model.SavingOptionVO;
-import com.spring_boot_momentor.model.SearchVO;
 import com.spring_boot_momentor.service.SavingService;
 
 
@@ -239,10 +239,18 @@ public class SavingController {
 	
 	//적금 검색 처리
 	@RequestMapping("/savingSearch")
-	public String savingSearch(SearchVO vo, Model model){
+	public String savingSearch(@RequestParam String prdName,
+			  				   @RequestParam String joinWay,
+			  				   @RequestParam String saveTrm, Model model){
+		HashMap<String ,Object> map = new HashMap<String, Object>();
+		map.put("prdName", prdName);
+		map.put("joinWay", joinWay);
+		map.put("saveTrm", saveTrm);
+		
 		// 서비스로 전송해서 DB 검색 결과 받아옴
-		ArrayList<SavingBaseVO> savingList = service.savingSearch(vo);	
+		ArrayList<SavingBaseVO> savingList = service.savingSearch(map);	
 		model.addAttribute("savingList", savingList);
+		System.out.println(savingList);
 		return "saving/savingResultForm";
 	}
 	
@@ -250,8 +258,22 @@ public class SavingController {
 	@ResponseBody
 	@RequestMapping("/SavingCompare")
 	public SavingBaseVO SavingCompare(@RequestParam String savingID, Model model) {
-		SavingBaseVO savingList = service.SavingCompare(savingID);
+		ArrayList<SavingBaseVO> savingList= service.SavingCompare(savingID);
+//		System.out.println("savingList >>>" + savingList.get(0).getIntrRate());
+		model.addAttribute("savingList", savingList.get(0));
+		return savingList.get(0);
+	}
+	
+	@RequestMapping("/savingPopup")
+	public String savingPopup() {
+		return "saving/savingForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/SavingCompareModal")
+	public String SavingCompareModal(@RequestParam String savingID, Model model) {
+		ArrayList<SavingBaseVO> savingList = service.SavingCompareModal(savingID);
 		model.addAttribute("savingList", savingList);
-		return savingList;
+		return "saving/savingForm";
 	}
 }

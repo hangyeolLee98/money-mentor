@@ -29,8 +29,8 @@
 								<select id="prd-type-select" name="prdType">
 									<option value="card" selected>카드</option>
 									<option value="insu">보험</option>
-									<option value="#">예적금</option>
-									<option value="#">대출</option>
+									<option value="deposit">예금</option>
+									<option value="saving">적금</option>
 								</select>
 							</td>
 						</tr>
@@ -46,11 +46,18 @@
 							<td class="prd-table-title">만기</td>
 							<td><input type="text" id="calMaturity" class="calMaturity" name="calMaturity"> 년</td>
 						</tr>
-						<tr class="prdMaturity">
+						<tr class="prdPayment">
 							<td class="prd-table-title">납부금</td>
 							<td><input type="text" id="calPayment" class="calPayment" name="calPayment"> 원</td>
 						</tr>
-						<tr><td colspan="2"><button type="submit" class="calender-add-custom-btn">추가</button></td></tr>
+						<tr id="prdDeposit" style="display:none">
+							<td class="prd-table-title">예치금</td>
+							<td><input type="text" id="calDeposit" class="calDeposit" name="calDeposit" > 원</td>
+						</tr>
+						<tr>
+							<td><button type="submit" class="calender-add-custom-btn">추가</button></td>
+							<td><div class="plan-warning-text"></div></td>
+						</tr>
 					</tbody>
 				</table>
 			</section>

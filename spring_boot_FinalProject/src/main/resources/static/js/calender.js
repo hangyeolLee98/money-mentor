@@ -464,8 +464,12 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('#select-calender').on('click', function(){
-		$('#calender-view').show();
+	$('#select-view').on('change', function(e){
+	  e.preventDefault();
+	  
+	  const kind = $('#select-view option:selected').val();
+	  if(kind == 'calender'){
+	  	$('#calender-view').show();
 		$('#chart-view').hide();
 		
 		jQuery.randerCalender();
@@ -474,17 +478,18 @@ $(document).ready(function(){
 		
 		if($('#chart-view').hasClass('select'))
 			$('#chart-view').removeClass('select');
-	});
-	
-	$('#select-chart').on('click', function(){
-		$('#chart-view').show();
+	  }
+	  else if(kind == "chart"){
+	  	$('#chart-view').show();
 		$('#calender-view').hide();
 		if(!($('#chart-view').hasClass('select')))
 			$('#chart-view').addClass('select');
 		
 		if($('#calender-view').hasClass('select'))
 			$('#calender-view').removeClass('select');
+	  }
 	});
+	
 	
 	jQuery.randerCalender();
 });

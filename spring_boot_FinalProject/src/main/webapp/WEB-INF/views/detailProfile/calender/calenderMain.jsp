@@ -19,7 +19,10 @@
 		<div id="body">
 			<section>
 				<div id="calender-head">
-					<div class="calender-head-items calender-head-text">캘린더</div>
+					<select id="select-view" name="select-view" class="calender-head-items calender-head-text">
+						<option value="calender" selected>캘린더</option>
+						<option value="chart">차트</option>
+					</select>
 					<div class="calender-date-view">
 						<div class="calender-head-items view-date">
 							<button id="year-select-btn" class="calender-head-text">
@@ -72,12 +75,6 @@
 							</table>
 						</div>
 						<div id="chart-view" style="display:none">
-							<div>
-								<canvas id="chart1"></canvas>
-							</div>
-							<div>
-								<canvas id="total-asset-chart"></canvas>
-							</div>
 						</div>
 						<div id="prd-view-option-box">
 							<div id="prd-items-view" class="hide">
@@ -91,14 +88,17 @@
 								</div>
 								<div id="search-option" style="display:none">
 									<div id="search-box">
-										<input type="text" name="searchText" placeholder="검색어 입력"><button id="searchBtn" class="p-btn"><i class="fa fa-search"></i></button>
+										<input type="text" id="searchTextBox" name="searchText" placeholder="검색어 입력"><button id="searchBtn" class="p-btn"><i class="fa fa-search"></i></button>
 									</div>
 									<select id="prd-kind-select" name="prd-kind-select">
 										<option value="card" selected>카드</option>
 										<option value="insu">보험</option>
+										<option value="deposit">예금</option>
+										<option value="saving">적금</option>
 									</select>
-									<span id="prd-kind-detail-select">
-									</span>
+									<select id="prd-kind-select-option" name="prd-kind-select-option">
+										<option value="default" selected>선택</option>
+									</select>
 									<select id="prd-order-select" name="order">
 										<option value="default" selected>기본</option>
 										<option value="name">이름순</option>
@@ -107,16 +107,8 @@
 									</select>
 								</div>
 							</div>
-						<div id="prd-list-box" style="display:none">
-						</div>
-						</div>
-					</div>
-					<div id="categori-box">
-						<div>
-							<button id="select-calender" class="select">캘린더</button>
-						</div>
-						<div>
-							<button id="select-chart">차트</button>
+							<div id="prd-list-box" style="display:none">
+							</div>
 						</div>
 					</div>
 				</div>

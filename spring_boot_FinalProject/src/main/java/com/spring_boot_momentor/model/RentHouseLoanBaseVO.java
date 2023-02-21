@@ -1,6 +1,7 @@
 package com.spring_boot_momentor.model;
 
 public class RentHouseLoanBaseVO {
+	private String rentHouseLoanID;
 	private String dclsMonth;
 	private String comNum;
 	private String prdNum;
@@ -12,7 +13,17 @@ public class RentHouseLoanBaseVO {
 	private String dlyRate;
 	private String loanLimit;
 	private String dclsStart;
-	
+	private String rpayTypeName;
+	private String lendRateTypeName;
+	private double lendRateMin;
+	private double lendRateMax;
+	private double lendRateAvg;
+	public String getRentHouseLoanID() {
+		return rentHouseLoanID;
+	}
+	public void setRentHouseLoanID(String rentHouseLoanID) {
+		this.rentHouseLoanID = rentHouseLoanID;
+	}
 	public String getDclsMonth() {
 		return dclsMonth;
 	}
@@ -78,6 +89,36 @@ public class RentHouseLoanBaseVO {
 	}
 	public void setDclsStart(String dclsStart) {
 		this.dclsStart = dclsStart;
+	}
+	public String getRpayTypeName() {
+		return rpayTypeName;
+	}
+	public void setRpayTypeName(String rpayTypeName) {
+		this.rpayTypeName = rpayTypeName;
+	}
+	public String getLendRateTypeName() {
+		return lendRateTypeName;
+	}
+	public void setLendRateTypeName(String lendRateTypeName) {
+		this.lendRateTypeName = lendRateTypeName;
+	}
+	public double getLendRateMin() {
+		return lendRateMin;
+	}
+	public void setLendRateMin(double lendRateMin) {
+		this.lendRateMin = lendRateMin;
+	}
+	public double getLendRateMax() {
+		return lendRateMax;
+	}
+	public void setLendRateMax(double lendRateMax) {
+		this.lendRateMax = lendRateMax;
+	}
+	public double getLendRateAvg() {
+		return lendRateAvg;
+	}
+	public void setLendRateAvg(double lendRateAvg) {
+		this.lendRateAvg = lendRateAvg;
 	}
 	
 	

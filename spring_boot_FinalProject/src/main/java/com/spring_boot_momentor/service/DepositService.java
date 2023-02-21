@@ -39,4 +39,14 @@ public class DepositService implements IDepositService {
 	public ArrayList<DepositBaseVO> depositSearch(HashMap<String, Object> map) {
 		return dao.depositSearch(map);
 	}
+	
+	//예금 비교 넣기
+	public ArrayList<DepositBaseVO> DepositCompare(String depositID){
+		return dao.DepositCompare(depositID);
+	}
+	
+	//예금 비교 모달
+	public ArrayList<DepositBaseVO> DepositCompareModal(String depositID){
+		return dao.DepositCompareModal(depositID);
+	}
 }

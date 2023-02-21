@@ -17,14 +17,11 @@ $(function(){
 	
 	<div class="cards">
 			<div class="table">
-				<div class="orders">
-					<button class="order">어떤순 버튼</button>
-					<button class="order">어떤순 버튼....</button>
-				</div>
-			  	<div id="js-load" class="main">
-				  <ul class="list">
-				<c:forEach var="card" items="${cardList1}" varStatus="status">
 				
+			  	<div id="js-load" class="main">
+				<ul class="list">
+				<c:forEach var="card" items="${cardList1}" varStatus="status">
+
 						<li value="${card.cardId}" id="${card.cardId}" class="lists__item js-load"  style="cursor: pointer;"> <!-- OnClick="location.href ='http://URL주소'" -->  
 							
 							<div class = "dd">
@@ -36,14 +33,8 @@ $(function(){
 							
 						<a class="anchor"> <!-- 상세페이지 url 넣기 --> <b class="name">${card.cardName}</b>
 						</a>
-						
-						
-					
+											
 						<p class="desc">${card.cardDes}</p>
-						
-						
-					
-	
 					</div>
 					<div class="preview">
 						<!-- 기본구문법1 -->
@@ -56,27 +47,33 @@ $(function(){
 							<a class="button button--wayra button--border-thick button--text-upper button--size-s"
 							href="https://card.kbcard.com/CRD/DVIEW/HCAMCXPRICAC0076?mainCC=a&cooperationcode=${card.cardUrl}">카드신청</a>
 						</c:if>
+						
+						<c:if test="${card.comCtg eq 'lotte'}">
+						<a class="button button--wayra button--border-thick button--text-upper button--size-s"
+							href="${card.cardUrl}">카드신청</a>
+						</c:if>
+						<c:if test="${card.comCtg eq 'hana'}">
+						<a class="button button--wayra button--border-thick button--text-upper button--size-s"
+							href="${card.cardUrl}">카드신청</a>
+						</c:if>
+						
 						<a class="button button--wayra button--border-thick button--text-upper button--size-s"
 						 id="compare" onclick="toggleBtn1(${card.cardId})">
 							<span class="icon"></span>
 							<span class="compare_txt">상품비교</span>
 						</a>
 					</div>
-					
-				
-					
-					
-					
+	
 					</div>
-						</li>
-
+					</li>
+					
 				</c:forEach>
-
+					
 			</ul>
 				 <div id="js-btn-wrap" class="btn-wrap"> <a href="#" class="morebutton" id="morebtn">
 			더보기</a> </div>
 				</div></div></div>
-    
+    				
     
 			  
 			

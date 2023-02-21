@@ -18,12 +18,6 @@ public class CalenderService implements ICalenderService{
 	ICalenderDAO dao;
 
 	@Override
-	public int countCard() {
-		// TODO Auto-generated method stub
-		return dao.countCard();
-	}
-
-	@Override
 	public ArrayList<PlanVO> calenderView(String userID) {
 		// TODO Auto-generated method stub
 		return dao.calenderView(userID);
@@ -43,9 +37,9 @@ public class CalenderService implements ICalenderService{
 	}
 
 	@Override
-	public void changePrdName(String prdName, String userID, String prdID, String prdType) {
+	public void changePrdName(String prdName, String userID, int dataID) {
 		// TODO Auto-generated method stub
-		dao.changePrdName(prdName, userID, prdID, prdType);
+		dao.changePrdName(prdName, userID, dataID);
 	}
 
 	@Override
@@ -70,6 +64,30 @@ public class CalenderService implements ICalenderService{
 	public void modifyPlan(CalenderVO vo) {
 		// TODO Auto-generated method stub
 		dao.modifyPlan(vo);
+	}
+
+	@Override
+	public String prdTotalFee(String userID, String prdType) {
+		// TODO Auto-generated method stub
+		return dao.prdTotalFee(userID, prdType);
+	}
+
+	@Override
+	public ArrayList<String> insertPrdCategory(String kind) {
+		// TODO Auto-generated method stub
+		return dao.insertPrdCategory(kind);
+	}
+
+	@Override
+	public ArrayList<CalenderProductVO> calenderSearch(String kind, String text) {
+		// TODO Auto-generated method stub
+		return dao.calenderSearch(kind, text);
+	}
+
+	@Override
+	public int prdTotalDeposit(String userID) {
+		// TODO Auto-generated method stub
+		return dao.prdTotalDeposit(userID);
 	}
 
 

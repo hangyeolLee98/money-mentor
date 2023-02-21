@@ -40,5 +40,16 @@ public class AnnuitySavingService implements IAnnuitySavingService {
 		return dao.AnnuitySavingSearch(map);
 	}
 
+	//연금 비교 넣기 
+	@Override
+	public ArrayList<AnnuitySavingBaseVO> AnnuitySavingCompare(String annuitySavingID){
+		return dao.AnnuitySavingCompare(annuitySavingID);
+	}
+	
+	//연금 비교 모달
+	@Override
+	public ArrayList<AnnuitySavingBaseVO> AnnuitySavingCompareModal(String annuitySavingID){
+		return dao.AnnuitySavingCompareModal(annuitySavingID);
+	}
 
 }

@@ -2,6 +2,7 @@ package com.spring_boot_momentor.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -9,8 +10,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring_boot_momentor.model.CardVO;
 import com.spring_boot_momentor.model.InsuVO;
 import com.spring_boot_momentor.service.InsuService;
 
@@ -142,14 +147,124 @@ public class InsuController {
 					service.insertInsu(vo);
 					
 				}
-
+				
+				
 			}
+	
 			
-
 			System.out.println("success");
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}	
 	}
+	
+	@RequestMapping("/InsuList")
+	public String InsuList() {
+		return "insu/insuList";
+	}
+	// 카드 전체 리스트
+	@RequestMapping("/insuallList")
+	public String listAllCard(Model model) {
+		ArrayList<InsuVO> insuList1 = service.listAllInsu();
+		model.addAttribute("insuList1", insuList1);
+		return "insu/insuSearchResultView";
+
+	}
+	
+	@RequestMapping("/insuSearch")
+	public String InsuAllSearch(@RequestParam String insuId, Model model) {
+		ArrayList<InsuVO> insuList1 = service.InsuAllSearch(insuId);
+		model.addAttribute("insuList1", insuList1);
+		System.out.println(insuList1.size());
+		return "insu/insuSearchResultView";
+	}
+	
+	// 상품 비교 추가
+			@ResponseBody
+			@RequestMapping("/InsuCompare")
+			public InsuVO InsuCompare(@RequestParam String insuId, Model model) {
+				InsuVO insuList1 = service.InsuCompare(insuId);
+				model.addAttribute("insuList1", insuList1);
+				return insuList1;
+			}
+			
+	// 보험종류만
+	@RequestMapping("/insuCategory1")
+	public String insuCategory1(@RequestParam("insuCtg") String insuCtg,
+								Model model) {
+		
+		
+		ArrayList<InsuVO> insuList1 = service.insuCategory1(insuCtg);
+		
+		model.addAttribute("insuList1", insuList1);
+		
+		return "insu/insuSearchResultView";
+	}		
+	
+	//회사명만
+	@RequestMapping("/insuCategory2")
+	public String insuCategory2(@RequestParam("prdLogo") String prdLogo,
+								Model model) {
+		
+		
+		ArrayList<InsuVO> insuList1 = service.insuCategory2(prdLogo);
+		
+		model.addAttribute("insuList1", insuList1);
+		
+		return "insu/insuSearchResultView";
+	}	
+	
+	// 연회비 
+	@RequestMapping("/insuCategory3")
+	public String insuCategory3(@RequestParam("insuIndex") String insuIndex,
+							    Model model) {
+		
+		
+		ArrayList<InsuVO> insuList1 = service.insuCategory3(Integer.parseInt(insuIndex));
+		
+		model.addAttribute("insuList1", insuList1);
+		
+		return "insu/insuSearchResultView";
+	}
+	
+	// 연회비 
+		@RequestMapping("/insuCategory4")
+		public String insuCategory4(@RequestParam("insuCtg") String insuCtg,
+									@RequestParam("prdLogo") String prdLogo,
+								    Model model) {
+			
+			
+			ArrayList<InsuVO> insuList1 = new ArrayList<InsuVO>();
+			if(insuCtg=="") {
+				insuList1 = service.insuCategory2(prdLogo);
+			}else {
+			
+				insuList1 = service.insuCategory4(insuCtg,prdLogo);
+			}
+			model.addAttribute("insuList1", insuList1);
+			
+			return "insu/insuSearchResultView";
+		}
+		
+	// 짬뽕 2
+			@RequestMapping("/insuCategory5")
+			public String insuCategory5(@RequestParam("insuCtg") String insuCtg,
+										@RequestParam("prdLogo") String prdLogo,
+										@RequestParam("insuIndex") int insuIndex,
+									   
+					Model model) {
+				ArrayList<InsuVO> insuList1 = new ArrayList<InsuVO>();
+				if(insuCtg=="" && prdLogo=="") {
+					insuList1 = service.insuCategory3(insuIndex);
+				}else {
+				
+					insuList1 = service.insuCategory5(insuCtg,prdLogo,insuIndex);
+				}
+				model.addAttribute("insuList1", insuList1);
+				
+				return "insu/insuSearchResultView";
+			}
+				
+	
 }

@@ -39,4 +39,15 @@ public class CreditLoanService implements ICreditLoanService {
 		return dao.creditLoanSearch(map);
 	}
 
+	//대출 비교 넣기
+	@Override
+	public ArrayList<CreditLoanBaseVO> CreditLoanCompare(String creditLoanID){
+		return dao.CreditLoanCompare(creditLoanID);
+	}
+	
+	//대출 비교 모달
+	@Override
+	public ArrayList<CreditLoanBaseVO> CreditLoanCompareModal(String creditLoanID){
+		return dao.CreditLoanCompareModal(creditLoanID);
+	}
 }

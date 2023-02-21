@@ -38,51 +38,70 @@
 
 				</form>
 			</div>
-
+	<form id="CardListFi">
 
 			<div class="category">
 				<h5 class="title">카드사</h5>
 				<div class="btncontainer">
-					<button class="item" type="button">
+					<button class="item" type="button" name="comCtg" value="">
+						<span class="w-btn w-btn-indigo">전체</span>
+					</button>
+					<button class="item" type="button" name="comCtg" value="KB">
 						<span class="cardbtnImg"><img class="iogo" alt="국민카드"
 							src="/image/KB.png"></span>
 					</button>
-					<button class="item" type="button">
+					<button class="item" type="button" name="comCtg" value="현대" >
 						<span class="cardbtnImg"><img class="iogo" alt="현대카드"
 							src="/image/HD.png"></span>
 					</button>
+					<button class="item" type="button" name="comCtg" value="lotte" >
+						<span class="cardbtnImg"><img class="iogo" alt="롯데카드"
+							src="/image/LOTTE.png"></span>
+					</button>
+					<button class="item" type="button" name="comCtg" value="hana" >
+						<span class="cardbtnImg"><img class="iogo" alt="하나은행"
+							src="/image/HN.png"></span>
+					</button>
+					
 				</div>
 			</div>
 			<div class="category">
 				<h5 class="title">혜택</h5>
 				<div class="btncontainer">
-					<button class="item" type="button">
+					<button class="item" type="button"  name="cardDes" value="">
+						<span class="w-btn w-btn-indigo">전체</span>
+					</button>
+					<button class="item" type="button"  name="cardDes" value="주유">
 						<span class="w-btn w-btn-indigo">주유</span>
 					</button>
-					<button class="item" type="button">
+					<button class="item" type="button"  name="cardDes" value="통신">
 						<span class="w-btn w-btn-indigo">통신</span>
 					</button>
-					<button class="item" type="button">
+					<button class="item" type="button" name="cardDes" value="교통">
+						<span class="w-btn w-btn-indigo">교통</span>
+					</button>
+					<button class="item" type="button" name="cardDes" value="쇼핑">
 						<span class="w-btn w-btn-indigo">쇼핑</span>
 					</button>
-					<button class="item" type="button">
+					<button class="item" type="button" name="cardDes" value="외식">
 						<span class="w-btn w-btn-indigo">외식</span>
 					</button>
-					<button class="item" type="button">
+					<button class="item" type="button" name="cardDes" value="차">
 						<span class="w-btn w-btn-indigo">자동차</span>
 					</button>
-					<button class="item" type="button">
-						<span class="w-btn w-btn-indigo">의류</span>
+					<button class="item" type="button" name="cardDes" value="해외">
+						<span class="w-btn w-btn-indigo">해외</span>
 					</button>
-					<button class="item" type="button">
-						<span class="w-btn w-btn-indigo">게임</span>
+					<button class="item" type="button" name="cardDes" value="편의점">
+						<span class="w-btn w-btn-indigo">편의점</span>
 					</button>
-					<button class="item" type="button">
+					<button class="item" type="button" name="cardDes" value="보험">
 						<span class="w-btn w-btn-indigo">보험</span>
 					</button>
-					<button class="item" type="button">
+					<button class="item" type="button" name="cardDes" value="OTT">
 						<span class="w-btn w-btn-indigo">OTT</span>
 					</button>
+					
 					<!-- 더 추가가능 -->
 				</div>
 
@@ -91,25 +110,30 @@
 			<div class="category">
 				<h5 class="title">연회비</h5>
 				<div class="btncontainer">
-					<button class="item" type="button">
+				
+					<button class="item" type="button" name="cardFee" value="0" >
 						<span class="w-btn w-btn-indigo">전체</span>
+						
 					</button>
-					<button class="item" type="button">
-						<span class="w-btn w-btn-indigo">~1만원</span>
+					
+					
+					<button class="item" type="button" name="cardFee" value="1">
+					
+						<span class="w-btn w-btn-indigo" >~1만원</span>
 					</button>
-					<button class="item" type="button">
+					<button class="item" type="button" name="cardFee" value="2">
 						<span class="w-btn w-btn-indigo">~3만원</span>
 					</button>
-					<button class="item" type="button">
+					<button class="item" type="button" name="cardFee" value="3">
 						<span class="w-btn w-btn-indigo">~10만원</span>
 					</button>
-					<button class="item" type="button">
+					<button class="item" type="button" name="cardFee" value="4">
 						<span class="w-btn w-btn-indigo">10만원 이상</span>
 					</button>
 				</div>
 			</div>
 
-
+</form>
 		</div>
 	</div>
 	<!-- cardSearchResultView -->

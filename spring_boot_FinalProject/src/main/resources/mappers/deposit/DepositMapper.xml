@@ -6,6 +6,7 @@
   
     <mapper namespace="com.spring_boot_momentor.dao.IDepositDAO">
       <resultMap id="DepositResult" type="com.spring_boot_momentor.model.DepositBaseVO">
+      	<result property="depositID" column="depositID"/>
 		<result property="dclsMonth" column="dclsMonth"/>
 		<result property="comNum" column="comNum"/>
 		<result property="prdNum" column="prdNum"/>
@@ -16,30 +17,88 @@
 		<result property="spclCnd" column="spclCnd"/>
 		<result property="maxLimit" column="maxLimit"/>
 		<result property="joinMember" column="joinMember"/>
+		<result property="intrRate" column="intrRate"/>
+		<result property="intrRate2" column="intrRate2"/>
+		<result property="saveTrm" column="saveTrm"/>
+		<result property="intrRateTypeName" column="intrRateTypeName"/>
+		
 	</resultMap>
 	
   	<insert id="insertDepositBase" parameterType="com.spring_boot_momentor.model.DepositBaseVO" timeout="3">
-  		insert into DepositBase (dclsMonth, comNum, prdNum, comName, prdName, joinWay, interest, spclCnd, maxLimit, joinMember)
-  		values (#{dclsMonth}, #{comNum}, #{prdNum}, #{comName}, #{prdName}, #{joinWay}, #{interest}, #{spclCnd}, #{maxLimit}, #{joinMember})
+  		insert into DepositBase (depositID, dclsMonth, comNum, prdNum, comName, prdName, joinWay, interest, spclCnd, maxLimit, joinMember)
+  		values (#{depositID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{comName}, #{prdName}, #{joinWay}, #{interest}, #{spclCnd}, #{maxLimit}, #{joinMember})
   	</insert>
   	<insert id="insertDepositOption" parameterType="com.spring_boot_momentor.model.DepositOptionVO">
-  		insert into DepositOption (comNum, prdNum, intrRate, intrRate2, saveTrm, intrRateTypeName)
-  		values (#{comNum}, #{prdNum}, #{intrRate}, #{intrRate2}, #{saveTrm}, #{intrRateTypeName})
+  		insert into DepositOption (depositID, dclsMonth, comNum, prdNum, intrRate, intrRate2, saveTrm, intrRateTypeName)
+  		values (#{depositID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{intrRate}, #{intrRate2}, #{saveTrm}, #{intrRateTypeName})
   	</insert>
   	
   	<!--  전체 연금 조회  -->
 	<select id="listAllDeposit" resultMap="DepositResult"> 
-		SELECT * FROM depositBase ORDER BY prdNum 
+		<!-- SELECT * FROM depositBase as db	inner join depositOption as do
+		on db.depositID = do.depositID -->
+		
+		SELECT db.depositID, db.comName, db.prdName, joinWay, interest, spclCnd, maxLimit, joinMember, intrRate, MAX(intrRate2) as intrRate2, saveTrm, intrRateTypeName
+		FROM depositBase as db
+		inner join depositOption as do
+		on db.depositID = do.depositID
+		group by prdName
 	</select>
 	
-	<!--  적금 검색  -->
+	<!--  예금 검색  -->
 	<select id="depositSearch" parameterType="hashmap" resultMap="DepositResult"> 
-		<![CDATA[
-		SELECT * FROM depositBase 
-		WHERE prdName like CONCAT('%', #{prdName}, '%') OR
-			  comName like CONCAT('%', #{prdName}, '%') and 
-			  joinWay like CONCAT('%', #{joinWay}, '%') 
-		]]> 
+		<!--  <![CDATA[ -->
+		SELECT * FROM depositBase as db	inner join depositOption as do
+		on db.depositID = do.depositID
+		
+		WHERE db.comName like CONCAT('%', #{prdName}, '%') AND
+			  db.joinWay like CONCAT('%', #{joinWay}, '%') 
+			  
+			  <if test='!saveTrm.equals("")'>
+   				AND do.saveTrm = #{saveTrm}
+			</if>
+		<!-- ]]> -->
+		<!-- <if test='saveTrm.equals("")'>
+   				
+   				<![CDATA[
+				SELECT * FROM depositBase as db	inner join depositOption as do
+				on db.depositID = do.depositID
+				
+				WHERE db.prdName like CONCAT('%', #{prdName}, '%') AND
+					  db.joinWay like CONCAT('%', #{joinWay}, '%') 
+					
+				
+				]]>
+   				
+		</if>
+			
+		<if test='!saveTrm.equals("")'>
+   				
+   				<![CDATA[
+				SELECT * FROM depositBase as db	inner join depositOption as do
+				on db.depositID = do.depositID
+				
+				WHERE db.prdName like CONCAT('%', #{prdName}, '%') AND
+					  db.joinWay like CONCAT('%', #{joinWay}, '%') 
+					  AND do.saveTrm = #{saveTrm}
+				
+				]]> 
+   				
+		</if>-->
+	</select>
+	
+	<!-- 예금 비교 넣기 -->
+	<select id="DepositCompare" resultMap="DepositResult" parameterType="string">
+		SELECT  b.comName, b.prdName, joinWay, interest, spclCnd, maxLimit, joinMember, intrRate, intrRate2, saveTrm, intrRateTypeName
+		FROM depositBase b , depositOption o
+		WHRER b.depositID = o.depositID AND b.depositID = #{depositID}
+	</select>
+	
+	<!-- 예금 비교 모달 -->
+	<select id="DepositCompareModal" resultMap="DepositResult" parameterType="string">
+		SELECT  b.comName, b.prdName, joinWay, interest, spclCnd, maxLimit, joinMember, intrRate, intrRate2, saveTrm, intrRateTypeName
+		FROM depositBase b , depositOption o
+		WHRER b.depositID = o.depositID AND b.depositID = #{depositID}
 	</select>
   </mapper>
   

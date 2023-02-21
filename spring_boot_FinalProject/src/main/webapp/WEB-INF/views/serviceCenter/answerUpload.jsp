@@ -14,7 +14,7 @@
 	<c:import url="/WEB-INF/views/layout/top.jsp" />
 		<section class="qusFrom_sec">
 			<div class="qusFrom_div">
-			<h3>관리자야 답변 달아라</h3>
+			<h3>관리자님 답변 달아주세요</h3>
 				<c:forEach var="ques" items="${getQNADetail}" varStatus="num">
 					<c:choose>
 						<c:when test="${empty sessionScope.sid}">

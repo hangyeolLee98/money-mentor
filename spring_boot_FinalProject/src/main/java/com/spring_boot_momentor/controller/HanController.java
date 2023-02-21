@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring_boot_momentor.model.CardVO;
+import com.spring_boot_momentor.model.InsuVO;
+import com.spring_boot_momentor.model.SavingBaseVO;
 import com.spring_boot_momentor.model.ServiceCenterVO;
 import com.spring_boot_momentor.service.CardService;
 import com.spring_boot_momentor.service.SCService;
@@ -31,12 +31,6 @@ SCService scservice;
 		return "/chat/chatBotGuide";
 	}
 	
-	@RequestMapping("/cardRandom")
-	public String cardRandom(Model model) {
-		ArrayList<CardVO> cardRandom = service.cardRandom();
-		model.addAttribute("cardRandom", cardRandom);
-		return "indexRanking/cardRanking";
-	}
 	/*서비스센터 start*/
 	@RequestMapping("/all/serviceCenter") //고객센터 열기
 	public String serviceCenter(Model model) {
@@ -87,7 +81,27 @@ SCService scservice;
 		
 		return "redirect:/all/serviceCenter";
 	}
-	
-	
 	/*서비스센터 end*/
+
+	@RequestMapping("/cardRandom")
+	public String cardRandom(Model model) {
+		ArrayList<CardVO> cardRandom = service.cardRandom();
+		model.addAttribute("cardRandom", cardRandom);
+		return "indexRanking/cardRanking";
+	}
+	@RequestMapping("/insuRandom")
+	public String insuRandom(Model model) {
+		ArrayList<InsuVO> insuRandom = scservice.insuRandom();
+		model.addAttribute("insuRandom", insuRandom);
+		return "indexRanking/insuRanking";
+	}
+	@RequestMapping("/savRandom")
+	public String savRandom(Model model) {
+		ArrayList<SavingBaseVO> savRandom = scservice.savRandom();
+		model.addAttribute("savRandom", savRandom);
+		return "indexRanking/savRanking";
+	}
+	
+	
+	
 }

@@ -1,8 +1,11 @@
 package com.spring_boot_momentor.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.spring_boot_momentor.model.AssetVO;
+import com.spring_boot_momentor.model.CardVO;
+import com.spring_boot_momentor.model.SavingBaseVO;
 import com.spring_boot_momentor.model.UserVO;
 
 public interface IUserService {
@@ -26,6 +29,9 @@ public interface IUserService {
 	// 로그인 된 유저이름 가져오기
 	public String getUserName(HashMap<String, Object> map);
 	
+	// 자산 정보유무 확인
+	public String findAssetInfo(String userId);
+	
 	// 자산 정보 입력
 	public void userAssetInsert(AssetVO vo);
 	
@@ -47,4 +53,10 @@ public interface IUserService {
 	
 	// 비밀번호 변경
 	public void PwChange(UserVO vo);
+	
+	// 랜덤 카드 정보
+	public ArrayList<CardVO> randCardList();
+	
+	// 랜덤 적금 정보
+	public ArrayList<SavingBaseVO> randSavingList();
 }

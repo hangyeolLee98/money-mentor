@@ -22,6 +22,9 @@
 		<result property="intrRate" column="intrRate"/>
 		<result property="intrRate2" column="intrRate2"/>
 		<result property="saveTrm" column="saveTrm"/>
+		<result property="rsrvTypeName" column="rsrvTypeName"/>
+		<result property="intrRateTypeName" column="intrRateTypeName"/>
+		
 	</resultMap>
 
 	<insert id="insertSavingBase" parameterType="com.spring_boot_momentor.model.SavingBaseVO"> 
@@ -36,29 +39,47 @@
 	
 	<!--   전체 적금 조회   -->
 	<select id="listAllSaving" resultMap="savingResult" > 
-		<!-- SELECT * FROM savingBase as sb	inner join savingOption as so
-		on sb.savingID = so.savingID
-		 -->
-		SELECT sb.savingID, comName, prdName, joinWay, interest, spclCnd, maxLimit, joinMember, etcNote, intrRate, MAX(intrRate2) as intrRate2, saveTrm
-		FROM savingBase as sb
+		<!--  SELECT * FROM savingBase as sb	inner join savingOption as so
+		on sb.savingID = so.savingID -->
+		
+	SELECT sb.savingID, comName, prdName, joinWay, interest, spclCnd, maxLimit, joinMember, etcNote, intrRate,<!-- intrRate,MAX(intrRate2) as intrRate2-->intrRate2, saveTrm,rsrvTypeName, intrRateTypeName
+		FROM SavingBase as sb
 		inner join savingOption as so
 		on sb.savingID = so.savingID
-		group by prdName;
-		
+		<!-- group by prdName
+		  -->
 	</select>	
-		
-	
+<!-- 		
+	WHERE prdName like CONCAT('%', #{prdName}, '%') OR
+			  prdName like CONCAT('%', #{prdName}, '%') AND 
+			  joinWay = #{joinWay} AND
+			  saveTrm = #{saveTrm} -->
 	<!--   적금 검색   -->
 	<select id="savingSearch" resultMap="savingResult"> 
-		SELECT * FROM savingBase 
-		WHERE comName like CONCAT('%', #{prdName}, '%') OR 
-			  prdName like CONCAT('%', #{prdName}, '%') AND 
-			  joinWay like CONCAT('%', #{way}, '%') 
+	SELECT * FROM SavingBase as sb	inner join SavingOption as so
+		on sb.savingID = so.savingID 
+		
+		WHERE comName like CONCAT('%', #{prdName}, '%') AND
+			  joinWay like CONCAT('%', #{joinWay}, '%') 
+			  <if test='!saveTrm.equals("")'>
+   				AND saveTrm = #{saveTrm}
+			</if>
+			  
+       
+			  
+	</select>
+	<!-- 적금 비교 넣기 -->
+	<select id="SavingCompare" resultMap="savingResult" parameterType="string">
+		SELECT b.comName, b.prdName, joinWay, interest, spclCnd, maxLimit, joinMember, etcNote, intrRate, intrRate2, saveTrm, rsrvTypeName, intrRateTypeName
+		FROM SavingBase b, SavingOption o
+		where b.savingID = o.savingID AND b.savingID = #{savingID} 
+	
 	</select>
 	
-	<select id="SavingCompare" resultMap="savingResult" parameterType="string">
-		SELECT * FROM savingBase 
-		where savingID = #{savingID}
-		 
+	<!-- 적금 비교 모달 -->
+	<select id="SavingCompareModal" resultMap="savingResult" parameterType="string">
+		SELECT b.comName, b.prdName, joinWay, interest, spclCnd, maxLimit, joinMember, etcNote, intrRate, intrRate2, saveTrm, rsrvTypeName, intrRateTypeName
+		FROM SavingBase b, SavingOption o
+		where b.savingID = o.savingID AND b.savingID = #{savingID}
 	</select>
 </mapper>  

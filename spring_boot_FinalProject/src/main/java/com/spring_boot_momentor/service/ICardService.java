@@ -12,6 +12,15 @@ public interface ICardService {
 	public CardVO CardCompare(String cardId); //카드비교 넣기
 	public void deleteCard(String carddNoms); // 비교 데이터 선택 삭제
 	public ArrayList<CardVO> CardComparemodal(String cardId); // 카드비교 모달
-	// 메인 랭킹 
-	public ArrayList<CardVO> cardRandom();
+	public ArrayList<CardVO> cardRandom();// 메인 랭킹 
+	
+	
+	public ArrayList<CardVO> cardCategory(String comCtg); // 카드사
+	public ArrayList<CardVO> cardCategory2(String cardDes); // 혜택
+	public ArrayList<CardVO> cardCategory3(int cardFee); // 연회비 
+	
+	
+	
+	public ArrayList<CardVO> cardCategory4(String cardDes, String comCtg);
+	public ArrayList<CardVO> cardCategory5(String cardDes, String comCtg, int cardFee);
 }

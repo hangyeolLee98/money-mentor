@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring_boot_momentor.model.CreditLoanBaseVO;
 import com.spring_boot_momentor.model.CreditLoanOptionVO;
@@ -83,6 +84,9 @@ public class CreditLoanController {
 					// 회사명번호, 상품번호
 					String comNum = (String) jsonObj.get("fin_co_no");
 					String prdNum = (String) jsonObj.get("fin_prdt_cd");
+					
+					String creditLoanID = comNum + prdNum;
+					
 					// 회사명, 상품명
 					String comName = (String) jsonObj.get("kor_co_nm");
 					String prdName = (String) jsonObj.get("fin_prdt_nm");
@@ -92,6 +96,7 @@ public class CreditLoanController {
 					String cbName = (String) jsonObj.get("cb_name");
 					String dclsStart = (String) jsonObj.get("dcls_strt_day");
 
+					vo.setCreditLoanID(creditLoanID);
 					vo.setDclsMonth(dclsMonth);
 					vo.setComNum(comNum);
 					vo.setPrdNum(prdNum);
@@ -145,9 +150,16 @@ public class CreditLoanController {
 
 				for (int i = 0; i < optionList.size(); i++) {
 					JSONObject jsonOption = (JSONObject) optionList.get(i);
+					
+					//공시 제출월
+					String dclsMonth = (String) jsonOption.get("dcls_month");
+					
 					// 회사명번호, 상품번호
 					String comNum = (String) jsonOption.get("fin_co_no");
 					String prdNum = (String) jsonOption.get("fin_prdt_cd");
+					
+					String creditLoanID = comNum + prdNum;
+					
 					// 금리구분
 					String crdtLendRateTypeName = (String) jsonOption.get("crdt_lend_rate_type_nm");
 
@@ -201,6 +213,8 @@ public class CreditLoanController {
 					}
 					Double crdtGradeAvg = Double.parseDouble(String.valueOf(jsonOption.get("crdt_grad_avg")));
 
+					vo2.setCreditLoanID(creditLoanID);
+					vo2.setDclsMonth(dclsMonth);
 					vo2.setComNum(comNum);
 					vo2.setPrdNum(prdNum);
 					vo2.setCrdtLendRateTypeName(crdtLendRateTypeName);
@@ -255,21 +269,30 @@ public class CreditLoanController {
 		model.addAttribute("creditLoanList", creditLoanList);
 		return "loan/creditLoanResultForm";	
 	}
-//	//연금 검색 처리
-//	@RequestMapping("/annuitySavingSearch")
-//	public String AnnuitySavingSearch(@RequestParam String prdName,
-//									  @RequestParam String pnsnKindName,
-//									  @RequestParam String prdtTypeName, Model model){
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("prdName", prdName);
-//		map.put("pnsnKindName", pnsnKindName);
-//		map.put("prdtTypeName", prdtTypeName);
-//		
-//		// 서비스로 전송해서 DB 검색 결과 받아옴
-//		ArrayList<AnnuitySavingBaseVO> annuitySavingList = service.AnnuitySavingSearch(map);	
-//		model.addAttribute("annuitySavingList", annuitySavingList);
-//		return "saving/annuitySavingResultForm";
-//	}
+	
+	//신용 대출 비교 추가
+	@ResponseBody
+	@RequestMapping("/CreditLoanCompare")
+	public CreditLoanBaseVO CreditLoanCompare(@RequestParam String creditLoanID, Model model) {
+		ArrayList<CreditLoanBaseVO> creditLoanList = service.CreditLoanCompare(creditLoanID);
+		model.addAttribute("creditLoanList", creditLoanList.get(0));
+		return creditLoanList.get(0);
+	}
+	
+	@RequestMapping("/creditLoanPopup")
+	public String creditLoanPopup() {
+		return "loan/crditLoanForm";
+	}
+	
+	//신용 대출 비교 모달
+	@ResponseBody
+	@RequestMapping("/CreditLoanCompareModal")
+	public String CreditLoanCompareModal(@RequestParam String creditLoanID, Model model) {
+		ArrayList<CreditLoanBaseVO> creditLoanList = service.CreditLoanCompareModal(creditLoanID);
+		model.addAttribute("creditLoanList", creditLoanList);
+		return "loan/crditLoanForm";
+	}
+	
 }
 
 

@@ -5,14 +5,69 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
     <mapper namespace="com.spring_boot_momentor.dao.IRentHouseLoanDAO">
+    <resultMap id="RentHouseLoanResult" type="com.spring_boot_momentor.model.RentHouseLoanBaseVO">
+    	<result property="rentHouseLoanID" column="rentHouseLoanID"/>
+    	<result property="dclsMonth" column="dclsMonth"/>
+    	<result property="comNum" column="comNum"/>
+    	<result property="prdNum" column="prdNum"/>
+    	<result property="comName" column="comName"/>
+    	<result property="prdName" column="prdName"/>
+    	<result property="joinWay" column="joinWay"/>
+    	<result property="loanInciExpn" column="loanInciExpn"/>
+    	<result property="erlyRpayFee" column="erlyRpayFee"/>
+    	<result property="dlyRate" column="dlyRate"/>
+    	<result property="loanLimit" column="loanLimit"/>
+    	<result property="dclsStart" column="dclsStart"/>
+    	<result property="rpayTypeName" column="rpayTypeName"/>
+    	<result property="lendRateTypeName" column="lendRateTypeName"/>
+    	<result property="lendRateMin" column="lendRateMin"/>
+    	<result property="lendRateMax" column="lendRateMax"/>
+    	<result property="lendRateAvg" column="lendRateAvg"/>
+    </resultMap>
+  	
+  	
+  	
   	<insert id="insertRentHouseLoanBase" parameterType="com.spring_boot_momentor.model.RentHouseLoanBaseVO" timeout="3">
-  		insert into RentHouseLoanBase (dclsMonth, comNum, prdNum, comName, prdName, joinWay, loanInciExpn, erlyRpayFee, dlyRate, loanLimit, dclsStart)
-  		values (#{dclsMonth}, #{comNum}, #{prdNum}, #{comName}, #{prdName}, #{joinWay}, #{loanInciExpn}, #{erlyRpayFee}, #{dlyRate}, #{loanLimit}, #{dclsStart})
+  		insert into RentHouseLoanBase (rentHouseLoanID, dclsMonth, comNum, prdNum, comName, prdName, joinWay, loanInciExpn, erlyRpayFee, dlyRate, loanLimit, dclsStart)
+  		values (#{rentHouseLoanID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{comName}, #{prdName}, #{joinWay}, #{loanInciExpn}, #{erlyRpayFee}, #{dlyRate}, #{loanLimit}, #{dclsStart})
   	</insert>
   	<insert id="insertRentHouseLoanOption" parameterType="com.spring_boot_momentor.model.RentHouseLoanOptionVO">
-  		insert into RentHouseLoanOption (comNum, prdNum, rpayTypeName, lendRateTypeName, lendRateMin, lendRateMax, lendRateAvg)
-  		values (#{comNum}, #{prdNum}, #{rpayTypeName}, #{lendRateTypeName}, #{lendRateMin}, #{lendRateMax}, #{lendRateAvg})
+  		insert into RentHouseLoanOption (rentHouseLoanID, dclsMonth, comNum, prdNum, rpayTypeName, lendRateTypeName, lendRateMin, lendRateMax, lendRateAvg)
+  		values (#{rentHouseLoanID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{rpayTypeName}, #{lendRateTypeName}, #{lendRateMin}, #{lendRateMax}, #{lendRateAvg})
   	</insert>
+  	
+  	<!--  전체 대출 조회  -->
+	<select id="listAllRentHouseLoan" resultMap="RentHouseLoanResult"> 
+		SELECT b.rentHouseLoanID, comName, prdName, joinWay, loanInciExpn, erlyRpayFee, dlyRate, loanLimit, rpayTypeName, lendRateTypeName, lendRateMin, lendRateMax, lendRateAvg
+		FROM rentHouseLoanBase as b
+		inner join rentHouseLoanOption as o
+		on b.rentHouseLoanID = o.rentHouseLoanID
+	</select>
+	
+	<!-- 대출 검색  -->
+	<select id="rentHouseLoanSearch" resultMap="RentHouseLoanResult">
+	SELECT * FROM RentHouseLoanBase as rb inner join RentHouseLoanOption as ro
+	on rb.rentHouseLoanID = ro.rentHouseLoanID
+	
+	WHERE comName like CONCAT('%', #{prdName}, '%') AND
+		  joinWay like CONCAT('%', #{joinWay}, '%')	AND
+		  rpayTypeName like CONCAT('%', #{rpayTypeName}, '%')
+	</select>
+	
+	<!-- 전세 대출 비교 넣기 -->
+	<select id="RentHouseLoanCompare" resultMap="RentHouseLoanResult" parameterType="string">
+		SELECT b.comName, b.prdName, joinWay, loanInciExpn, erlyRpayFee, dlyRate, loanLimit, rpayTypeName, lendRateTypeName, lendRateMin, lendRateMax, lendRateAvg
+		FROM RentHouseLoanBase b, RentHouseLoanOption o
+		where b.rentHouseLoanID = o.rentHouseLoanID AND b.rentHouseLoanID = #{rentHouseLoanID} 
+	
+	</select>
+	
+	<!-- 전세 대출 비교 모달 -->
+	<select id="RentHouseLoanCompareModal" resultMap="RentHouseLoanResult" parameterType="string">
+		SELECT b.comName, b.prdName, joinWay, loanInciExpn, erlyRpayFee, dlyRate, loanLimit, rpayTypeName, lendRateTypeName, lendRateMin, lendRateMax, lendRateAvg
+		FROM RentHouseLoanBase b, RentHouseLoanOption o
+		where b.rentHouseLoanID = o.rentHouseLoanID AND b.rentHouseLoanID = #{rentHouseLoanID} 
+	</select>
   	</mapper>
   	
   	

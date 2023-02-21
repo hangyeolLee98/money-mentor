@@ -1,6 +1,7 @@
 package com.spring_boot_momentor.model;
 
 public class DepositBaseVO {
+	private String depositID;
 	private String dclsMonth;
 	private String comNum;
 	private String prdNum;
@@ -11,6 +12,16 @@ public class DepositBaseVO {
 	private String spclCnd;
 	private int maxLimit;
 	private String joinMember;
+	private double intrRate;
+	private double intrRate2;
+	private String saveTrm;
+	private String intrRateTypeName;
+	public String getDepositID() {
+		return depositID;
+	}
+	public void setDepositID(String depositID) {
+		this.depositID = depositID;
+	}
 	public String getDclsMonth() {
 		return dclsMonth;
 	}
@@ -70,6 +81,30 @@ public class DepositBaseVO {
 	}
 	public void setJoinMember(String joinMember) {
 		this.joinMember = joinMember;
+	}
+	public double getIntrRate() {
+		return intrRate;
+	}
+	public void setIntrRate(double intrRate) {
+		this.intrRate = intrRate;
+	}
+	public double getIntrRate2() {
+		return intrRate2;
+	}
+	public void setIntrRate2(double intrRate2) {
+		this.intrRate2 = intrRate2;
+	}
+	public String getSaveTrm() {
+		return saveTrm;
+	}
+	public void setSaveTrm(String saveTrm) {
+		this.saveTrm = saveTrm;
+	}
+	public String getIntrRateTypeName() {
+		return intrRateTypeName;
+	}
+	public void setIntrRateTypeName(String intrRateTypeName) {
+		this.intrRateTypeName = intrRateTypeName;
 	}
 	
 	

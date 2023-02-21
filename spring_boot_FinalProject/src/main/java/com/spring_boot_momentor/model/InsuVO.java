@@ -1,7 +1,7 @@
 package com.spring_boot_momentor.model;
 
 public class InsuVO {
-	private int id;
+	private int insuId;
 	private String prdName;
 	private String prdLogo;
 	private String insuName;
@@ -15,11 +15,12 @@ public class InsuVO {
 	private String insuNote;
 	private String insuJoinURL;
 	private String insuPhoneNumber;
-	public int getId() {
-		return id;
+	
+	public int getInsuId() {
+		return insuId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setInsuId(int insuId) {
+		this.insuId = insuId;
 	}
 	public String getPrdName() {
 		return prdName;

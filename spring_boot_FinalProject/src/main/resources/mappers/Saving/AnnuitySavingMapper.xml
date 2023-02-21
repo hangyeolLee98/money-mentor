@@ -5,6 +5,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.spring_boot_momentor.dao.IAnnuitySavingDAO">
   <resultMap id="AnnuitySavingResult" type="com.spring_boot_momentor.model.AnnuitySavingBaseVO">
+  		<result property="annuitySavingID" column="annuitySavingID"/>
 		<result property="dclsMonth" column="dclsMonth"/>
 		<result property="comNum" column="comNum"/>
 		<result property="prdNum" column="prdNum"/>
@@ -20,34 +21,70 @@
 		<result property="btrmPrftRate2" column="btrmPrftRate2"/>
 		<result property="btrmPrftRate3" column="btrmPrftRate3"/>
 		<result property="saleCom" column="saleCom"/>
-		<result property="dclsStart" column="dclsStart"/>
+		<result property="pnsnRecTrm" column="pnsnRecTrm"/>
+		<result property="pnsnEnterAge" column="pnsnEnterAge"/>
+		<result property="monPay" column="monPay"/>
+		<result property="payPeriod" column="payPeriod"/>
+		<result property="pnsnStartAge" column="pnsnStartAge"/>
+		<result property="pnsnRecAmt" column="pnsnRecAmt"/>
+	
 	</resultMap>
 	
   	<insert id="insertAnnuitySavingBase" parameterType="com.spring_boot_momentor.model.AnnuitySavingBaseVO" timeout="3">
-  		insert into AnnuitySavingBase (dclsMonth, comNum, prdNum, comName, prdName, pnsnKindName, saleStart, prdtTypeName, avgPrftRate, 
+  		insert into AnnuitySavingBase (annuitySavingID, dclsMonth, comNum, prdNum, comName, prdName, pnsnKindName, saleStart, prdtTypeName, avgPrftRate, 
   									   dclsRate, guarRate, btrmPrftRate1, btrmPrftRate2, btrmPrftRate3, saleCom, dclsStart)
-  		values (#{dclsMonth}, #{comNum}, #{prdNum}, #{comName}, #{prdName}, #{pnsnKindName}, #{saleStart}, #{prdtTypeName}, #{avgPrftRate},
+  		values (#{annuitySavingID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{comName}, #{prdName}, #{pnsnKindName}, #{saleStart}, #{prdtTypeName}, #{avgPrftRate},
   			    #{dclsRate}, #{guarRate}, #{btrmPrftRate1}, #{btrmPrftRate2}, #{btrmPrftRate3}, #{saleCom}, #{dclsStart})
   	</insert>
   	<insert id="insertAnnuitySavingOption" parameterType="com.spring_boot_momentor.model.AnnuitySavingOptionVO">
-  		insert into AnnuitySavingOption (comNum, prdNum, pnsnRecTrm, pnsnEnterAge, monPay, payPeriod, pnsnStartAge, pnsnRecAmt)
-  		values (#{comNum}, #{prdNum}, #{pnsnRecTrm}, #{pnsnEnterAge}, #{monPay}, #{payPeriod}, #{pnsnStartAge}, #{pnsnRecAmt})
+  		insert into AnnuitySavingOption (annuitySavingID, dclsMonth, comNum, prdNum, pnsnRecTrm, pnsnEnterAge, monPay, payPeriod, pnsnStartAge, pnsnRecAmt)
+  		values (#{annuitySavingID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{pnsnRecTrm}, #{pnsnEnterAge}, #{monPay}, #{payPeriod}, #{pnsnStartAge}, #{pnsnRecAmt})
   	</insert>
   	
   	<!--  전체 연금 조회  -->
 	<select id="listAllAnnuitySaving" resultMap="AnnuitySavingResult"> 
-		SELECT * FROM annuitySavingBase ORDER BY prdNum 
+		<!--  SELECT * FROM savingBase as sb	inner join savingOption as so
+		on sb.savingID = so.savingID -->
+		
+<!-- 	SELECT ab.annuitySavingID, comName, prdName, pnsnKindName, saleStart, prdtTypeName, avgPrftRate, dclsRate, guarRate, btrmPrftRate1, btrmPrftRate2, btrmPrftRate3,
+	saleCom, pnsnRecTrm, pnsnEnterAge, monPay, pnsnStartAge, pnsnRecAmt
+		FROM annuitySavingBase as ab
+		inner join annuitySavingOption as ao
+		on ab.annuitySavingID = ao.annuitySavingID -->
+		<!-- group by prdName
+		  -->
+		  SELECT * FROM annuitySavingBase as b	inner join annuitySavingOption as o
+		on b.annuitySavingID = o.annuitySavingID
+	
+		  
 	</select>
 	
 	<!-- 연금 검색 -->
 	<select id="AnnuitySavingSearch" parameterType="hashmap" resultMap="AnnuitySavingResult" > 
 		<![CDATA[
 		SELECT * FROM annuitySavingBase 
-		WHERE prdName like CONCAT('%', #{prdName}, '%') or
+		WHERE 
 			  comName like CONCAT('%', #{prdName}, '%') and
 			  prdtTypeName like CONCAT('%', #{prdtTypeName}, '%') and
 			  pnsnKindName like CONCAT('%', #{pnsnKindName}, '%')
-			]]> 
-	</select>
+		]]> 
 
+	</select>
+	
+	<!-- 적금 비교 넣기 -->
+	<select id="AnnuitySavingCompare" resultMap="AnnuitySavingResult" parameterType="string">
+		SELECT b.comName, b.prdName, pnsnKindName, saleStart, prdtTypeName, avgPrftRate, dclsRate, guarRate, btrmPrftRate1, btrmPrftRate2, btrmPrftRate3, 
+		saleCom, pnsnRecTrm, pnsnEnterAge, monPay, payPeriod, pnsnStartAge, pnsnRecAmt
+		FROM AnnuitySavingBase b, AnnuitySavingOption o
+		where b.annuitySavingID = o.annuitySavingID AND b.annuitySavingID = #{annuitySavingID} 
+	
+	</select>
+	
+	<!-- 적금 비교 모달 -->
+	<select id="AnnuitySavingCompareModal" resultMap="AnnuitySavingResult" parameterType="string">
+		SELECT b.comName, b.prdName, pnsnKindName, saleStart, prdtTypeName, avgPrftRate, dclsRate, guarRate, btrmPrftRate1, btrmPrftRate2, btrmPrftRate3, 
+		saleCom, pnsnRecTrm, pnsnEnterAge, monPay, payPeriod, pnsnStartAge, pnsnRecAmt
+		FROM AnnuitySavingBase b, AnnuitySavingOption o
+		where b.annuitySavingID = o.annuitySavingID AND b.annuitySavingID = #{annuitySavingID}
+	</select>
   </mapper>

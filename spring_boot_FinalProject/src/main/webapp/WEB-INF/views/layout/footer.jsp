@@ -15,7 +15,7 @@
 						<ul id="foot_ul">
 							<li><a href="<c:url value='/all/introduce'/>">모멘토 소개</a></li>
 							<li>ㅣ</li>
-							<li><a href="javascript:void(0);" onclick="chatFunction(); return false;">챗봇 가이드</a></li>
+							<li><a href="<c:url value='/all/serviceCenter'/>">고객센터</a></li>
 							<li>ㅣ</li>
 							<li><a href="<c:url value='/CardList'/>">비교 & 추천</a></li>
 							<li>ㅣ</li>
@@ -25,7 +25,7 @@
 					<hr />
 					<div class="fo_div3">
 						<ul id="foot_ul">
-							<li><a href="<c:url value='/#'/>">이용안내</a></li>
+							<li>이용약관</li>
 							<li>ㅣ</li>
 							<li>대표 1J4P</li>
 							<li>ㅣ</li>

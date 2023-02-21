@@ -4,13 +4,18 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring_boot_momentor.model.RentHouseLoanBaseVO;
 import com.spring_boot_momentor.model.RentHouseLoanOptionVO;
@@ -73,6 +78,9 @@ public class RentHouseLoanController {
 					// 회사명번호, 상품번호
 					String comNum = (String) jsonObj.get("fin_co_no");
 					String prdNum = (String) jsonObj.get("fin_prdt_cd");
+					
+					String rentHouseLoanID = comNum + prdNum; 
+					
 					// 회사명, 상품명
 					String comName = (String) jsonObj.get("kor_co_nm");
 					String prdName = (String) jsonObj.get("fin_prdt_nm");
@@ -87,6 +95,7 @@ public class RentHouseLoanController {
 					
 					String dclsStart = (String) jsonObj.get("dcls_strt_day");
 
+					vo.setRentHouseLoanID(rentHouseLoanID);
 					vo.setDclsMonth(dclsMonth);
 					vo.setComNum(comNum);
 					vo.setPrdNum(prdNum);
@@ -141,9 +150,14 @@ public class RentHouseLoanController {
 
 				for (int i = 0; i < optionList.size(); i++) {
 					JSONObject jsonOption = (JSONObject) optionList.get(i);
+					
+					//공시 제출월
+					String dclsMonth = (String) jsonOption.get("dcls_month");
 					// 회사명번호, 상품번호
 					String comNum = (String) jsonOption.get("fin_co_no");
 					String prdNum = (String) jsonOption.get("fin_prdt_cd");
+					
+					String rentHouseLoanID = comNum + prdNum; 
 					
 					// 대출 상환 유형, 대출금리유형
 					String rpayTypeName = (String) jsonOption.get("rpay_type_nm");
@@ -168,6 +182,8 @@ public class RentHouseLoanController {
 						lendRateAvg = Double.parseDouble(String.valueOf(jsonOption.get("lend_rate_avg")));
 					}
 
+					vo2.setRentHouseLoanID(rentHouseLoanID);
+					vo2.setDclsMonth(dclsMonth);
 					vo2.setComNum(comNum);
 					vo2.setPrdNum(prdNum);
 					vo2.setRpayTypeName(rpayTypeName);
@@ -187,4 +203,59 @@ public class RentHouseLoanController {
 		}
 		return "loan/rentHouseLoanForm";
 	}
+
+
+	@RequestMapping("/rentHouseLoanForm")
+	public String viewRentHouseLoanListAll() {
+		return "loan/rentHouseLoanForm";
+	}
+	
+	//전체 전세 자금 대출 조회
+	@RequestMapping("/rentHouseLoanListAll")
+	public String viewRentHouseLoanListAll(Model model) {
+		ArrayList<RentHouseLoanBaseVO> rentHouseLoanList = service.listAllRentHouseLoan();
+		model.addAttribute("rentHouseLoanList", rentHouseLoanList);
+		return "loan/rentHouseLoanResultForm";
+		
+	}
+	
+	//전세 자금 대출 검색 처리
+	@RequestMapping("/rentHouseLoanSearch")
+	public String RentHouseLoanSearch(@RequestParam String prdName,
+									  @RequestParam String joinWay,
+									  @RequestParam String rpayTypeName,
+									  Model model) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("prdName", prdName);
+		map.put("joinWay", joinWay);
+		map.put("rpayTypeName", rpayTypeName);
+		
+		//서비스로 전송해서 DB 검색 결과 받아옴 
+		ArrayList<RentHouseLoanBaseVO> rentHouseLoanList = service.rentHouseLoanSearch(map);
+		model.addAttribute("rentHouseLoanList", rentHouseLoanList);
+		return "loan/rentHouseLoanResultForm";
+	}
+	
+	//전세 자금 대출 비교 추가
+	@ResponseBody
+	@RequestMapping("/RentHouseLoanCompare")
+	public RentHouseLoanBaseVO RentHouseLoanCompare(@RequestParam String rentHouseLoanID, Model model) {
+		ArrayList<RentHouseLoanBaseVO> rentHouseLoanList = service.RentHouseLoanCompare(rentHouseLoanID);
+		model.addAttribute("rentHouseLoanList", rentHouseLoanList.get(0));
+		return rentHouseLoanList.get(0);
+	}
+	
+	@RequestMapping("/rentHousePopup")
+	public String rentHouseLoanPopup() {
+		return "loan/rentHouseLoanForm";
+	}
+	
+	//전세 자금 대출 비교 모달
+	@ResponseBody
+	@RequestMapping("/RentHouseLoanCompareModal")
+	public String RentHouseLoanCompareModal(@RequestParam String rentHouseLoanID, Model model) {
+		ArrayList<RentHouseLoanBaseVO> rentHouseLoanList = service.RentHouseLoanCompareModal(rentHouseLoanID);
+		model.addAttribute("rentHouseLoanList", rentHouseLoanList);
+		return "loan/rentHouseLoanForm";
+	}	
 }

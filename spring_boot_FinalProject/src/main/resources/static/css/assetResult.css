@@ -49,13 +49,32 @@ table th {
 }
 
 .product {
-	height: 100px;
+	width: 350px;
+	height: 150px;
 }
 
 .p1 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	background-color: rgb(206, 251, 201);
 }
 
 .p2 {
+	width: 450px;
 	background-color: rgb(217, 229, 255);
+}
+
+.card {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.cardImg {
+	width: 100px;
+	height: 150px;
+}
+
+a {
+	text-decoration: none;
 }

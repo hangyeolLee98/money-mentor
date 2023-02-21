@@ -1,6 +1,8 @@
 package com.spring_boot_momentor.model;
 
 public class AnnuitySavingOptionVO {
+	private String annuitySavingID;
+	private String dclsMonth;
 	private String comNum;
 	private String prdNum;
 	private String pnsnRecTrm;
@@ -10,6 +12,18 @@ public class AnnuitySavingOptionVO {
 	private String pnsnStartAge;
 	private int pnsnRecAmt;
 	
+	public String getAnnuitySavingID() {
+		return annuitySavingID;
+	}
+	public void setAnnuitySavingID(String annuitySavingID) {
+		this.annuitySavingID = annuitySavingID;
+	}
+	public String getDclsMonth() {
+		return dclsMonth;
+	}
+	public void setDclsMonth(String dclsMonth) {
+		this.dclsMonth = dclsMonth;
+	}
 	public String getComNum() {
 		return comNum;
 	}
@@ -58,5 +72,7 @@ public class AnnuitySavingOptionVO {
 	public void setPnsnRecAmt(int pnsnRecAmt) {
 		this.pnsnRecAmt = pnsnRecAmt;
 	}
+	
+	
 	
 }

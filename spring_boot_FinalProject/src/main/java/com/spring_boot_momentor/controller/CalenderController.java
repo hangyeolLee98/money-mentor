@@ -1,6 +1,7 @@
 package com.spring_boot_momentor.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,15 +25,16 @@ public class CalenderController {
 	private CalenderService service;
 	
 	@RequestMapping("/profile/calender")
-	public String calender() {
+	public String calender(Model model, HttpSession session) {
+		String userID = (String)session.getAttribute("sid");
+		model.addAttribute("userID", userID);
 		return "detailProfile/calender/calenderMain";
 	}
 	
 	@ResponseBody 
 	@RequestMapping("/profile/calender/getSID")
-	public String getSID(Model model, HttpSession session) {
+	public String getSID(HttpSession session) {
 		String userID = (String)session.getAttribute("sid");
-		model.addAttribute("userID", userID);
 		return userID;
 	}
 	
@@ -47,12 +49,11 @@ public class CalenderController {
 	@RequestMapping("/profile/calender/changePrdName")
 	public String changePrdName(HttpSession session,
 												@RequestParam("prdName") String prdName,
-												@RequestParam("prdID") String prdID,
-												@RequestParam("prdType") String prdType) {
+												@RequestParam("dataID") int dataID) {
 		
 		String userID = (String)session.getAttribute("sid");
 		
-		service.changePrdName(prdName, userID, prdID, prdType);
+		service.changePrdName(prdName, userID, dataID);
 
 		return "redirect:/profile/calender";
 	}
@@ -62,7 +63,7 @@ public class CalenderController {
 	public ArrayList<CalenderProductVO> getPrdCardData(
 													@PathVariable String kind,
 													@PathVariable String kindDetail,
-													@PathVariable String order) {	
+													@PathVariable String order) {
 		
 		ArrayList<CalenderProductVO> prd = service.calenderPrdList(kind, kindDetail, order);
 				
@@ -79,6 +80,7 @@ public class CalenderController {
 											@RequestParam("calTransfer") int calTransfer,
 											@RequestParam("calMaturity") int calMaturity,
 											@RequestParam("calPayment") int calPayment,
+											@RequestParam("calDeposit") int calDeposit,
 											@RequestParam("prdName") String prdName,
 											HttpSession session) {
 		
@@ -90,7 +92,6 @@ public class CalenderController {
 		//vo에 올리기 전, 중복이 있는지 검사 / 사용자 지정 데이터는 중복 검사 X
 		if(!prdID.equals("0")) {
 			planCount = service.planDuplicateCheck(memId, prdID, prdType);
-			System.out.println(planCount);
 		}
 		
 		if(planCount == 0) {
@@ -104,6 +105,7 @@ public class CalenderController {
 			vo.setPrdType(prdType);
 			vo.setCalPayment(calPayment);
 			vo.setPrdName(prdName);
+			vo.setCalDeposit(calDeposit);
 			service.insertPlan(vo);
 		}
 		else {
@@ -121,7 +123,6 @@ public class CalenderController {
 		
 		if(chkArr != null) {
 			for(String dataID : chkArr) {
-				System.out.println(dataID);
 				service.deletePlan(Integer.parseInt(dataID));
 			}
 		}
@@ -173,4 +174,80 @@ public class CalenderController {
 		
 		return "detailProfile/calender/modifyPlanView";
 	}
+	
+
+	@ResponseBody
+	@RequestMapping("/profile/calender/categoryChart")
+	public List<Integer> categoryChart(HttpSession session) {
+		
+		String userID = (String)session.getAttribute("sid");
+		
+		List<Integer> categoryChart = new ArrayList<Integer>();
+		String[] category = {"card", "insu", "deposit", "savings", "loan"};
+		
+		String strPrice = "";
+		int price = 0;
+		
+		for(int i = 0; i < category.length; i++) {
+			strPrice = service.prdTotalFee(userID, category[i]);
+			if(strPrice == null) {
+				strPrice = "0";
+			}
+			
+			price = Integer.parseInt(strPrice);
+			
+			categoryChart.add(price);
+		}
+		
+		return categoryChart;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/profile/calender/totalAssetChart")
+	public List<Integer> totalAssetChart(HttpSession session) {
+		
+		String userID = (String)session.getAttribute("sid");
+		
+		List<Integer> assetChart = new ArrayList<Integer>();
+		String[] category = {"card", "insu", "deposit", "savings", "loan"};
+
+		String strPrice = "";
+		int price = 0;
+		int savePrice = service.prdTotalDeposit(userID);
+		int borrowPrice = 0;
+		
+		for(int i = 0; i < category.length; i++) {
+			strPrice = service.prdTotalFee(userID, category[i]);
+			if(strPrice == null) {
+				strPrice = "0";
+			}
+			
+			price = Integer.parseInt(strPrice);
+			
+				borrowPrice += price;
+		}
+
+		assetChart.add(savePrice);
+		assetChart.add(borrowPrice);
+		return assetChart;
+	}
+
+	@ResponseBody
+	@RequestMapping("/profile/calender/insertPrdCategory")
+	public ArrayList<String> insertPrdCategory(@RequestParam("kind") String kind) {
+		ArrayList<String> category = service.insertPrdCategory(kind);
+		return category;
+	}
+	
+
+	@ResponseBody
+	@RequestMapping("profile/calender/search")
+	public ArrayList<CalenderProductVO> calenderSearch(@RequestParam("kind") String kind,
+													   @RequestParam("text") String text) {
+
+		ArrayList<CalenderProductVO> prd = service.calenderSearch(kind, text);
+		
+		return prd;
+	}
+	
 }

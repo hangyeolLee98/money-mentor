@@ -13,14 +13,15 @@
 		const transfer = $('#calTransfer');
 		const maturity = $('#calMaturity');
 		const payment = $('#calPayment');
+		const deposit = $('#calDeposit');
 		
 		let prdName = $('#prdName').val();
 		let calSubDate = $('#calSubDate').val();
 		let calTransfer = $('#calTransfer').val();
 		let calMaturity = $('#calMaturity').val();
 		let calPayment = $('#calPayment').val();
+		let calDeposit = $('#calDeposit').val();
 		
-		console.log(calSubDate);
 		
 		if(prdName.length == 0){
 			prdName = name.attr("placeholder");
@@ -34,6 +35,9 @@
 		if(calPayment.length == 0){
 			calPayment = payment.attr("placeholder");
 		}
+		if(calPayment.length == 0){
+			calDeposit = deposit.attr("placeholder");
+		}
 		
 		$.ajax({
 			url:`/profile/calender/modifyPlan/${prdID}`,
@@ -44,6 +48,7 @@
 				'calMaturity': calMaturity, 
 				'calPayment': calPayment,
 				'prdName': prdName,
+				'calDeposit': calDeposit,
 			},
 			dataType:'text',
 			success: function(result){
@@ -52,5 +57,16 @@
  				window.close();
 			},
 		});
+	});
+	
+	$('#prd-type-select').on('change', function(){
+		const kind = $('#prd-type-select option:selected').val();
+		
+		if(kind == "deposit" || kind == "saving"){
+			$('#prdDeposit').show();
+		}
+		else{
+			$('#prdDeposit').hide();
+		}
 	});
  });

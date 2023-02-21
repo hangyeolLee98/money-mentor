@@ -1,0 +1,513 @@
+@charset "UTF-8";
+
+/* body { */
+/* 	margin: 0; */
+/* 	max-width: 1072px; */
+/* 	margin-left: auto; */
+/*     margin-right: auto; */
+/* 	font-size: 1.4rem; */
+/* 	font-family: -apple-system, BlinkMacSystemFont, HelveticaNeue, Helvetica, */
+/* 		AppleSDGothicNeo, sans-serif; */
+/* 	color: #242424; */
+/* 	background-color: #f1f5fe; */
+/* } */
+
+body { 
+	color: #242424;
+	background-color: #f1f5fe;
+	margin: auto;
+	}
+.cardSec {
+	margin: 0;
+	max-width: 1072px;
+	margin-left: auto;
+    margin-right: auto;
+	font-size: 1.4rem;
+	font-family: -apple-system, BlinkMacSystemFont, HelveticaNeue, Helvetica,
+		AppleSDGothicNeo, sans-serif;
+	color: #242424;
+	background-color: #f1f5fe;
+	margin-top:100px;
+}
+
+.filters {
+	max-width: 1072px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 12px;
+	padding: 7px 9px 0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	min-width: 320px;
+}
+
+.table {
+	max-width: 1072px;
+	margin-left: auto;
+	margin-right: auto;
+	flex-wrap: wrap;
+	position: relative;
+	border-radius: 10px;
+	box-shadow: 0 2px 3px 0 rgb(0 0 0/ 5%), 0 0 2px 0 rgb(0 0 0/ 7%);
+	color: #666;
+	background-color: #fff;
+}
+
+.filters .category:first-child {
+	border-top-left-radius: inherit;
+}
+
+.filters .category {
+	flex-basis: 100%;
+	max-width: 100%;
+	position: relative;
+	line-height: 53px;
+}
+
+.item {
+	max-width: 1072px;
+    min-height: 35px;
+    padding: 0 13px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.47;
+    letter-spacing: -.62px;
+}
+
+.filters [aria-selected=true] .cardbtnImg {
+    border-color: #bfceee;
+    background-color: #f0f5ff;
+}
+
+
+
+li.item {
+	width: 1000px;
+    
+}
+
+h5 {
+	display: block;
+	margin-block-start: 1.67em;
+	margin-block-end: 1.67em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+}
+
+.filters .title {
+	position: absolute;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: 1px 0 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    min-width: 107px;
+    padding-left: 25px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -.3px;
+    color: #242424;
+    -webkit-border-top-left-radius: inherit;
+    border-top-left-radius: inherit;
+    -webkit-border-bottom-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+    background-image: -webkit-linear-gradient(right,hsla(0,0%,100%,0),hsla(0,0%,100%,.95) 44px);
+    background-image: linear-gradient(270deg,hsla(0,0%,100%,0) 0,hsla(0,0%,100%,.95) 44px);
+}
+
+#CardList{
+text-align: -webkit-center;
+}
+.search {
+  position: relative;
+  max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+}
+
+/* 검색 창 및 버튼 */
+#sreachimg{
+	
+	position : absolute;
+  width: 17px;
+  top: 30px;
+  right: 32px;
+  margin: 0;
+	}
+
+input#insuId  {
+  width: 97%;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.btncontainer {
+	overflow-x:auto; /* 창 작아지면 밑에 스크롤바 */
+	margin-right: 14px;
+	padding-left: 113px;
+	white-space: nowrap; /* 지우면 리스트 길게 나열 */
+}
+
+/* .btncontainer::-webkit-scrollbar {  스크롤 안보이게 하기 
+	display: none;
+} */
+.item {
+	display: inline-block;
+	padding: 0 8px;
+	border: 1px solid transparent;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	vertical-align: middle;
+	font-weight: 500;
+	line-height: 1.47;
+	letter-spacing: -.62px;
+}
+
+
+
+.item2 {
+	display: inline-block;
+	border: 1px solid transparent;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	vertical-align: middle;
+	margin-left: 22px;
+	margin-right: 22px;
+	font-size: 20px;
+	line-height: 1.47;
+	letter-spacing: -.62px;
+	width: calc(100% - 44px);
+	line-height: 1.47;
+	border: 1px solid transparent; /* 테이블 중앙에 베지 */
+}
+
+.btncontainer img {
+	display: inline-block;
+	height: 28px;
+	vertical-align: middle;
+}
+
+img {
+	overflow-clip-margin: content-box;
+	overflow: clip;
+	transition: all 0.2s linear;
+}
+
+img:hover{
+	transform: scale(1.1);
+}
+
+button {
+	writing-mode: horizontal-tb !important;
+	text-rendering: auto;
+	word-spacing: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	text-align: center;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 1.47;
+	letter-spacing: -.62px;
+	display: inline-block;
+	vertical-align: middle;
+	background-color: white;
+	padding: 0.8px;
+}
+
+.cards{
+	
+	max-width: 1072px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 12px;
+	padding: 7px 9px 0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	min-width: 320px;
+}
+
+.orders {
+	
+
+	margin-top: 10px;
+	margin-left: 20px;
+	vertical-align: middle;
+	margin-left: 20px;
+	margin-bottom: 10px;
+	
+}
+
+.order {
+	
+	
+	display: inline-block;
+	padding: 0 8px;
+	border: 1px solid transparent;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	vertical-align: middle;
+	font-weight: 500;
+	line-height: 1.47;
+	color: #afafaf;
+}
+
+
+
+.lists__item {
+    display: none;
+    
+}
+
+.dd{
+    display: flex;
+    
+}
+
+li{
+	list-style:none;
+}
+
+
+.cardImg{
+	width: 120px;
+	height: 30px;
+	transition: all 0.2s linear;
+}
+
+.cardImg:hover{
+	transform: scale(1.1);
+}
+
+.list {
+	
+    padding-top: 10px;
+    list-style-type: disc;
+    margin-block-start:1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
+}
+
+.lists__item{
+	
+	container-type: inline-size;
+	cursor: pointer;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.info{
+	width: 1000px;
+	max-width: 1072px;
+	margin-left: 20px;
+    margin-right: auto;
+}
+
+.preview {
+    align-self: flex-start;
+    display: grid;
+}
+
+.name{
+	font-size: 32px;
+}
+
+p.desc{
+	font-weight: bold;
+}
+
+
+a .button{
+	
+}
+
+.btn-wrap {
+        display: inline-block;
+    margin: 0px 0px 26px 425px;
+}
+
+button:after{
+	
+}
+
+/* 더보기  a태그 */
+#morebtn{
+	 height: 36px;
+	 border: 3px solid #00000075;
+   	 color: #00000075;
+	 font-size: 40px;
+	 background-color: #fdfdfd;
+	 cursor: pointer;
+	    border-radius: 5px;
+	 box-shadow: 3px 3px #222;
+
+	 
+	 padding: 0 20px;
+}
+#morebtn:hover {
+	 opacity: 0.7;
+}
+
+#morebtn:active{
+	 background-color: #eee;
+	 opacity: 1;
+}
+
+#chcdel{
+	display: inline-flex;
+    padding: 10px 9px 0;
+}	
+	
+#compbtn{
+	padding: 10px 30px 0;
+}
+	
+/* 상품비교 버튼들 */
+.comp_prod_selector button{
+
+	height: 36px;
+	 border: 3px solid #00000075;
+   	 color: #00000075;
+	 font-size: 16px;
+	 background-color: #fdfdfd;
+	 cursor: pointer;
+	 box-shadow: 3px 3px #222;
+	border-radius: 5px;
+	 padding: 0 20px;
+	 
+}
+.comp_prod_selector button:hover{opacity: 0.7;}
+
+.comp_prod_selector	button:active {
+	 background-color: #eee;
+	 opacity: 1;
+}
+
+/* 상품비교 창 */
+
+h4 {
+       display: block;
+      margin-block-start: 6px;
+        margin-inline-start: 43px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    
+    margin-right: auto;
+    width: 1028px;
+    float: left;
+}
+
+.comp_prod_selector {
+    position: fixed;
+    bottom: 0;
+    margin-left: 10px;
+    margin-right: auto;
+    width: 1054px;
+    z-index: 1;
+   
+    
+  
+}
+
+.comp_prod_selector .compsel_head {
+    height: 8px;
+    line-height: 38px;
+   	background-color: #264db5;
+    color: #fff;
+    overflow: hidden;
+    padding: 0 0 41px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1054px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    
+}
+
+.comp_prod_selector .compsel_body {
+    position: relative;
+    background: #fff;
+    border: solid #b3b3b3;
+    border-width: 0 1px;
+    height: 165px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1054px;
+}
+
+.comp_prod_selector .compsel_prods {
+	display:flex;
+	background-color:#fff;
+   
+    overflow: auto;
+    float: left;
+     border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1051px;
+}
+.comp_prod_selector .compsel_opt_area {
+    position: absolute;
+    width: 178px;
+   height: 1000px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #bdbdff;
+    float: right;
+   
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 60px;
+   
+    
+    
+}
+
+.comp_prod_selector .compsel_body:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+input.chkDelete{
+	float: left;
+}
+
+
+.btn_compsel{
+	
+	width: 130px;
+   
+}
+.oo{
+	    width: 160px;
+	padding-right: 20px;
+    font-size: 16px;
+    font-weight: bold;
+	
+}
+	.prod_list{
+	display: flex;
+	}
+	
+	.oo img{
+	height: 28px;
+	transition: all 0.2s linear;
+	}
+
+	.head_opt{
+	display: inline;
+    float: right;
+    margin-block-start: -4px;
+    margin-inline-end: 36px;
+	}

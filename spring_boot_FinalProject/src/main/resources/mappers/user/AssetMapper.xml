@@ -4,6 +4,13 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.spring_boot_momentor.dao.IUserDAO">
+  	 <!-- 회원 자산정보 유무 -->
+  	 <select id="findAssetInfo" parameterType="string" resultType="string">
+  	 	select userProperty
+  	 	from property
+  	 	where userId = #{userId}
+  	 </select>
+  
 	 <!-- 회원 자산 저장 -->
 	 <insert id="userAssetInsert">
 	 	insert into property (userProperty, userSalary, userDeposit, userSavings, userLoans, userInterest, userId)
@@ -40,5 +47,21 @@
 													   where userId=#{userId}) and j.userAge = (select userAge
 																								from joinUserList
 																								where userId=#{userId})
+	 </select>
+	 
+	 <!-- 랜덤 카드 정보 -->
+	 <select id="randCardList" resultType="com.spring_boot_momentor.model.CardVO">
+	 	select *
+	 	from cards
+	 	order by rand() LIMIT 0, 4;
+	 </select>
+	 
+	 <!-- 랜덤 적금 정보 -->
+	 <select id="randSavingList" resultType="com.spring_boot_momentor.model.SavingBaseVO">
+	 	SELECT sb.savingID, comName, prdName, joinWay, interest, spclCnd, maxLimit, joinMember, etcNote, intrRate, intrRate2, saveTrm
+		FROM savingBase as sb
+		inner join savingOption as so
+		on sb.savingID = so.savingID
+		order by rand() LIMIT 0, 4;
 	 </select>
   </mapper>

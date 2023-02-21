@@ -8,9 +8,7 @@
 }
 #prd-list-box{
 	overflow:auto;
-	height:1280px;
 	display:flex;
-	justify-content:space-evenly;
 	flex-wrap: wrap;
 }
 #prd-view-option-box{
@@ -104,8 +102,9 @@
 	width:300px;
 	min-height:150px;
 	min-width:100px;
-	margin:5px auto;
+	margin:5px;
 	padding-bottom:10px;
+	padding-top:10px;
 	border-radius:5px;
 }
 .prd-des{
@@ -156,4 +155,12 @@
 .item-btn-box{
 	display:flex;
 	margin-top:10px;
+}
+
+.prd-com{
+	font-size:13px;
+}
+
+.prd-title{
+	height:75px;
 }

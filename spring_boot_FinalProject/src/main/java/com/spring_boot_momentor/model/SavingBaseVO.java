@@ -14,9 +14,13 @@ public class SavingBaseVO {
 	private String joinMember;
 	private String etcNote;
 	private String dclsStart;
-	private String intrRate;
-	private String intrRate2;
-	private String saveTrm;
+	private double intrRate;
+	private double intrRate2;
+	private int saveTrm;
+	private String rsrvTypeName;
+	private String intrRateTypeName;
+	
+	
 	public String getSavingID() {
 		return savingID;
 	}
@@ -95,23 +99,35 @@ public class SavingBaseVO {
 	public void setDclsStart(String dclsStart) {
 		this.dclsStart = dclsStart;
 	}
-	public String getIntrRate() {
+	public double getIntrRate() {
 		return intrRate;
 	}
-	public void setIntrRate(String intrRate) {
+	public void setIntrRate(double intrRate) {
 		this.intrRate = intrRate;
 	}
-	public String getIntrRate2() {
+	public double getIntrRate2() {
 		return intrRate2;
 	}
-	public void setIntrRate2(String intrRate2) {
+	public void setIntrRate2(double intrRate2) {
 		this.intrRate2 = intrRate2;
 	}
-	public String getSaveTrm() {
+	public int getSaveTrm() {
 		return saveTrm;
 	}
-	public void setSaveTrm(String saveTrm) {
+	public void setSaveTrm(int saveTrm) {
 		this.saveTrm = saveTrm;
+	}
+	public String getRsrvTypeName() {
+		return rsrvTypeName;
+	}
+	public void setRsrvTypeName(String rsrvTypeName) {
+		this.rsrvTypeName = rsrvTypeName;
+	}
+	public String getIntrRateTypeName() {
+		return intrRateTypeName;
+	}
+	public void setIntrRateTypeName(String intrRateTypeName) {
+		this.intrRateTypeName = intrRateTypeName;
 	}
 	
 	

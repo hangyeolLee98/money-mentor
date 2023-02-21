@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring_boot_momentor.model.DepositBaseVO;
 import com.spring_boot_momentor.model.DepositOptionVO;
@@ -79,6 +80,9 @@ public class DepositController {
 						//회사번호, 상품번호
 						String comNum = (String) jsonObj.get("fin_co_no");
 						String prdNum = (String) jsonObj.get("fin_prdt_cd");
+						
+						String depositID = comNum + prdNum;
+						
 						//회사명, 상품명
 						String comName = (String) jsonObj.get("kor_co_nm");
 						String prdName = (String) jsonObj.get("fin_prdt_nm");
@@ -94,6 +98,8 @@ public class DepositController {
 						} else {
 							maxLimit = Integer.parseInt(String.valueOf(jsonObj.get("max_limit")));
 						}
+						
+						vo.setDepositID(depositID);
 						vo.setDclsMonth(dclsMonth);
 						vo.setComNum(comNum);
 						vo.setPrdNum(prdNum);
@@ -149,9 +155,21 @@ public class DepositController {
 
 					for (int i = 0; i < optionList.size(); i++) {
 						JSONObject jsonOption = (JSONObject) optionList.get(i);
+						
+						//공시제출월
+						String dclsMonth = (String) jsonOption.get("dcls_month");
 
+						
 						String comNum = (String) jsonOption.get("fin_co_no");
 						String prdNum = (String) jsonOption.get("fin_prdt_cd");
+						
+						
+						String depositID = comNum + prdNum;
+						
+						//회사명, 상품명
+						String comName = (String) jsonOption.get("kor_co_nm");
+						String prdName = (String) jsonOption.get("fin_prdt_nm");
+//						System.out.println(comName +" //////////////"+ prdName) ;
 						Double intrRate = 0.0;
 //						Double intr_rate = Double.parseDouble(String.valueOf(jsonOption.get("intr_rate")));
 						if(String.valueOf(jsonOption.get("intr_rate")).equals("null")) {
@@ -164,8 +182,12 @@ public class DepositController {
 						String saveTrm = (String) jsonOption.get("save_trm");
 						String intrRateTypeName = (String) jsonOption.get("intr_rate_type_nm");
 
+						vo2.setDepositID(depositID);
+						vo2.setDclsMonth(dclsMonth);
 						vo2.setComNum(comNum);
 						vo2.setPrdNum(prdNum);
+//						vo2.setComName(comName);
+//						vo2.setPrdName(prdName);
 						vo2.setIntrRate(intrRate);
 						vo2.setIntrRate2(intrRate2);
 						vo2.setSaveTrm(saveTrm);
@@ -199,17 +221,42 @@ public class DepositController {
 	@RequestMapping("/depositSearch")
 	public String DepositSearch(@RequestParam String prdName,
 								@RequestParam String joinWay,
+								@RequestParam String saveTrm,
 								Model model) {
 		
 		HashMap<String ,Object> map = new HashMap<String, Object>();
 		map.put("prdName", prdName);
 		map.put("joinWay", joinWay);
+		map.put("saveTrm", saveTrm);
 		
 		// 서비스로 전송해서 DB 검색 결과 받아옴
 		ArrayList<DepositBaseVO> depositList = service.depositSearch(map);	
 		model.addAttribute("depositList", depositList);
 		return "deposit/depositResultForm";	
 	}
+	
+	//예금 비교 추가
+	@ResponseBody
+	@RequestMapping("/DepositCompare")
+	public DepositBaseVO DepositCompare(@RequestParam String depositID, Model model ) {
+		ArrayList<DepositBaseVO> depositList = service.DepositCompare(depositID);
+		model.addAttribute("depositList", depositList.get(0));
+		return depositList.get(0);		
+	}
+	
+	@RequestMapping("/depositPop")
+	public String depositPopup() {
+		return "deposit/depositForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/DepositCompareModal")
+	public String DepositCompareModal(@RequestParam String depositID, Model model) {
+		ArrayList<DepositBaseVO> depositList = service.DepositCompareModal(depositID);
+		model.addAttribute("depositList", depositList);
+		return "deposit/depositForm";
+	}
+	
 	
 }
 	

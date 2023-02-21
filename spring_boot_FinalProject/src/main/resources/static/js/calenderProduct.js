@@ -5,7 +5,7 @@
   //상품목록
  jQuery.randerProduct = function(){
 	const kind = $('#prd-kind-select option:selected').val();
-	const kindDetail = $('#prd-kind-detail-select option:selected').val();
+	const kindDetail = $('#prd-kind-select-option option:selected').val();
 	const order = $('#prd-order-select option:selected').val();
 
 	$('#prd-list-box').empty();
@@ -18,6 +18,7 @@
 		$.each(result, function(index, item){	
 			let viewData =	`
 							<div class="prd-item">`;
+							
 			
 			let linkData = "";
 			
@@ -26,6 +27,9 @@
 			}
 			else if(item.prdCom == '현대'){
 				linkData = `"window.open('https://www.hyundaicard.com/cpc/cr/CPCCR0201_01.hc?cardWcd=${item.prdURL}')"`;
+			}
+			else if(item.prdCom == null){
+				linkData = '#';
 			}
 			else{
 				linkData = `"window.open('{item.prdURL}')"`;
@@ -47,16 +51,16 @@
 			
 			
 			if(item.prdCom == 'KB'){
-				viewData += `<span>[국민카드]</span>`;
+				viewData += `<span class="prd-com">[국민카드]</span>`;
 			}
 			else if(item.prdCom == '현대'){
-				viewData += `<span>[현대카드]</span>`;
+				viewData += `<span class="prd-com">[현대카드]</span>`;
 			}
 			else if(item.prdCom == 'lotte'){
-				viewData += `<span>[롯데카드]</span>`;
+				viewData += `<span class="prd-com">[롯데카드]</span>`;
 			}
 			else{
-				viewData += `<span>${item.prdCom}</span>`;
+				viewData += `<span class="prd-com">${item.prdCom}</span>`;
 			}
 			
 			viewData += `
@@ -79,9 +83,15 @@
 								<span class="deco-btn-like off"><button class="deco-btn like"><i id="like" class="fa fa-heart-o"></i></button></span>
 								<span class="deco-btn-bookMark off"><button class="deco-btn bookMark"><i id="bookMark" class="fa fa-star-o"></i></button></span>
 							</div>
+						`;
+						
+			if(linkData != '#'){
+				viewData += `
 							<div class="item-btn-box">
 								<button onclick=${linkData}>상세보기</button>
 						`;
+			
+			}
 						
 			if(sid != ""){
 							viewData += `<button class="add-prd-btn open">추가하기</button>`;
@@ -135,29 +145,25 @@ $(document).ready(function(){
 	$(document).on('change', '#prd-kind-select', function(e){
 	  e.preventDefault();
 	  const kind = $('#prd-kind-select option:selected').val();
-	  $('#prd-kind-detail-select').empty();
-	  if(kind == 'card'){
-	  	$('#prd-kind-detail-select').append(`
-								<select id="prd-kind-select-option" name="prd-kind-select-option">
-									<option value="default" selected>카드명</option>
-									<option value="현대">현대카드</option>
-									<option value="KB">국민카드</option>
-									<option value="lotte">롯데카드</option>
-								</select>
-	  							`);
-	  }
-	  else if(kind == 'insu'){
-	  	$('#prd-kind-detail-select').append(`
-								<select id="prd-kind-select-option"  name="prd-kind-select-option">
-									<option value="default" selected>보험종류</option>
-									<option value="암진단">암진단</option>
-									<option value="질병">질병</option>
-									<option value="상해">상해</option>
-									<option value="화재">화재</option>
-									<option value="자동차">자동차</option>
-								</select>
-	  							`);
-	  }
+	  $('#prd-kind-select-option').empty();
+	$('#prd-kind-select-option').append(`
+										<option value="default" selected>선택</option>
+										`);
+	  
+	  
+	  $.ajax({
+	        type: 'POST',
+	        url: `/profile/calender/insertPrdCategory`,
+	        dataType: 'json',
+	        data:{'kind': kind},
+	        success:function(result){
+	        	for(let i = 0; i < result.length; i++){
+		        	$('#prd-kind-select-option').append(`
+										<option value="${result[i]}">${result[i]}</option>
+		        	`);
+	        	}
+	        }
+	  });
 	  jQuery.randerProduct();
 	});
 	
@@ -191,7 +197,7 @@ $(document).ready(function(){
 		$('.add-prd-btn').eq(clickIndex).removeClass('open');
 		
 		const kind = $('#prd-kind-select option:selected').val();
-		const kindDetail = $('#prd-kind-detail-select option:selected').val();
+		const kindDetail = $('#prd-kind-select-option option:selected').val();
 		const order = $('#prd-order-select option:selected').val();
 		 
 		$.ajax({
@@ -200,6 +206,7 @@ $(document).ready(function(){
 	        dataType: 'json',
 	        success: function(result) {
 	        	const data = result;
+	        	
 				if(kind == "insu"){
 		        	const prdID = data[clickIndex].prdID;
 		        	const prdType = kind;
@@ -213,7 +220,7 @@ $(document).ready(function(){
 		        	$('.prd-detail-view').eq(clickIndex).append(`
 																<table>
 																	<tbody>
-																		<tr class="prdName">
+																		<tr class="prdName-box">
 																			<td class="prd-table-title">별명</td>
 																			<td><input placeholder="미기입시 상품명" type="text" id="prdName" class="prdName" name="prdName"></td>
 																		</tr>
@@ -227,7 +234,7 @@ $(document).ready(function(){
                                                                             <td>${female} 원</td>
                                                                         </tr>
 																		<tr class="prdSubDate">
-																			<td class="prd-table-title">가입일</td>
+																			<td class="prd-table-title">계약일</td>
 																			<td><input type="date" id="calSubDate" class="calSubDate" name="calSubDate"></td>
 																		</tr>
 																		<tr class="prdTransfer">
@@ -242,12 +249,65 @@ $(document).ready(function(){
 																			<td class="prd-table-title">납부금</td>
 																			<td><input type="text" id="calPayment" class="calPayment" name="calPayment"> 원</td>
 																		</tr>
-																		<tr><td colspan="2"><button type="submit" class="calender-add-btn" id="${data[clickIndex].id}">추가</button></td></tr>
+																		<tr>
+																			<td><button type="submit" class="calender-add-btn" id="${prdID}">추가</button></td>
+																			<td><div class="plan-warning-text"></div></td>
+																		</tr>
 																	</tbody>
 																</table>
 					  										`);
 				  
 				  }
+				  else if(kind == "saving" || kind == "deposit"){
+		        	let prdPrice = data[clickIndex].prdPrice;
+		        	const prdID = data[clickIndex].prdID;
+		        	const prdType = kind;
+		        	prdPrice = prdPrice.toLocaleString('ko-KR');
+		        	prdPrice += ' 원';
+		        	
+		        	if(prdPrice == '0 원'){
+		        		prdPrice = '없음';
+		        	}
+		        	
+		        	$('.prd-detail-view').eq(clickIndex).append(`
+																<table>
+																	<tbody>
+																		<tr class="prdName-box">	
+																			<td class="prd-table-title">별명</td>
+																			<td><input placeholder="미기입시 상품명" type="text" id="prdName" class="prdName" name="prdName"></td>
+																		</tr>
+																		<tr class="prdFee">
+																			<td class="prd-table-title">최고한도</td>
+																			<td>${prdPrice}</td>
+																		</tr>
+																		<tr class="prdSubDate">
+																			<td class="prd-table-title">계약일</td>
+																			<td><input type="date" id="calSubDate" class="calSubDate" name="calSubDate"></td>
+																		</tr>
+																		<tr class="prdTransfer">
+																			<td class="prd-table-title">이체일</td>
+																			<td><input type="text" id="calTransfer" class="calTransfer" name="calTransfer"> 일</td>
+																		</tr>
+																		<tr class="prdMaturity">
+																			<td class="prd-table-title">만기</td>
+																			<td><input type="text" id="calMaturity" class="calMaturity" name="calMaturity"> 년</td>
+																		</tr>
+																		<tr class="prdMaturity">
+																			<td class="prd-table-title">납부금</td>
+																			<td><input type="text" id="calPayment" class="calPayment" name="calPayment"> 원</td>
+																		</tr>
+																		<tr class="prdDeposit">
+																			<td class="prd-table-title">예치금</td>
+																			<td><input type="text" id="calDeposit" class="calDeposit" name="calDeposit"> 원</td>
+																		</tr>
+																		<tr>
+																			<td><button type="submit" class="calender-add-btn" id="${prdID}">추가</button></td>
+																			<td><div class="plan-warning-text"></div></td>
+																		</tr>
+																	</tbody>
+																</table>
+					  										`);
+	  		  }
 	        	else{
 		        	let prdPrice = data[clickIndex].prdPrice;
 		        	const prdID = data[clickIndex].prdID;
@@ -256,7 +316,7 @@ $(document).ready(function(){
 		        	$('.prd-detail-view').eq(clickIndex).append(`
 																<table>
 																	<tbody>
-																		<tr class="prdName">
+																		<tr class="prdName-box">	
 																			<td class="prd-table-title">별명</td>
 																			<td><input placeholder="미기입시 상품명" type="text" id="prdName" class="prdName" name="prdName"></td>
 																		</tr>
@@ -265,7 +325,7 @@ $(document).ready(function(){
 																			<td>${prdPrice} 원</td>
 																		</tr>
 																		<tr class="prdSubDate">
-																			<td class="prd-table-title">가입일</td>
+																			<td class="prd-table-title">계약일</td>
 																			<td><input type="date" id="calSubDate" class="calSubDate" name="calSubDate"></td>
 																		</tr>
 																		<tr class="prdTransfer">
@@ -280,7 +340,10 @@ $(document).ready(function(){
 																			<td class="prd-table-title">납부금</td>
 																			<td><input type="text" id="calPayment" class="calPayment" name="calPayment"> 원</td>
 																		</tr>
-																		<tr><td colspan="2"><button type="submit" class="calender-add-btn" id="${prdID}">추가</button></td></tr>
+																		<tr>
+																			<td><button type="submit" class="calender-add-btn" id="${prdID}">추가</button></td>
+																			<td><div class="plan-warning-text"></div></td>
+																		</tr>
 																	</tbody>
 																</table>
 					  										`);
@@ -288,15 +351,6 @@ $(document).ready(function(){
 	  		  }
 	  	});
 	});
-	
-	$('#prd-kind-detail-select').append(`
-							<select id="prd-kind-select-option" name="prd-kind-select-option">
-								<option value="default" selected>카드명</option>
-								<option value="현대">현대카드</option>
-								<option value="KB">국민카드</option>
-								<option value="lotte">롯데카드</option>
-							</select>
-	  						`);
 
 	//상품선택 툴 숨기기
 	$(document).on('click', '.close', function(e){
@@ -310,6 +364,140 @@ $(document).ready(function(){
 		$('.add-prd-btn').eq(clickIndex).addClass('open');
 		$('.add-prd-btn').eq(clickIndex).removeClass('close');
 	});
+	
+	$.ajax({
+	   type: 'GET',
+	   url: "/profile/calender/insertPrdCategory",
+	   dataType: 'json',
+	   data:{'kind': 'card'},
+	   success:function(result){
+	        for(let i = 0; i < result.length; i++){
+		       	$('#prd-kind-select-option').append(`
+									<option value="${result[i]}">${result[i]}</option>
+		       	`);
+	        }
+	     }
+	  });
+	  
+	  //검색 기능
+	  $('#searchBtn').on('click', function(){
+	  	const text = $('#searchTextBox').val();
+		const kind = $('#prd-kind-select option:selected').val();
+		
+		$.ajax({
+			type: 'GET',
+			url: "/profile/calender/search",
+	   		dataType: 'json',
+			data:{'text': text,
+				  'kind': kind},
+			success:function(result){
+				$('#prd-list-box').empty();
+				if(result.length == 0){
+					$('#prd-list-box').append(`<div>검색 결과가 없습니다.</div>`);
+				}
+				else{
+					$.each(result, function(index, item){	
+						let viewData =	`
+							<div class="prd-item">`;
+							
+			
+						let linkData = "";
+						
+						if(item.prdCom == 'KB'){
+							linkData = `"window.open('https://card.kbcard.com/CRD/DVIEW/HCAMCXPRICAC0076?mainCC=a&cooperationcode=${item.prdURL}')"`;
+						}
+						else if(item.prdCom == '현대'){
+							linkData = `"window.open('https://www.hyundaicard.com/cpc/cr/CPCCR0201_01.hc?cardWcd=${item.prdURL}')"`;
+						}
+						else if(item.prdCom == null){
+							linkData = '#';
+						}
+						else{
+							linkData = `"window.open('{item.prdURL}')"`;
+						}
+						
+						if(item.prdImg != null){
+							viewData += `
+										<div class="img-box">
+											<a onclick=${linkData}>
+												<img src="${item.prdImg}"/>
+											</a>
+										</div>
+										`;
+						}
+						viewData += `
+										<div class="prd-info-box">
+											<div class="prd-title">`;
+											
+						
+						
+						if(item.prdCom == 'KB'){
+							viewData += `<span class="prd-com">[국민카드]</span>`;
+						}
+						else if(item.prdCom == '현대'){
+							viewData += `<span class="prd-com">[현대카드]</span>`;
+						}
+						else if(item.prdCom == 'lotte'){
+							viewData += `<span class="prd-com">[롯데카드]</span>`;
+						}
+						else{
+							viewData += `<span class="prd-com">${item.prdCom}</span>`;
+						}
+						
+						viewData += `
+											<div class="prd-name">${item.prdName}</div>
+										</div>`;
+							
+						
+						let prdDes = item.prdDes;
+						
+						if(prdDes != null){
+							viewData += `
+											<div class="prd-des">
+												<div>${prdDes}</div>
+											</div>
+											`;
+						}
+						
+						viewData += `
+										<div class="deco-btn-box">
+											<span class="deco-btn-like off"><button class="deco-btn like"><i id="like" class="fa fa-heart-o"></i></button></span>
+											<span class="deco-btn-bookMark off"><button class="deco-btn bookMark"><i id="bookMark" class="fa fa-star-o"></i></button></span>
+										</div>
+									`;
+									
+						if(linkData != '#'){
+							viewData += `
+										<div class="item-btn-box">
+											<button onclick=${linkData}>상세보기</button>
+									`;
+						
+						}
+									
+						if(sid != ""){
+										viewData += `<button class="add-prd-btn open">추가하기</button>`;
+										}
+										viewData += `
+										</div>
+				  									<div class="prd-detail-view" style="display:none">
+													</div>
+									</div>
+								</div>`;
+								
+							$('#prd-list-box').append(`
+													${viewData}
+													`);		
+					});
+				}
+			}
+		});
+	  });
+	  
+	  $("#searchTextBox").on("keyup",function(key){
+        if(key.keyCode==13) {
+	  		$('#searchBtn').click();
+        }
+	  });
 	
 	  jQuery.randerProduct();
 });

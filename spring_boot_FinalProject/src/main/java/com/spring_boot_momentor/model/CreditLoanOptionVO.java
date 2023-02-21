@@ -1,6 +1,8 @@
 package com.spring_boot_momentor.model;
 
 public class CreditLoanOptionVO {
+	private String creditLoanID;
+	private String dclsMonth;
 	private String comNum;
 	private String prdNum;
 	private String crdtLendRateTypeName;
@@ -13,7 +15,18 @@ public class CreditLoanOptionVO {
 	private double crdtGrade3Up;
 	private double crdtGrade3Down;
 	private double crdtGradeAvg;
-	
+	public String getCreditLoanID() {
+		return creditLoanID;
+	}
+	public void setCreditLoanID(String creditLoanID) {
+		this.creditLoanID = creditLoanID;
+	}
+	public String getDclsMonth() {
+		return dclsMonth;
+	}
+	public void setDclsMonth(String dclsMonth) {
+		this.dclsMonth = dclsMonth;
+	}
 	public String getComNum() {
 		return comNum;
 	}
@@ -86,6 +99,7 @@ public class CreditLoanOptionVO {
 	public void setCrdtGradeAvg(double crdtGradeAvg) {
 		this.crdtGradeAvg = crdtGradeAvg;
 	}
+	
 	
 }
 

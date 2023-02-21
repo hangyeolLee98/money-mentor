@@ -37,4 +37,46 @@
   		SET answer=#{answer}
   		WHERE qusNum=#{qusNum}
   	</update>
+  		<resultMap type="com.spring_boot_momentor.model.InsuVO" id="insuResult">
+			
+		<result column="prdName" property="prdName"/>
+		<result column="prdLogo" property="prdLogo"/>
+		<result column="insuName" property="insuName"/>
+		<result column="insuCtg" property="insuCtg"/>
+		<result column="insuDes" property="insuDes"/>
+		<result column="insuPrice" property="insuPrice"/>
+		<result column="male" property="male"/>
+		<result column="female" property="female"/>
+		<result column="insuIndex" property="insuIndex"/>
+		<result column="age" property="age"/>
+		<result column="insuNote" property="insuNote"/>
+		<result column="insuJoinURL" property="insuJoinURL"/>
+		<result column="insuPhoneNumber" property="insuPhoneNumber"/>
+	</resultMap>
+  	<select id="insuRandom" resultMap="insuResult" >
+		SELECT * FROM insu
+		ORDER BY insuId LIMIT 0, 3
+	</select>
+	<resultMap id="savingResult" type="com.spring_boot_momentor.model.SavingBaseVO">
+		<result property="savingID" column="savingID"/>
+		<result property="dclsMonth" column="dclsMonth"/>
+		<result property="comNum" column="comNum"/>
+		<result property="prdNum" column="prdNum"/>
+		<result property="comName" column="comName"/>
+		<result property="prdName" column="prdName"/>
+		<result property="joinWay" column="joinWay"/>
+		<result property="interest" column="interest"/>
+		<result property="spclCnd" column="spclCnd"/>
+		<result property="maxLimit" column="maxLimit"/>
+		<result property="joinMember" column="joinMember"/>
+		<result property="etcNote" column="etcNote"/>
+		<result property="dclsStart" column="dclsStart"/>
+		<result property="intrRate" column="intrRate"/>
+		<result property="intrRate2" column="intrRate2"/>
+		<result property="saveTrm" column="saveTrm"/>
+	</resultMap>
+	<select id="savRandom" resultMap="savingResult" >
+		SELECT * FROM savingBase
+		ORDER BY savingID DESC LIMIT 0, 3
+	</select>
   </mapper>

@@ -103,7 +103,7 @@ jQuery.randerPlan = function(){
 						
 						
 						plan += `
-								<span class="plan-title">${prdName} 이체일 <input class="plan-checkBox" type="checkbox"></span>
+								<span class="plan-title"><span class="plan-prd-title"><span id="${item.dataID}" class="plan-prd-name">${prdName}</span> 이체일</span> <input class="plan-checkBox" type="checkbox"></span>
 		
 							`;
 						
@@ -230,25 +230,25 @@ $(document).ready(function(){
 	       
 	
 	//일정 이름 변경하기
-	$(document).on('dblclick', '.calender-plan-name', function(e){
+	$(document).on('dblclick', '.plan-prd-name', function(e){
 		e.preventDefault();
 		
-		if($('input[name=prdName]').length > 0){
-			$('.prdName').eq(0).focus();
+		if($('input[name=plan-prdName]').length > 0){
+			$('.plan-prdName').eq(0).focus();
 		}
 		else{
-			const index = $('.calender-plan-name').index(this);
-			const prdName = $('.calender-plan-name').eq(index).text();
-			const prdID = $('.calender-plan-box').eq(index).attr('id');
+			const index = $('.plan-prd-name').index(this);
+			const prdName = $('.plan-prd-name').eq(index).text();
+			const dataID = $('.plan-prd-name').eq(index).attr('id');
 			
 			
-			$('.calender-plan-name').eq(index).empty();
-			$('.calender-plan-name').eq(index).append(`
-											<input placeholder="${prdName}" type="text" id="prdName" name="prdName">
+			$('.plan-prd-name').eq(index).empty();
+			$('.plan-prd-name').eq(index).append(`
+											<input placeholder="${prdName}" type="text" id="plan-prdName" name="plan-prdName">
 											`)
 			
-			$('.calender-plan-title').eq(index).append(`
-											<button type="button" id="${prdID}" class="change-prdName-btn" name="cngPrdName">변경</button>
+			$('.plan-prd-title').eq(index).append(`
+											<button type="button" id="pln-${dataID}" class="change-prdName-btn" name="cngPrdName">변경</button>
 											`)
 		}
 	});
@@ -257,15 +257,13 @@ $(document).ready(function(){
 	$(document).on('click', '.change-prdName-btn', function(e){
 		e.preventDefault();
 		
-		let prdName = $('#prdName').val();
+		let prdName = $('#plan-prdName').val();
 		const index = $('.change-prdName-btn').index(this);
-		const prdID = $('.calender-plan-box').eq(index).attr("id");
-		let prdType = $('.calender-plan-box').eq(index).attr("class")
-		prdType = prdType.replace("calender-plan-box ", "");
-		
+		let dataID = $('.change-prdName-btn').eq(index).attr("id");
+		dataID = dataID.replace('pln-', '');
 		
 		if(prdName.length == 0){
-			prdName = $('#prdName').attr('placeholder');
+			prdName = $('#plan-prdName').attr('placeholder');
 		}
 		
 		$.ajax({
@@ -273,8 +271,7 @@ $(document).ready(function(){
 			url:'/profile/calender/changePrdName',
 			dataType:'text',
 			data:{'prdName':prdName, 
-				  'prdID':prdID,
-				  'prdType':prdType,
+				  'dataID':dataID,
 				  },
 			success:function(){
 				$('.calender-plan-name').eq(index).empty();
@@ -287,7 +284,7 @@ $(document).ready(function(){
 	});  
 	
 	//일정 이름 변경하기
-	$(document).on('keyup', '.calender-plan-name', function(e){
+	$(document).on('keyup', '#plan-prdName', function(e){
 		if(e.keyCode == 13){
 			$('.change-prdName-btn').click();
 		}
@@ -312,25 +309,6 @@ $(document).ready(function(){
 		}
 	});
 	
-		
-	//차트 숨기기 보이기
-	$('#chart-view-btn').on('click', function(e){
-	  	e.preventDefault();
-		if($('#chart-view-box').hasClass('hide')){
-			$('#chart-view-box').removeClass('hide');
-			$('#chart-view-box').addClass('show');
-			$('#chart-icon').removeClass('fa-plus');
-			$('#chart-icon').addClass('fa-minus');
-			$('#chart-list-box').show();
-		}
-		else if($('#chart-view-box').hasClass('show')){
-			$('#chart-view-box').removeClass('show');
-			$('#chart-view-box').addClass('hide');
-			$('#chart-icon').removeClass('fa-minus');
-			$('#chart-icon').addClass('fa-plus');
-			$('#chart-list-box').hide();
-		}
-	});
 	
 	
 	//일정 추가하기
@@ -339,44 +317,79 @@ $(document).ready(function(){
 		const clickBtn = $('.calender-add-btn').index(this);
 		const prdID = $(this).attr('id');
 	  	const prdType = $('#prd-kind-select option:selected').val();
+		const kind = $('#prd-kind-select option:selected').val();
 		
 		const name = $('.prdName').eq(clickBtn);
 		const subDate = $('.calSubDate').eq(clickBtn);
 		const transfer = $('.calTransfer').eq(clickBtn);
 		const maturity = $('.calMaturity').eq(clickBtn);
 		const payment = $('.calPayment').eq(clickBtn);
+		const deposit = $('.calDeposit').eq(clickBtn);
 		let resultData = ""
 		
+		$('.plan-warning-text').empty();
+		
 		if(subDate.val() == ""){
-			alert("계약일을 입력해주세요!");
 			subDate.focus();
+			subDate.css('outline', '1px solid red');
+			$('.plan-warning-text').eq(clickBtn).append(
+				'계약일을 입력해주세요!'
+			);
 			return false;
 		}
-		else if(transfer.val() == ""){
-			alert("이체일을 입력해주세요!");
+		else if(transfer.val() == ""  && (kind != "deposit" || kind != "saving")){
 			transfer.focus();
+			transfer.css('outline', '1px solid red');
+			$('.plan-warning-text').eq(clickBtn).append(
+				'이체일을 입력해주세요!'
+			);
 			return false;
 		}
 		else if(maturity.val() == ""){
-			alert("만기를 입력해주세요!");
 			maturity.focus();
+			maturity.css('outline', '1px solid red');
+			$('.plan-warning-text').eq(clickBtn).append(
+				'만기를 입력해주세요!'
+			);
 			return false;
 		}
-		else if(payment.val() == ""){
-			alert("이체 금액을 입력해주세요!");
+		else if(payment.val() == "" && (kind != "deposit" || kind != "saving")){
 			payment.focus();
+			payment.css('outline', '1px solid red');
+			$('.plan-warning-text').eq(clickBtn).append(
+				'이체 금액을 입력해주세요!'
+			);
+			return false;
+		}
+		else if(deposit.val() == "" && (kind == "deposit" || kind == "saving")){
+			deposit.focus();
+			deposit.css('outline', '1px solid red');
+			$('.plan-warning-text').eq(clickBtn).append(
+				'예치금을 입력해주세요!'
+			);
 			return false;
 		}
 		
 		const calSubDate = subDate.val();
-		const calTransfer = transfer.val();
+		let calTransfer = transfer.val();
 		const calMaturity = maturity.val();
-		const calPayment = payment.val();
+		let calPayment = payment.val();
+		let calDeposit = deposit.val();
 		let prdName = name.val();
 			
-		if(prdName.length == ""){
+		if(prdName.length == 0){
 			prdName = $('.prd-name').eq(Number(prdID)-1).text();
 		}
+		if(calDeposit.length == 0){
+			calDeposit = 0;
+		}
+		if(calTransfer.length == 0){
+			calTransfer = 0;
+		}
+		if(calPayment.length == 0){
+			calPayment = 0;
+		}
+	
 
 		$.ajax({
 			url:`/profile/calender/sendFormData/${prdType}/${prdID}`,
@@ -386,6 +399,7 @@ $(document).ready(function(){
 				'calMaturity': calMaturity, 
 				'calPayment': calPayment,
 				'prdName': prdName,
+				'calDeposit': calDeposit,
 			},
 			dataType:'text',
 			success: function(result){
@@ -394,7 +408,9 @@ $(document).ready(function(){
 				}else if(result == "ok"){
 					jQuery.randerPlan();
 					jQuery.randerAllPlan();
+					jQuery.randerChart();
 					alert("일정을 등록했습니다.");	
+					$('prd-detail-view').hide();
 				}	
 			},
 		});
@@ -413,7 +429,6 @@ $(document).ready(function(){
 	$(document).on('click', '#plan-modify', function(e){
 	  	e.preventDefault();
 		const clickIndex = $('.plan-modify').index(this);
-		console.log(clickIndex);
 	});
 	
 	
@@ -430,8 +445,6 @@ $(document).ready(function(){
 		  		$('.plan-list-checkBox:checked').each(function(){
 		  			checkArr.push($(this).attr('id'));
 		  		});
-		  		
-		  		console.log(checkArr);
 		  		
 		  		$.ajax({
 		  			type:'POST',
@@ -454,6 +467,8 @@ $(document).ready(function(){
 	$('#add-custom-prd').on('click', function(){
 		window.open("/profile/calender/addPlan", 'add-custom-plan', 'width=700, height=280');
 	});
+	
+	
 	
 	$(document).on('click', '.plan-modify', function(){
 		let dataID = $('.plan-modify').eq($('.plan-modify').index(this)).attr('id');

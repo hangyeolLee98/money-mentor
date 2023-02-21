@@ -14,7 +14,6 @@
 							<li id="menu1_2"><div>고객센터</div>
 								<ul class="hd_menu_sub">
 									<li><a href="<c:url value='/chatbotForm'/>" onclick="window.open(this.href, '_blank', 'width=500,height=740,toolbars=no,scrollbars=no, left=300, top=150'); return false;" >챗봇</a></li>
-									<li><a href="<c:url value='/all/chatguide'/>">챗봇 가이드</a></li>
 									<li><a href="<c:url value='/calculator'/>" onclick="window.open(this.href, '_blank', 'width=850,height=600,toolbars=no,scrollbars=no, left=300, top=150'); return false;">계산기</a></li>
 									<li><a href="<c:url value='/all/serviceCenter'/>">고객센터</a></li>
 								</ul>
@@ -32,13 +31,13 @@
 									<li><a href="<c:url value='/creditLoanForm'/>">신용 대출 상품</a></li>
 									<li><a href="<c:url value='/rentHouseLoanForm'/>">전세 대출 상품</a></li>
 									<li><a href="<c:url value='/annuitySavingForm'/>">연금 상품</a></li>
-									<li><a href="<c:url value='/insuList'/>">보험 상품</a></li>
+									<li><a href="<c:url value='/InsuList'/>">보험 상품</a></li>
 								</ul>
 							</li>
 							<li id="menu1_4"><div>My Momentor</div>
 								<ul class="hd_menu_sub">
 									<li><a href="<c:url value='/profile/calender'/>">캘린더</a></li>
-									<li><a href="<c:url value='/user/assetInfoForm'/>">정보입력</a></li>
+									<li><a href="<c:url value='/user/assetInfoForm/${sessionScope.sid}'/>">정보입력</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -50,13 +49,13 @@
 						<span id="span_line">ㅣ</span>
 						<span id="span_text"><a href="<c:url value='/user/joinForm'/>">회원가입</a></span>
 						<span id="span_line">ㅣ</span>
-						<span id="span_text"><a href="<c:url value='/#'/>">이용약관</a></span>
+						<span id="span_text"><a>이용약관</a></span>
 					</c:if>	
 					<c:if test="${not empty sessionScope.sid}">
-					${sessionScope.suserName }님	<!--  30:00(점점 줄고 지나면 자동 로그아웃)  -->
+						<span id="span_text">${sessionScope.suserName}님  &nbsp;</span>
 						<span id="span_text"><a href="<c:url value='/user/logout'/>">로그아웃</a></span>
 						<span id="span_line">ㅣ</span>
-						<span id="span_text"><a href="<c:url value='/#'/>">이용약관</a></span>
+						<span id="span_text"><a>이용약관</a></span>
 					</c:if>
 					
 					</div>
@@ -77,6 +76,7 @@
 								<li><a href="<c:url value='/annuitySavingForm'/>">연금 상품</a></li>
 								<li><a href="<c:url value='/profile/calender'/>">캘린더</a></li>
 								<li><a href="<c:url value='/all/chatbot'/>">챗봇</a></li>
+								<li><a href="<c:url value='/all/serviceCenter'/>">고객센터</a></li>
 							</ul>
 						</div>
 						<div id="under_span"><a id="momentor_loge" href="<c:url value='/'/>">Momentor</a></div>

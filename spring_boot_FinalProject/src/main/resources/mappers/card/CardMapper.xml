@@ -42,6 +42,62 @@
 	  ]]>
 	</select>
 	
+	<select id="cardCategory" resultMap="cardResult" parameterType="string" resultType="com.spring_boot_momentor.model.CardVO">
+
+<![CDATA[
+	  SELECT * FROM cards
+	  where comCtg like CONCAT('%',#{comCtg},'%') 
+
+	  ]]>
+</select>
+
+
+<select id="cardCategory2" resultMap="cardResult" parameterType="string" resultType="com.spring_boot_momentor.model.CardVO">
+
+<![CDATA[
+	  SELECT * FROM cards
+	  where cardDes like CONCAT('%',#{cardDes},'%') 
+
+	  ]]>
+</select>
+
+<select id="cardCategory3" resultMap="cardResult" parameterType="hashmap" resultType="com.spring_boot_momentor.model.CardVO">
+
+<![CDATA[
+	  SELECT * FROM cards
+	 where  
+     cardFee>#{min} 
+     and
+     cardFee<= #{max};
+	 
+	  ]]>
+</select>
+
+<select id="cardCategory4" resultMap="cardResult" parameterType="string" resultType="com.spring_boot_momentor.model.CardVO">
+
+<![CDATA[
+	  SELECT * FROM cards
+	  where comCtg like CONCAT('%',#{comCtg},'%') 
+	  and cardDes like CONCAT('%',#{cardDes},'%') 
+	
+
+	  ]]>
+</select> 
+
+<select id="cardCategory5" resultMap="cardResult" parameterType="hashmap" resultType="com.spring_boot_momentor.model.CardVO">
+
+<![CDATA[
+	  SELECT * FROM cards
+	  where comCtg like CONCAT('%',#{comCtg},'%') 
+	  and cardDes like CONCAT('%',#{cardDes},'%') 
+	  and
+		cardFee>#{min} 
+     and
+     cardFee<= #{max};
+
+	  ]]>
+</select> 
+
 	<select id="CardCompare" resultMap="cardResult" parameterType="string">
 		SELECT * FROM cards 
 		where cardId = #{cardId}

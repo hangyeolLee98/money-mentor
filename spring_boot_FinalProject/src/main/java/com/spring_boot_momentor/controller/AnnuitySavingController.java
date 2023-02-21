@@ -16,13 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring_boot_momentor.model.AnnuitySavingBaseVO;
 import com.spring_boot_momentor.model.AnnuitySavingOptionVO;
 import com.spring_boot_momentor.service.AnnuitySavingService;
 
 
-// 와이라노
 @Controller
 public class AnnuitySavingController {
 	@Autowired
@@ -80,6 +80,9 @@ public class AnnuitySavingController {
 					// 회사명번호, 상품번호
 					String comNum = (String) jsonObj.get("fin_co_no");
 					String prdNum = (String) jsonObj.get("fin_prdt_cd");
+					
+					String annuitySavingID = comNum + prdNum; 
+					
 					// 회사명, 상품명
 					String comName = (String) jsonObj.get("kor_co_nm");
 					String prdName = (String) jsonObj.get("fin_prdt_nm");
@@ -138,6 +141,7 @@ public class AnnuitySavingController {
 					}
 					String dclsStart = (String) jsonObj.get("dcls_strt_day");
 					
+					vo.setAnnuitySavingID(annuitySavingID);
 					vo.setDclsMonth(dclsMonth);
 					vo.setComNum(comNum);
 					vo.setPrdNum(prdNum);
@@ -195,9 +199,13 @@ public class AnnuitySavingController {
 
 				for (int i = 0; i < optionList.size(); i++) {
 					JSONObject jsonOption = (JSONObject) optionList.get(i);
+					
+					String dclsMonth = (String) jsonOption.get("dcls_month");
 					// 회사명번호, 상품번호
 					String comNum = (String) jsonOption.get("fin_co_no");
 					String prdNum = (String) jsonOption.get("fin_prdt_cd");
+					
+					String annuitySavingID = comNum + prdNum;
 
 					String pnsnRecTrm = (String) jsonOption.get("pnsn_recp_trm_nm");
 					String pnsnEnterAge = (String) jsonOption.get("pnsn_entr_age_nm");
@@ -206,7 +214,8 @@ public class AnnuitySavingController {
 					String pnsnStartAge = (String) jsonOption.get("pnsn_strt_age_nm");
 					Integer pnsnRecAmt = Integer.parseInt(String.valueOf(jsonOption.get("pnsn_recp_amt")));
 					
-
+					vo2.setAnnuitySavingID(annuitySavingID);
+					vo2.setDclsMonth(dclsMonth);
 					vo2.setComNum(comNum);
 					vo2.setPrdNum(prdNum);
 					vo2.setPnsnRecTrm(pnsnRecTrm);
@@ -254,5 +263,27 @@ public class AnnuitySavingController {
 		ArrayList<AnnuitySavingBaseVO> annuitySavingList = service.AnnuitySavingSearch(map);	
 		model.addAttribute("annuitySavingList", annuitySavingList);
 		return "saving/annuitySavingResultForm";
+	}
+	
+	//연금 비교 추가
+	@ResponseBody
+	@RequestMapping("/AnnuitySavingCompare")
+	public AnnuitySavingBaseVO AnnuitySavingCompare(@RequestParam String annuitySavingID, Model model) {
+		ArrayList<AnnuitySavingBaseVO> annuitySavingList = service.AnnuitySavingCompare(annuitySavingID);
+		model.addAttribute("annuitySavingList", annuitySavingList.get(0));
+		return annuitySavingList.get(0);
+	}
+	
+	@RequestMapping("/annuityPop")
+	public String annuityPopup() {
+		return "saving/annuitySavingForm";		
+	}
+	
+	@ResponseBody
+	@RequestMapping("/AnnuitySavingCompareModal")
+	public String AnnuitySavingCompareModal(@RequestParam String annuitySavingID, Model model) {
+		ArrayList<AnnuitySavingBaseVO> annuitySavingList = service.AnnuitySavingCompareModal(annuitySavingID);
+		model.addAttribute("annuitySavingList", annuitySavingList);
+		return "saving/annuitySavingForm";
 	}
 }

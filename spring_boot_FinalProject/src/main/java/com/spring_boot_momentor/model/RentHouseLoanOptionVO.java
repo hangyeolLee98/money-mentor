@@ -1,6 +1,8 @@
 package com.spring_boot_momentor.model;
 
 public class RentHouseLoanOptionVO {
+	private String rentHouseLoanID;
+	private String dclsMonth;
 	private String comNum;
 	private String prdNum;
 	private String rpayTypeName;
@@ -9,6 +11,18 @@ public class RentHouseLoanOptionVO {
 	private double lendRateMax;
 	private double lendRateAvg;
 	
+	public String getRentHouseLoanID() {
+		return rentHouseLoanID;
+	}
+	public void setRentHouseLoanID(String rentHouseLoanID) {
+		this.rentHouseLoanID = rentHouseLoanID;
+	}
+	public String getDclsMonth() {
+		return dclsMonth;
+	}
+	public void setDclsMonth(String dclsMonth) {
+		this.dclsMonth = dclsMonth;
+	}
 	public String getComNum() {
 		return comNum;
 	}

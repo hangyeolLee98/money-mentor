@@ -14,7 +14,14 @@ public class CalenderVO {
 	private int dataID;
 	private int calPayment;
 	private String prdName;
+	private int calDeposit;
 	
+	public int getCalDeposit() {
+		return calDeposit;
+	}
+	public void setCalDeposit(int calDeposit) {
+		this.calDeposit = calDeposit;
+	}
 	public String getCalSubDate() {
 		return calSubDate;
 	}

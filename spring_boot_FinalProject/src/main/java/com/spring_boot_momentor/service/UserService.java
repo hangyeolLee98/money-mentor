@@ -1,5 +1,6 @@
 package com.spring_boot_momentor.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.spring_boot_momentor.dao.IUserDAO;
 import com.spring_boot_momentor.model.AssetVO;
+import com.spring_boot_momentor.model.CardVO;
+import com.spring_boot_momentor.model.SavingBaseVO;
 import com.spring_boot_momentor.model.UserVO;
 
 @Service
@@ -99,5 +102,20 @@ public class UserService implements IUserService {
 		String encodedPassword = passwordEncoder.encode(vo.getUserPassword());
 		vo.setUserPassword(encodedPassword);
 		dao.PwChange(vo);
+	}
+
+	@Override
+	public String findAssetInfo(String userId) {
+		return dao.findAssetInfo(userId);
+	}
+
+	@Override
+	public ArrayList<CardVO> randCardList() {
+		return dao.randCardList();
+	}
+
+	@Override
+	public ArrayList<SavingBaseVO> randSavingList() {
+		return dao.randSavingList();
 	}
 }

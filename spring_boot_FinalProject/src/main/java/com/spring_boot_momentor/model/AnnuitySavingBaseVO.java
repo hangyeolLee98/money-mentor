@@ -1,6 +1,7 @@
 package com.spring_boot_momentor.model;
 
 public class AnnuitySavingBaseVO {
+	private String annuitySavingID;
 	private String dclsMonth;
 	private String comNum;
 	private String prdNum;
@@ -17,7 +18,19 @@ public class AnnuitySavingBaseVO {
 	private double btrmPrftRate3;
 	private String saleCom;
 	private String dclsStart;
+	private String pnsnRecTrm;
+	private String pnsnEnterAge;
+	private String monPay;
+	private String payPeriod;
+	private String pnsnStartAge;
+	private int pnsnRecAmt;
 	
+	public String getAnnuitySavingID() {
+		return annuitySavingID;
+	}
+	public void setAnnuitySavingID(String annuitySavingID) {
+		this.annuitySavingID = annuitySavingID;
+	}
 	public String getDclsMonth() {
 		return dclsMonth;
 	}
@@ -114,6 +127,43 @@ public class AnnuitySavingBaseVO {
 	public void setDclsStart(String dclsStart) {
 		this.dclsStart = dclsStart;
 	}
+	public String getPnsnRecTrm() {
+		return pnsnRecTrm;
+	}
+	public void setPnsnRecTrm(String pnsnRecTrm) {
+		this.pnsnRecTrm = pnsnRecTrm;
+	}
+	public String getPnsnEnterAge() {
+		return pnsnEnterAge;
+	}
+	public void setPnsnEnterAge(String pnsnEnterAge) {
+		this.pnsnEnterAge = pnsnEnterAge;
+	}
+	public String getMonPay() {
+		return monPay;
+	}
+	public void setMonPay(String monPay) {
+		this.monPay = monPay;
+	}
+	public String getPayPeriod() {
+		return payPeriod;
+	}
+	public void setPayPeriod(String payPeriod) {
+		this.payPeriod = payPeriod;
+	}
+	public String getPnsnStartAge() {
+		return pnsnStartAge;
+	}
+	public void setPnsnStartAge(String pnsnStartAge) {
+		this.pnsnStartAge = pnsnStartAge;
+	}
+	public int getPnsnRecAmt() {
+		return pnsnRecAmt;
+	}
+	public void setPnsnRecAmt(int pnsnRecAmt) {
+		this.pnsnRecAmt = pnsnRecAmt;
+	}
+	
 	
 	
 }

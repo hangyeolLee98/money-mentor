@@ -15,7 +15,14 @@ public class PlanVO {
 	private String prdName;
 	private String prdID;
 	private String prdType;
+	private String calDeposit;
 
+	public String getCalDeposit() {
+		return calDeposit;
+	}
+	public void setCalDeposit(String calDeposit) {
+		this.calDeposit = calDeposit;
+	}
 	public int getDataID() {
 		return dataID;
 	}

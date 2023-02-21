@@ -134,12 +134,12 @@ text-align: -webkit-center;
 	position : absolute;
   width: 17px;
   top: 30px;
-  right: 22px;
+  right: 32px;
   margin: 0;
 	}
 
 input#cardId  {
-  width: 100%;
+  width: 97%;
   border: 1px solid #bbb;
   border-radius: 8px;
   padding: 10px 12px;
@@ -287,14 +287,14 @@ li{
 
 .list {
 	
-  
+    padding-top: 10px;
     list-style-type: disc;
     margin-block-start:1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 20px;
-      padding-inline-end: 20px;
+    padding-inline-end: 20px;
 }
 
 .lists__item{
@@ -314,11 +314,16 @@ li{
 
 .preview {
     align-self: flex-start;
+    display: grid;
 }
 
 .name{
 	font-size: 40px;
 }
+p.desc{
+	font-weight: bold;
+}
+
 
 a .button{
 	
@@ -480,16 +485,14 @@ h4 {
 }
 .oo{
 	padding-right: 40px;
-    font-size: 15px;
-	
+    font-size: 16px;
+	font-weight: bolder;
 }
 	.prod_list{
 	display: flex;
-	
 	}
 	
 	.oo img{
-	
 	width: 150px;
 	height: 220px;
 	transition: all 0.2s linear;
@@ -499,5 +502,5 @@ h4 {
 	display: inline;
     float: right;
     margin-block-start: -4px;
-        margin-inline-end: 36px;
+    margin-inline-end: 36px;
 	}

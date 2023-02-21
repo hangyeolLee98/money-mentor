@@ -11,4 +11,6 @@ public interface IDepositDAO {
 	public void insertDepositOption(DepositOptionVO vo);
 	public ArrayList<DepositBaseVO> listAllDeposit(); //예금 조회
 	public ArrayList<DepositBaseVO> depositSearch(HashMap<String, Object> map);  //연금 검색
+	public ArrayList<DepositBaseVO> DepositCompare(String depositID); //예금 비교 넣기
+	public ArrayList<DepositBaseVO> DepositCompareModal(String depositID); //예금 비교
 }

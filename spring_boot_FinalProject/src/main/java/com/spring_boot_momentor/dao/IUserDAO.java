@@ -1,6 +1,10 @@
 package com.spring_boot_momentor.dao;
 
+import java.util.ArrayList;
+
 import com.spring_boot_momentor.model.AssetVO;
+import com.spring_boot_momentor.model.CardVO;
+import com.spring_boot_momentor.model.SavingBaseVO;
 import com.spring_boot_momentor.model.UserVO;
 
 public interface IUserDAO {
@@ -23,6 +27,9 @@ public interface IUserDAO {
 	// 로그인된 유저 이름가져오기
 	public String getUserName(String id);
 	
+	// 자산 정보유무 확인
+	public String findAssetInfo(String userId);
+	
 	// 자산 정보 입력
 	public void userAssetInsert(AssetVO vo);
 	
@@ -44,4 +51,10 @@ public interface IUserDAO {
 	
 	// 비밀번호 변경
 	public void PwChange(UserVO vo);
+	
+	// 랜덤 카드 정보
+	public ArrayList<CardVO> randCardList();
+	
+	// 랜덤 적금 정보
+	public ArrayList<SavingBaseVO> randSavingList();
 }

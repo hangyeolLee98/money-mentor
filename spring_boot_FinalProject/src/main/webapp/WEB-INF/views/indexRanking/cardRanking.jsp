@@ -10,7 +10,6 @@
 			<span class="cardIndex_span ${card.cardId}">
 			<img class="cardIndex_main ${card.cardId}"  src="<c:url value='${card.cardImgUrl}'/>" >
 				<div>${card.cardName}</div>
-				
 			</span>
 		</c:forEach>
 	</div>

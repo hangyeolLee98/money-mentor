@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+#select-view{
+	background-color:var(--main-color);
+	border:unset;
+	outline:unset;
+}
+#select-view option{
+	background-color:white;
+	color:#333333;
+}
+#chart-view{
+	padding: 20px;
+}
+
+.chart-view-box{
+    display: grid;
+    justify-content: center;
+    padding-bottom: 50px;
+    text-align:center;
+    align-items: center;	
+}

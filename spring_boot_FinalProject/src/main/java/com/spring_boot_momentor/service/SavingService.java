@@ -1,6 +1,7 @@
 package com.spring_boot_momentor.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.spring_boot_momentor.dao.ISavingDAO;
 import com.spring_boot_momentor.model.SavingBaseVO;
 import com.spring_boot_momentor.model.SavingOptionVO;
-import com.spring_boot_momentor.model.SearchVO;
 
 
 
@@ -39,12 +39,17 @@ public class SavingService implements ISavingService {
 
 	
 	@Override
-	public ArrayList<SavingBaseVO> savingSearch(SearchVO vo) {
-		return dao.savingSearch(vo);
+	public ArrayList<SavingBaseVO> savingSearch(HashMap<String, Object> map) {
+		return dao.savingSearch(map);
 	}
 
 	//적금 비교 넣기
-	public SavingBaseVO SavingCompare(String savingID) {
+	public ArrayList<SavingBaseVO> SavingCompare(String savingID) {
 		return dao.SavingCompare(savingID);	
+	}
+	
+	//적금 비교 모달
+	public ArrayList<SavingBaseVO> SavingCompareModal(String savingID){
+		return dao.SavingCompareModal(savingID);
 	}
 }

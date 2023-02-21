@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#prdName{
+#plan-prdName{
 	width:60%;
 }
 #plan-view{
@@ -58,7 +58,8 @@
 	justify-content:space-between;
 }
 .plan-modify, 
-#plan-del{
+#plan-del,
+.change-prdName-btn{
 	padding:5px;
 	font-size:12px;
 	margin-right:5px;
@@ -85,4 +86,10 @@
 	color:var(--main-color);
 	font-size:15px;
 	padding:15px;
+}
+
+.plan-warning-text{
+	color:red;
+	font-size:13px;
+	font-weight:bold;
 }

@@ -1,4 +1,4 @@
-package com.spring_boot_momentor.controller;
+package  com.spring_boot_momentor.controller;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.spring_boot_momentor.Selenium;
+
 import com.spring_boot_momentor.model.CardVO;
 import com.spring_boot_momentor.service.CardService;
 
@@ -204,70 +204,17 @@ public class CardController {
 		return "index";
 	}
 
-	@RequestMapping("/CardList")
-	public String CardList() {
-		return "list/cardList";
-	}
-
-	// 카드 전체 리스트
-	@RequestMapping("/cardallList")
-	public String listAllCard(Model model) {
-		ArrayList<CardVO> cardList1 = service.listAllCard();
-		model.addAttribute("cardList1", cardList1);
-		return "list/cardSearchResultView";
-
-	}
-
-	@RequestMapping("/cardsearch")
-	public String CardAllSearch(@RequestParam String cardId, Model model) {
-		ArrayList<CardVO> cardList1 = service.CardAllSearch(cardId);
-		model.addAttribute("cardList1", cardList1);
-		System.out.println(cardList1.size());
-		return "list/cardSearchResultView";
-	}
-
-	// 상품 비교 추가
-	@ResponseBody
-	@RequestMapping("/CardCompare")
-	public CardVO CardCompare(@RequestParam String cardId, Model model) {
-		CardVO cardList1 = service.CardCompare(cardId);
-		model.addAttribute("cardList1", cardList1);
-		return cardList1;
-	}
-
-	@RequestMapping("/popup")
-	public String popup() {
-		return "list/cardList";
-	}
-
-	// 카드비교 모달
-//	  @ResponseBody
-//	  @RequestMapping("/CardComparemodal")
-//	  public CardVO CardComparemodal(@RequestParam String cardId, Model model) {
-//		  CardVO cardList1 = service.CardComparemodal(cardId);
-//		  model.addAttribute("cardList1", cardList1);
-//		 return cardList1;
-//	  }
-
-	// 카드비교 모달
-	@ResponseBody
-	@RequestMapping("/CardComparemodal")
-	public String CardComparemodal(@RequestParam String cardId, Model model) {
-		ArrayList<CardVO> cardList1 = service.CardComparemodal(cardId);
-		model.addAttribute("cardList1", cardList1);
-		return "list/cardList";
-	}
-
 	// Selenium 카드 데이터 수집
 	
 	private WebDriver driver;
 	private WebDriverWait wait;
-	private static final String url = "https://www.lottecard.co.kr/app/LPCDADA_V100.lc"; // 크롤링 진행할 페이지 주소 입력
+	private static String url = "https://www.lottecard.co.kr/app/LPCDADA_V100.lc"; // 크롤링 진행할 페이지 주소 입력
 	
 	@RequestMapping("/card/lotte")
 	public String lotteCard() {
+		
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Program Files\\Google\\Chrome\\ChromeDriver\\chromedriver.exe");
+				"C:\\Program Files (x86)\\Google\\Chrome\\ChromeDriver\\chromedriver.exe");
 		// 크롬 드라이버 세팅 (드라이버 설치한 경로 입력)
 
 		ChromeOptions options = new ChromeOptions();
@@ -307,8 +254,11 @@ public class CardController {
 	            vo.setCardImgUrl(element.findElement(By.cssSelector("img")).getAttribute("src"));
 	            String commonUrl = "https://www.lottecard.co.kr/app/LPCDADB_V100.lc?vtCdKndC=";
 	            String urlExtraction = element.findElement(By.cssSelector("a")).getAttribute("onclick").substring(7, 20);
+	            String cardurluse = commonUrl + urlExtraction;
+	           
+	            
 	            vo.setCardFee(0);
-	            vo.setCardUrl(commonUrl + urlExtraction);
+	            vo.setCardUrl(cardurluse);
 	            vo.setComCtg("lotte");
 	            service.insertCard(vo);
 	        }
@@ -316,7 +266,203 @@ public class CardController {
 
 			return elements;
 		}
-	
-	
+		
+		
+		
+		private WebDriver driver1;
+		private WebDriverWait wait1;
+		private static String url1 = "https://www.hanacard.co.kr/OPI31000000D.web?schID=pcd&mID=OPI31000005P&CT_ID=241704030444153"; // 크롤링 진행할 페이지 주소 입력
+		
+		@RequestMapping("/card/hana")
+		public String hanaCard() {
+			
+			System.setProperty("webdriver.chrome.driver",
+					"C:\\Program Files (x86)\\Google\\Chrome\\ChromeDriver\\chromedriver.exe");
+			// 크롬 드라이버 세팅 (드라이버 설치한 경로 입력)
+
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--disable-popup-blocking"); //팝업안띄움
+		    options.addArguments("headless"); //브라우저 안띄움
+		    options.addArguments("--disable-gpu"); //gpu 비활성화
+		    driver1 = new ChromeDriver(options);
+
+			try {
+				getDataList1();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			driver1.close(); // 탭 닫기
+			driver1.quit(); // 브라우저 닫기
+			return "index";
+		}
+		
+		// 데이터 가져오기
+			private List<WebElement> getDataList1() throws InterruptedException {
+				CardVO vo = new CardVO();
+				wait1 = new WebDriverWait(driver1, Duration.ofSeconds(3));
+				
+				driver1.get(url1); // 브라우저에서 url로 이동한다.
+				Thread.sleep(1000); // 강제로 1초 대기
+				
+				
+				List<WebElement> elements = driver1.findElements(By.cssSelector(".card_slide_area > li"));
+				for(int i=1; i<7; i++) {
+					
+				WebElement dddd = driver1.findElement(By.xpath("//*[@id=\"stc_list\"] >\r\n"+ "li:nth-child[i]\"]"));
+				System.out.println("gkgk" +dddd);
+				driver1.findElement(By.xpath("//*[@id=\"stc_list\"] >li[i]\"]")).click(); 
+			    wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"stc_list\"] >\r\n"+ "li:nth-child[i]\"]"))); // 클릭 후 페이지가 로드될 때까지 대기
+					
+		        for (WebElement element : elements) {
+		        	System.out.println(element);
+		            vo.setCardName(element.findElement(By.cssSelector(".txt > dt")).getText());
+		           
+		          
+		            
+		            vo.setCardDes(element.findElement(By.cssSelector(".txt dd")).getText());
+		            
+		            vo.setCardImgUrl(element.findElement(By.cssSelector("img")).getAttribute("src"));
+		            String commonUrl = "https://www.hanacard.co.kr/OPI41000000D.web?schID=pcd&mID=PI41015249P&CD_PD_SEQ=";        
+		            String urlExtraction = element.findElement(By.cssSelector(".btn_ty04")).getAttribute("onclick").substring(13, 18);
+		         
+		            String cardurluse = commonUrl + urlExtraction;
+		            Object fee = element.findElement(By.cssSelector(".s2 ul li")).getText();
+		            
+		           vo.setCardFee((int)fee);
+		            vo.setCardUrl(cardurluse);
+		            vo.setComCtg("hana");
+		            service.insertCard(vo);
+		        	}
+		        	
+				}
+				return elements;
+				
+			}
+		
+		@RequestMapping("/CardList")
+		public String CardList() {
+			return "list/cardList";
+		}
+
+		// 카드 전체 리스트
+		@RequestMapping("/cardallList")
+		public String listAllCard(Model model) {
+			ArrayList<CardVO> cardList1 = service.listAllCard();
+			model.addAttribute("cardList1", cardList1);
+			return "list/cardSearchResultView";
+
+		}
+		
+		@RequestMapping("/cardsearch")
+		public String CardAllSearch(@RequestParam String cardId, Model model) {
+			ArrayList<CardVO> cardList1 = service.CardAllSearch(cardId);
+			model.addAttribute("cardList1", cardList1);
+			System.out.println(cardList1.size());
+			return "list/cardSearchResultView";
+		}
+
+		
+		// 카드만
+		@RequestMapping("/cardCategory")
+		public String cardCategory(
+								  
+								   @RequestParam("comCtg") String comCtg,
+				Model model) {
+			
+			
+			ArrayList<CardVO> cardList1 = service.cardCategory(comCtg);
+			
+			model.addAttribute("cardList1", cardList1);
+			
+			return "list/cardSearchResultView";
+		}
+		
+		// 해택만
+		@RequestMapping("/cardCategory2")
+		public String cardCategory2(@RequestParam("cardDes") String cardDes,
+								  
+								   
+				Model model) {
+			
+			
+			ArrayList<CardVO> cardList1 = service.cardCategory2(cardDes);
+			
+			model.addAttribute("cardList1", cardList1);
+			
+			return "list/cardSearchResultView";
+		}
+		
+		// 연회비 
+		@RequestMapping("/cardCategory3")
+		public String cardCategory3(@RequestParam("cardFee") String cardFee,
+								  
+								   
+				Model model) {
+			
+			
+			ArrayList<CardVO> cardList1 = service.cardCategory3(Integer.parseInt(cardFee));
+			
+			model.addAttribute("cardList1", cardList1);
+			
+			return "list/cardSearchResultView";
+		}
+		
+		// 짬뽕 1
+		@RequestMapping("/cardCategory4")
+		public String cardCategory4(@RequestParam("cardDes") String cardDes,
+									@RequestParam("comCtg") String comCtg,
+									
+								   
+				Model model) {
+			ArrayList<CardVO> cardList1 = new ArrayList<CardVO>();
+			if(comCtg=="") {
+				 cardList1 = service.cardCategory2(cardDes);
+			}else {
+			
+			cardList1 = service.cardCategory4(cardDes,comCtg);
+			}
+			model.addAttribute("cardList1", cardList1);
+			
+			return "list/cardSearchResultView";
+		}
+		
+		
+		// 짬뽕 2
+		@RequestMapping("/cardCategory5")
+		public String cardCategory5(@RequestParam("cardDes") String cardDes,
+									@RequestParam("comCtg") String comCtg,
+									@RequestParam("cardFee") int cardFee,
+								   
+				Model model) {
+			ArrayList<CardVO> cardList1 = new ArrayList<CardVO>();
+			if(comCtg=="" && cardDes=="") {
+				 cardList1 = service.cardCategory3(cardFee);
+			}else {
+			
+			cardList1 = service.cardCategory5(cardDes,comCtg,cardFee);
+			}
+			model.addAttribute("cardList1", cardList1);
+			
+			return "list/cardSearchResultView";
+		}
+		
+		// 상품 비교 추가
+		@ResponseBody
+		@RequestMapping("/CardCompare")
+		public CardVO CardCompare(@RequestParam String cardId, Model model) {
+			CardVO cardList1 = service.CardCompare(cardId);
+			model.addAttribute("cardList1", cardList1);
+			return cardList1;
+		}
+
+//		@RequestMapping("/popup")
+//		public String popup() {
+//			return "list/cardList";
+//		}
+
+
+		
+		
 
 }

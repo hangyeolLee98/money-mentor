@@ -24,6 +24,7 @@
  		//var formData = $(this).serialize();
  		var prdName = $('#prdName').val();
  		var joinWay = $('input:radio[name="joinway"]:checked').val();
+ 		var saveTrm =$('input:radio[name="saveTrm"]:checked').val();
  		//var pnsnKindName = $('input:radio[name="pnsnKindName"]:checked').val();
  		
  		//var formData = $(this).serialize();
@@ -32,7 +33,8 @@
  			type:"post",
  			url:"/depositSearch",
  			data: {"prdName":prdName,
-					"joinWay":joinWay},
+					"joinWay":joinWay,
+					"saveTrm":saveTrm},
  			success:function(result){
 			  $('#searchResultBox').html(result);
 			},
