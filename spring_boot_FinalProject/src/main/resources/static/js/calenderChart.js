@@ -22,17 +22,17 @@
 				else{
 					$('#chart-view').append(`
 							<div class="chart-view-box">
-								<div>사용하는 돈 비율(가제)</div>
+								<div>지출 비용 비율</div>
 								<canvas id="money-ratio-chart"></canvas>
 							</div>
 					`);
 					const ratioChart = new Chart('money-ratio-chart', {
 						type:'doughnut',
 						data:{
-							labels :["카드", "보험"],
+							labels :["카드", "보험", "예금", "적금"],
 							datasets:[{
-								backgroundColor :['yellow', 'red'],
-								data:[result[0], result[1]]
+								backgroundColor :['#00C39F', 'red', 'Yellow', '#597BB6'],
+								data:[result[0], result[1], result[2], result[3]]
 							}]
 						},
 						options : {
@@ -55,7 +55,7 @@
 		if(total != 0){
 			$('#chart-view').append(`
 					<div class="chart-view-box">
-						<div>전체 자산 차트(가제)</div>
+						<div>전체 자산 차트</div>
 						<canvas id="total-asset-chart"></canvas>
 					</div>
 			`);
@@ -64,7 +64,7 @@
 			data:{
 				labels :["모은돈", "빌린돈"],
 				datasets:[{
-					backgroundColor :['blue', 'gray'],
+					backgroundColor :['#597BB6', '#E2F1FF'],
 					data:[result[0], result[1]]
 				}]
 			},

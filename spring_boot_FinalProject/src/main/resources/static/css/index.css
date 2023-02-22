@@ -272,7 +272,7 @@ body {
     position: relative;
     margin-left: 76px;
 }
-.detail {
+.detail, .detailI, .detailS, .detailA {
 /*     position: absolute; */
     width: 376px;
     height:200px;

@@ -84,7 +84,7 @@
 				</when>
 				<when test="kind == 'insu'">
 					SELECT 
-						id AS prdID,
+						insuId AS prdID,
 						insuName AS prdName,
 						insuJoinURL AS prdURL,
 						prdName AS prdCom,
@@ -100,7 +100,7 @@
 						comName AS prdCom,
 						prdName AS prdName,
 						maxLimit AS prdPrice
-					FROM savingbase 
+					FROM savingBase 
 					<if test="kindDetail != 'default'">
 						WHERE comName=#{kindDetail} 
 					</if>
@@ -111,7 +111,7 @@
 						prdName AS prdName,
 						comName AS prdCom,
 						maxLimit AS prdPrice
-					FROM depositbase 
+					FROM depositBase 
 					<if test="kindDetail != 'default'">
 						WHERE comName=#{kindDetail} 
 					</if>
@@ -169,7 +169,7 @@
 	  </select>
 	  <select id="prdTotalDeposit" resultType="int">
 			SELECT SUM(calDeposit) FROM calender 
-			WHERE userID=#{userID} ;
+			WHERE userID=#{userID};
 	  </select>
 	  <select id="insertPrdCategory" resultType="String">
 	  	<choose>
@@ -180,10 +180,10 @@
 					SELECT insuCtg FROM insu GROUP BY insuCtg
 				</when>
 				<when test="kind == 'saving'">
-					SELECT comName FROM savingbase GROUP BY comName
+					SELECT comName FROM savingBase GROUP BY comName
 				</when>
 				<when test="kind == 'deposit'">
-					SELECT comName FROM depositbase GROUP BY comName
+					SELECT comName FROM depositBase GROUP BY comName
 				</when>
 		</choose>
 	  </select>
@@ -220,7 +220,7 @@
 						comName AS prdCom,
 						prdName AS prdName,
 						maxLimit AS prdPrice
-					FROM savingbase 
+					FROM savingBase 
 	  				WHERE prdName like CONCAT('%',#{text},'%')
 				</when>
 				<when test="kind == 'deposit'">
@@ -229,7 +229,7 @@
 						comName AS prdCom,
 						prdName AS prdName,
 						maxLimit AS prdPrice
-					FROM depositbase 
+					FROM depositBase 
 	  				WHERE prdName like CONCAT('%',#{text},'%')
 				</when>
 			</choose>

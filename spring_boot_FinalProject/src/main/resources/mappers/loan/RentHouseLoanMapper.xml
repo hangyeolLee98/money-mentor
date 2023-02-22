@@ -28,11 +28,11 @@
   	
   	
   	<insert id="insertRentHouseLoanBase" parameterType="com.spring_boot_momentor.model.RentHouseLoanBaseVO" timeout="3">
-  		insert into RentHouseLoanBase (rentHouseLoanID, dclsMonth, comNum, prdNum, comName, prdName, joinWay, loanInciExpn, erlyRpayFee, dlyRate, loanLimit, dclsStart)
+  		insert into rentHouseLoanBase (rentHouseLoanID, dclsMonth, comNum, prdNum, comName, prdName, joinWay, loanInciExpn, erlyRpayFee, dlyRate, loanLimit, dclsStart)
   		values (#{rentHouseLoanID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{comName}, #{prdName}, #{joinWay}, #{loanInciExpn}, #{erlyRpayFee}, #{dlyRate}, #{loanLimit}, #{dclsStart})
   	</insert>
   	<insert id="insertRentHouseLoanOption" parameterType="com.spring_boot_momentor.model.RentHouseLoanOptionVO">
-  		insert into RentHouseLoanOption (rentHouseLoanID, dclsMonth, comNum, prdNum, rpayTypeName, lendRateTypeName, lendRateMin, lendRateMax, lendRateAvg)
+  		insert into rentHouseLoanOption (rentHouseLoanID, dclsMonth, comNum, prdNum, rpayTypeName, lendRateTypeName, lendRateMin, lendRateMax, lendRateAvg)
   		values (#{rentHouseLoanID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{rpayTypeName}, #{lendRateTypeName}, #{lendRateMin}, #{lendRateMax}, #{lendRateAvg})
   	</insert>
   	
@@ -46,7 +46,7 @@
 	
 	<!-- 대출 검색  -->
 	<select id="rentHouseLoanSearch" resultMap="RentHouseLoanResult">
-	SELECT * FROM RentHouseLoanBase as rb inner join RentHouseLoanOption as ro
+	SELECT * FROM rentHouseLoanBase as rb inner join rentHouseLoanOption as ro
 	on rb.rentHouseLoanID = ro.rentHouseLoanID
 	
 	WHERE comName like CONCAT('%', #{prdName}, '%') AND
@@ -57,7 +57,7 @@
 	<!-- 전세 대출 비교 넣기 -->
 	<select id="RentHouseLoanCompare" resultMap="RentHouseLoanResult" parameterType="string">
 		SELECT b.comName, b.prdName, joinWay, loanInciExpn, erlyRpayFee, dlyRate, loanLimit, rpayTypeName, lendRateTypeName, lendRateMin, lendRateMax, lendRateAvg
-		FROM RentHouseLoanBase b, RentHouseLoanOption o
+		FROM rentHouseLoanBase b, rentHouseLoanOption o
 		where b.rentHouseLoanID = o.rentHouseLoanID AND b.rentHouseLoanID = #{rentHouseLoanID} 
 	
 	</select>
@@ -65,7 +65,7 @@
 	<!-- 전세 대출 비교 모달 -->
 	<select id="RentHouseLoanCompareModal" resultMap="RentHouseLoanResult" parameterType="string">
 		SELECT b.comName, b.prdName, joinWay, loanInciExpn, erlyRpayFee, dlyRate, loanLimit, rpayTypeName, lendRateTypeName, lendRateMin, lendRateMax, lendRateAvg
-		FROM RentHouseLoanBase b, RentHouseLoanOption o
+		FROM rentHouseLoanBase b, rentHouseLoanOption o
 		where b.rentHouseLoanID = o.rentHouseLoanID AND b.rentHouseLoanID = #{rentHouseLoanID} 
 	</select>
   	</mapper>

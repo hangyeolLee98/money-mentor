@@ -4,6 +4,19 @@
 	height:50px;
 }
 .savIndex_main{
-	width:100px;
-	height:100px;
+	width:85px;
+	height:85px;
+}
+.annIndex_main{
+	width:130px;
+	height:33px;
+}
+.detailI.\32, .detailI.\33{
+	display: none;
+}
+.detailS.\30 01513010-01-30-355-0005, .detailS.\30 01513010-01-30-355-0002{
+	display: none;	
+}
+.detailA.\30 01317300714, .detailA.\30 01317300713{
+	display: none;	
 }

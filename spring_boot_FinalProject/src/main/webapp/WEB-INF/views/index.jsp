@@ -131,7 +131,7 @@
 			 				<div class="see_sec">
 			 					<div  class="see_sec1">
 				 					<div class="img_section">
-				 						<div  class="ann_Img_div">추후 추가 예정입니다.
+				 						<div  class="ann_Img_div">
 				 						
 				 						</div>
 			 						</div>

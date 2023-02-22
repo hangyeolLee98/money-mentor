@@ -25,24 +25,24 @@
 	</resultMap>
 	
   	<insert id="insertDepositBase" parameterType="com.spring_boot_momentor.model.DepositBaseVO" timeout="3">
-  		insert into DepositBase (depositID, dclsMonth, comNum, prdNum, comName, prdName, joinWay, interest, spclCnd, maxLimit, joinMember)
+  		insert into depositBase (depositID, dclsMonth, comNum, prdNum, comName, prdName, joinWay, interest, spclCnd, maxLimit, joinMember)
   		values (#{depositID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{comName}, #{prdName}, #{joinWay}, #{interest}, #{spclCnd}, #{maxLimit}, #{joinMember})
   	</insert>
   	<insert id="insertDepositOption" parameterType="com.spring_boot_momentor.model.DepositOptionVO">
-  		insert into DepositOption (depositID, dclsMonth, comNum, prdNum, intrRate, intrRate2, saveTrm, intrRateTypeName)
+  		insert into depositOption (depositID, dclsMonth, comNum, prdNum, intrRate, intrRate2, saveTrm, intrRateTypeName)
   		values (#{depositID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{intrRate}, #{intrRate2}, #{saveTrm}, #{intrRateTypeName})
   	</insert>
   	
-  	<!--  전체 연금 조회  -->
+  	<!--  전체 예금 조회  -->
 	<select id="listAllDeposit" resultMap="DepositResult"> 
 		<!-- SELECT * FROM depositBase as db	inner join depositOption as do
 		on db.depositID = do.depositID -->
 		
 		SELECT db.depositID, db.comName, db.prdName, joinWay, interest, spclCnd, maxLimit, joinMember, intrRate, MAX(intrRate2) as intrRate2, saveTrm, intrRateTypeName
 		FROM depositBase as db
-		inner join depositOption as do
-		on db.depositID = do.depositID
-		group by prdName
+		INNER JOIN depositOption as do
+		ON db.depositID = do.depositID
+		GROUP BY prdName
 	</select>
 	
 	<!--  예금 검색  -->

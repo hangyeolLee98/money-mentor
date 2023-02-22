@@ -79,4 +79,32 @@
 		SELECT * FROM savingBase
 		ORDER BY savingID DESC LIMIT 0, 3
 	</select>
+	 <resultMap id="AnnuitySavingResult" type="com.spring_boot_momentor.model.AnnuitySavingBaseVO">
+  		<result property="annuitySavingID" column="annuitySavingID"/>
+		<result property="dclsMonth" column="dclsMonth"/>
+		<result property="comNum" column="comNum"/>
+		<result property="prdNum" column="prdNum"/>
+		<result property="comName" column="comName"/>
+		<result property="prdName" column="prdName"/>
+		<result property="pnsnKindName" column="pnsnKindName"/>
+		<result property="saleStart" column="saleStart"/>
+		<result property="prdtTypeName" column="prdtTypeName"/>
+		<result property="avgPrftRate" column="avgPrftRate"/>
+		<result property="dclsRate" column="dclsRate"/>
+		<result property="guarRate" column="guarRate"/>
+		<result property="btrmPrftRate1" column="btrmPrftRate1"/>
+		<result property="btrmPrftRate2" column="btrmPrftRate2"/>
+		<result property="btrmPrftRate3" column="btrmPrftRate3"/>
+		<result property="saleCom" column="saleCom"/>
+		<result property="pnsnRecTrm" column="pnsnRecTrm"/>
+		<result property="pnsnEnterAge" column="pnsnEnterAge"/>
+		<result property="monPay" column="monPay"/>
+		<result property="payPeriod" column="payPeriod"/>
+		<result property="pnsnStartAge" column="pnsnStartAge"/>
+		<result property="pnsnRecAmt" column="pnsnRecAmt"/>
+	</resultMap>
+	<select id="annRandom" resultMap="AnnuitySavingResult" >
+		SELECT * FROM AnnuitySavingBase
+		ORDER BY annuitySavingID DESC LIMIT 0, 3
+	</select>
   </mapper>

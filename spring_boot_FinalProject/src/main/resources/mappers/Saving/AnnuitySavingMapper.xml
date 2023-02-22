@@ -31,13 +31,13 @@
 	</resultMap>
 	
   	<insert id="insertAnnuitySavingBase" parameterType="com.spring_boot_momentor.model.AnnuitySavingBaseVO" timeout="3">
-  		insert into AnnuitySavingBase (annuitySavingID, dclsMonth, comNum, prdNum, comName, prdName, pnsnKindName, saleStart, prdtTypeName, avgPrftRate, 
+  		insert into annuitySavingBase (annuitySavingID, dclsMonth, comNum, prdNum, comName, prdName, pnsnKindName, saleStart, prdtTypeName, avgPrftRate, 
   									   dclsRate, guarRate, btrmPrftRate1, btrmPrftRate2, btrmPrftRate3, saleCom, dclsStart)
   		values (#{annuitySavingID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{comName}, #{prdName}, #{pnsnKindName}, #{saleStart}, #{prdtTypeName}, #{avgPrftRate},
   			    #{dclsRate}, #{guarRate}, #{btrmPrftRate1}, #{btrmPrftRate2}, #{btrmPrftRate3}, #{saleCom}, #{dclsStart})
   	</insert>
   	<insert id="insertAnnuitySavingOption" parameterType="com.spring_boot_momentor.model.AnnuitySavingOptionVO">
-  		insert into AnnuitySavingOption (annuitySavingID, dclsMonth, comNum, prdNum, pnsnRecTrm, pnsnEnterAge, monPay, payPeriod, pnsnStartAge, pnsnRecAmt)
+  		insert into annuitySavingOption (annuitySavingID, dclsMonth, comNum, prdNum, pnsnRecTrm, pnsnEnterAge, monPay, payPeriod, pnsnStartAge, pnsnRecAmt)
   		values (#{annuitySavingID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{pnsnRecTrm}, #{pnsnEnterAge}, #{monPay}, #{payPeriod}, #{pnsnStartAge}, #{pnsnRecAmt})
   	</insert>
   	
@@ -62,7 +62,8 @@
 	<!-- 연금 검색 -->
 	<select id="AnnuitySavingSearch" parameterType="hashmap" resultMap="AnnuitySavingResult" > 
 		<![CDATA[
-		SELECT * FROM annuitySavingBase 
+		SELECT * FROM annuitySavingBase as b	inner join annuitySavingOption as o
+		on b.annuitySavingID = o.annuitySavingID
 		WHERE 
 			  comName like CONCAT('%', #{prdName}, '%') and
 			  prdtTypeName like CONCAT('%', #{prdtTypeName}, '%') and
@@ -75,7 +76,7 @@
 	<select id="AnnuitySavingCompare" resultMap="AnnuitySavingResult" parameterType="string">
 		SELECT b.comName, b.prdName, pnsnKindName, saleStart, prdtTypeName, avgPrftRate, dclsRate, guarRate, btrmPrftRate1, btrmPrftRate2, btrmPrftRate3, 
 		saleCom, pnsnRecTrm, pnsnEnterAge, monPay, payPeriod, pnsnStartAge, pnsnRecAmt
-		FROM AnnuitySavingBase b, AnnuitySavingOption o
+		FROM annuitySavingBase b, annuitySavingOption o
 		where b.annuitySavingID = o.annuitySavingID AND b.annuitySavingID = #{annuitySavingID} 
 	
 	</select>
@@ -84,7 +85,7 @@
 	<select id="AnnuitySavingCompareModal" resultMap="AnnuitySavingResult" parameterType="string">
 		SELECT b.comName, b.prdName, pnsnKindName, saleStart, prdtTypeName, avgPrftRate, dclsRate, guarRate, btrmPrftRate1, btrmPrftRate2, btrmPrftRate3, 
 		saleCom, pnsnRecTrm, pnsnEnterAge, monPay, payPeriod, pnsnStartAge, pnsnRecAmt
-		FROM AnnuitySavingBase b, AnnuitySavingOption o
+		FROM annuitySavingBase b, annuitySavingOption o
 		where b.annuitySavingID = o.annuitySavingID AND b.annuitySavingID = #{annuitySavingID}
 	</select>
   </mapper>

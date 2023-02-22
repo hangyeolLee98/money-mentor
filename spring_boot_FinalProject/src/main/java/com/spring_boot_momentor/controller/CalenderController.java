@@ -183,7 +183,7 @@ public class CalenderController {
 		String userID = (String)session.getAttribute("sid");
 		
 		List<Integer> categoryChart = new ArrayList<Integer>();
-		String[] category = {"card", "insu", "deposit", "savings", "loan"};
+		String[] category = {"card", "insu", "deposit", "saving"};
 		
 		String strPrice = "";
 		int price = 0;
@@ -209,7 +209,7 @@ public class CalenderController {
 		String userID = (String)session.getAttribute("sid");
 		
 		List<Integer> assetChart = new ArrayList<Integer>();
-		String[] category = {"card", "insu", "deposit", "savings", "loan"};
+		String[] category = {"card", "insu", "deposit", "saving"};
 
 		String strPrice = "";
 		int price = 0;
@@ -218,6 +218,7 @@ public class CalenderController {
 		
 		for(int i = 0; i < category.length; i++) {
 			strPrice = service.prdTotalFee(userID, category[i]);
+
 			if(strPrice == null) {
 				strPrice = "0";
 			}

@@ -26,17 +26,289 @@
     <table summary="" id="js-load" class="lists__item js-load">
 		<tr>
 			<td class="c_info" >
-			<div class="List">
-															
+						
+						<div class="logo">
+						<c:choose> 
+						
+						<c:when test = "${rentHouseLoan.comName eq '디비저축은행'}">
+							<div class= "bankImg DB"></div>
+						</c:when>
+							
+						<c:when test="${rentHouseLoan.comName eq '한국스탠다드차타드은행'}">
+							<div class= "bankImg SC"></div>
+						</c:when>
+						<c:when test="${rentHouseLoan.comName eq '주식회사 케이뱅크'}">
+							<div class= "bankImg K"></div>
+							
+						</c:when>
+						<c:when test="${rentHouseLoan.comName eq '국민은행'}">
+							<div class= "bankImg KB"></div>				
+						</c:when>
+						<c:when test="${rentHouseLoan.comName eq 'KB저축은행'}">
+							<div class= "bankImg KB"></div>				
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '부산은행'}">
+							<div class= "bankImg BNK"></div>			
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq 'BNK저축은행'}">
+							<div class= "bankImg BNK"></div>
+							
+						</c:when>
+						<c:when test="${rentHouseLoan.comName eq '경남은행'}">
+							<div class= "bankImg BNK"></div>							
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '중소기업은행'}">
+						<div class= "bankImg IBK"></div>							
+						</c:when>
+						<c:when test="${rentHouseLoan.comName eq 'IBK저축은행'}">
+						<div class= "bankImg IBK"></div>							
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '상상인플러스저축은행'}">
+						<div class= "bankImg SangSangPlus"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '조은저축은행'}">
+						<div class= "bankImg Choeun"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '한국산업은행'}">
+						<div class= "bankImg KDB"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '전북은행'}">
+						<div class= "bankImg JB"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '주식회사 카카오뱅크'}">
+						<div class= "bankImg Kakao"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '농협은행주식회사'}">
+						<div class= "bankImg NH"></div>
+						</c:when>
+						<c:when test="${rentHouseLoan.comName eq '엔에이치저축은행'}">
+						<div class= "bankImg NH"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '토스뱅크 주식회사'}">
+						<div class= "bankImg Toss"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '우리은행'}">
+						<div class= "bankImg Woori"></div>
+						</c:when>
+						<c:when test="${rentHouseLoan.comName eq '우리금융저축은행'}">
+						<div class= "bankImg Woori"></div>
+						</c:when>
+						<c:when test="${rentHouseLoan.comName eq '우리저축은행'}">
+						<div class= "bankImg Woori"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '대구은행'}">
+						<div class= "bankImg DG"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '광주은행'}">
+						<div class= "bankImg GJ"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '제주은행'}">
+						<div class= "bankImg JJ"></div>
+						</c:when>
+						<c:when test="${rentHouseLoan.comName eq '신한은행'}">
+						<div class= "bankImg JJ"></div>
+						</c:when>
+						<c:when test="${rentHouseLoan.comName eq '신한저축은행'}">
+						<div class= "bankImg JJ"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '애큐온저축은행'}">
+						<div class= "bankImg Acuon"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq 'OSB저축은행'}">
+						<div class= "bankImg OSB"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '스카이저축은행'}">
+						<div class= "bankImg Sky"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '민국저축은행'}">
+						<div class= "bankImg MG"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '푸른저축은행'}">
+						<div class= "bankImg PR"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq 'HB저축은행'}">
+						<div class= "bankImg HB"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '키움예스저축은행'}">
+						<div class= "bankImg KUYS"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '키움저축은행'}">
+						<div class= "bankImg KU"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq 'SBI저축은행'}">
+						<div class= "bankImg SBI"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '바로저축은행'}">
+						<div class= "bankImg BARO"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '다올저축은행'}">
+						<div class= "bankImg DAOL"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '고려저축은행'}">
+						<div class= "bankImg KOREA"></div>
+						</c:when>
+						<c:when test="${rentHouseLoan.comName eq '예가람저축은행'}">
+						<div class= "bankImg KOREA"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '진주저축은행'}">
+						<div class= "bankImg JINJU"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '국제저축은행'}">
+						<div class= "bankImg KJ"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '흥국저축은행'}">
+						<div class= "bankImg KOREA"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '한화저축은행'}">
+						<div class= "bankImg HH"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '동양저축은행'}">
+						<div class= "bankImg DY"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '더블저축은행'}">
+						<div class= "bankImg DDBB"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '삼호저축은행'}">
+						<div class= "bankImg Samho"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '융창저축은행'}">
+						<div class= "bankImg YC"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '스마트저축은행'}">
+						<div class= "bankImg Smart"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '스타저축은행'}">
+						<div class= "bankImg Star"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '세람저축은행'}">
+						<div class= "bankImg SR"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '상상인저축은행'}">
+						<div class= "bankImg SangSangIn"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '한국투자저축은행'}">
+						<div class= "bankImg HT"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '청주저축은행'}">
+						<div class= "bankImg Cheongju"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '금화저축은행'}">
+						<div class= "bankImg GH"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '인천저축은행'}">
+						<div class= "bankImg IC"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '모아저축은행'}">
+						<div class= "bankImg MA"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '대백저축은행'}">
+						<div class= "bankImg Daeback"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '부림저축은행'}">
+						<div class= "bankImg BR"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '영진저축은행'}">
+						<div class= "bankImg YG"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '페퍼저축은행'}">
+						<div class= "bankImg PP"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq 'CK저축은행'}">
+						<div class= "bankImg CK"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '대명상호저축은행'}">
+						<div class= "bankImg DMSH"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '아산저축은행'}">
+						<div class= "bankImg AS"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '대한저축은행'}">
+						<div class= "bankImg DHJC"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '센트럴저축은행'}">
+						<div class= "bankImg STR"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '드림저축은행'}">
+						<div class= "bankImg Dream"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '머스트삼일저축은행'}">
+						<div class= "bankImg MS"></div>
+						</c:when>
+						
+						<c:when test="${rentHouseLoan.comName eq '오성저축은행'}">
+						<div class= "bankImg OS"></div>
+						</c:when>
+						
+						
+						<c:otherwise>이미지<br>준비중</c:otherwise>
+						</c:choose>
+						</div>
+						
+						<div class="list">									
 					<dl>
 						<%--<dt><a href=<c:url value='/creditLoan/detailViewCreditLoan/${creditLoan.prdNum }'/>">${creditLoan.prdNum }</a></dt>--%>
 						<dd class="text01">${rentHouseLoan.joinWay }</dd>
 						<dd class="text02">${rentHouseLoan.comName }</dd>
 						<dd class="text03">${rentHouseLoan.prdName }</dd>
+						<dd class="text04">${rentHouseLoan.rpayTypeName }</dd>
 						
-						<!-- <dd>최고 연 <strong>3.25%</strong> 36개월</dd> -->
+						<dd>대출한도 <strong>${rentHouseLoan.loanLimit}</strong></dd>
 					</dl>
-			</div>	
+						</div>	
 			
 			</td>
 
@@ -56,20 +328,15 @@
 						data-lendRateTypeName="${rentHouseLoan.lendRateTypeName }"
 						data-lendRateMin="${rentHouseLoan.lendRateMin }"
 						data-lendRateMax="${rentHouseLoan.lendRateMax }"
-						data-lendRateAvg="${rentHouseLoan.lendRateAvg }"
-					>비교하기</a>
+						data-lendRateAvg="${rentHouseLoan.lendRateAvg }">비교하기</a>
 					<a href="#">가입하기</a>
 				</div>
 			</td>
 		</tr>
 		</table>									
+	
 	</c:forEach>
-		<div class="btn_set btn_center" id="js-btn-wrap">
-							<div class="btn btn03">
-								<a href="javascript:;" id="load">더보기</a>
-							</div>
-						</div>
-	</div>
+
 	</section>
 	</tbody>
 	</table>
@@ -78,21 +345,23 @@
 	<script id="compare-template" type="text/template">
 		<li class="prod_lists">
 		<div class="oo">
+			<div class="id6">
+				<input type="checkbox" name="Chk_list" class="chkDelete" value="null">
+				<input class="prdName" type="hidden" value="">
+			</div>
+			<div class="oo_detail">
 			<input type="hidden" class="comName" value=""><span class="comNameSpan"></span><br>
 			<input type="hidden" class="prdName" value=""><span class="prdNameSpan"></span><br>
 			<input type="hidden" class="joinWay" value="">
 			<input type="hidden" class="loanInciExpn" value="">
 			<input type="hidden" class="erlyRpayFee" value="">
 			<input type="hidden" class="dlyRate" value="">
-			<input type="hidden" class="loanLimit" value="">
-			<input type="hidden" class="rpayTypeName" value="">
+			<input type="hidden" class="rpayTypeName" value=""><span class="rpayTypeNameSpan"></span><br>
+			<input type="hidden" class="loanLimit" value="">대출한도 <span class="loanLimitSpan"></span><br>			
 			<input type="hidden" class="lendRateTypeName" value="">
 			<input type="hidden" class="lendRateMin" value="">
 			<input type="hidden" class="lendRateMax" value="">
 			<input type="hidden" class="lendRateAvg" value="">
-			<div class="id6">
-				<input type="checkbox" name="Chk_list" class="chkDelete" value="null">
-				<input class="prdName" type="hidden" value="">
 			</div>
 		</div>
 		</li>
@@ -115,11 +384,14 @@
 				$(html).find(".erlyRpayFee").val($(this).data("erlyrpayfee"));
 				$(html).find(".dlyRate").val($(this).data("dlyrate"));
 				$(html).find(".loanLimit").val($(this).data("loanlimit"));
+				$(html).find(".loanLimitSpan").text($(this).data("loanlimit"));
 				$(html).find(".rpayTypeName").val($(this).data("rpaytypename"));
+				$(html).find(".rpayTypeNameSpan").text($(this).data("rpaytypename"));
 				$(html).find(".lendRateTypeName").val($(this).data("lendratetypename"));
 				$(html).find(".lendRateMin").val($(this).data("lendratemin"));
 				$(html).find(".lendRateMax").val($(this).data("lendratemax"));
 				$(html).find(".lendRateAvg").val($(this).data("lendrateavg"));
+				
 				
 				
 				$("ul.prod_list").append(html);		

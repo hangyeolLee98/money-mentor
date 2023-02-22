@@ -15,17 +15,16 @@
    
   </head>
   <body>
-    <div class="">
+    	<div id="List_All">
     	<c:import url="/WEB-INF/views/layout/top.jsp" />
-    	<div id="List_All">	   				
+    		   				
 		<!-- 리스트 -->
-		<div class="prdList">
-			<table>
+
 			 <colgroup>
 				<col width="*">
 				<col width="30%">
 			</colgroup> 
-		<tbody>
+
 		<section id="container">
 			<div class="contents">
 					<fieldset>
@@ -33,8 +32,9 @@
 						<form id="CreditLoanList">
 						<div class="searchbox">
 							<ul>
-								<li>
-									<label for="prdName">상품명</label>
+								
+								<li class="searchbar">
+									<label for="prdName">은행명</label>
 									<input type="text" name="prdName" id="prdName" style="width:800px">
 								</li>
 								
@@ -84,17 +84,20 @@
 					</fieldset>
 						
 					</div>
-					</section>
-					</tbody>
-						</table>
-							</div>
+					
 						<div id="searchResultBox"></div>
 								
-						<div class="comp_prod_selector"style="display: none" id="btn1" >
+						<div class="btn_set btn_center" id="js-btn-wrap">
+							<div class="btn btn03">
+								<a href="javascript:;" id="load">더보기</a>
+							</div>
+						</div>
+						
+		<div class="comp_prod_selector"style="display: none" id="btn1" >
 		<!-- compsel_head -->
 		<div class="compsel_head compsel_show">
 			<h4 class="compsel_title">
-				상품 비교<span class="comp_num"></span>
+				상품 비교함<span class="comp_num"></span>
 				<div class="head_opt">
 				<button type="button" onclick="productCompare12();"
 					class="btn_layer_toggle">닫기
@@ -112,12 +115,14 @@
 
 			<!-- compsel_prods -->
 			<div class="compsel_prods">
+			
 				<!-- 안에 li 개수에 따라 ul.prod_list의 너비 값을 주어야 함 (li개수 x 140) li 개수 최대 10개 -->
-				<ul class="prod_list" style="width: 876px;">
+				<ul class="prod_list" >
+				
 					<!-- none.js append 내부 데이터 들어옴 -->
 
-
 				</ul>
+				<div class="compselText">* [비교하기] 버튼을 클릭하면 위 상품들끼리 비교할 수 있습니다</div>
 			</div>
 			<!-- //compsel_prods -->
 
@@ -126,18 +131,21 @@
 				<div class="opt_select">
 
 					<div id="chcdel">
+					<div class="allCheckBox">
 					<input type="checkbox" id="allCheck" name="allCheck"class="allCheck">
-					<button type="button" class="btn_compsel" id="deleteCardBtn" >삭제</button>
+					</div>
+					<button type="button" class="btn_compsel" id="deleteCardBtn" ><span>전체삭제</span></button>
 					
 					</div>
+					
 					<div id="compbtn">
 					 
 					<button type="button" class="btn_compsel sel_prod_comp"
-						onclick="productCompare1()">비교하기</button>
-					
+						onclick="productCompare1()"><span>비교하기</span></button>
+					</div>
 					<!-- <button type="button" class="btn_compsel sel_prod_comp">비교하기</button>
 						</div> -->
-				</div>
+				
 				<!-- //opt_select -->
 				<!-- opt_delete -->
 				<div class="opt_delete"></div>
@@ -169,12 +177,13 @@
 			</div>
 		</div>
 	</div>
-	</section>
-	</tbody>
+	
 	</div>
+	
+	</section>
 				<c:import url="/WEB-INF/views/layout/footer.jsp" />	
     	
-    
+    </div>
     
     <script id="compare-detail-template" type="text/template">
 		<table class="modallist">

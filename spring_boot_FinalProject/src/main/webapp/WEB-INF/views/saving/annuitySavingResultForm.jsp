@@ -115,6 +115,82 @@
 						<div class= "bankImg Sky"></div>
 						</c:when>
 						
+						<c:when test="${annuitySaving.comName eq '청주저축은행'}">
+						<div class= "bankImg Cheongju"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '금화저축은행'}">
+						<div class= "bankImg GH"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '인천저축은행'}">
+						<div class= "bankImg IC"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '모아저축은행'}">
+						<div class= "bankImg MA"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '대백저축은행'}">
+						<div class= "bankImg Daeback"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '부림저축은행'}">
+						<div class= "bankImg BR"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '영진저축은행'}">
+						<div class= "bankImg YG"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '페퍼저축은행'}">
+						<div class= "bankImg PP"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq 'CK저축은행'}">
+						<div class= "bankImg CK"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '대명상호저축은행'}">
+						<div class= "bankImg DMSH"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '아산저축은행'}">
+						<div class= "bankImg AS"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '대한저축은행'}">
+						<div class= "bankImg DHJC"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '센트럴저축은행'}">
+						<div class= "bankImg STR"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '드림저축은행'}">
+						<div class= "bankImg Dream"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '머스트삼일저축은행'}">
+						<div class= "bankImg MS"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '오성저축은행'}">
+						<div class= "bankImg OS"></div>
+						</c:when>
+						
+						
+						<c:when test="${annuitySaving.comName eq '교보라이프플래닛생명보험주식회사'}">
+						<div class= "bankImg KBLIFE"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '솔브레인저축은행'}">
+						<div class= "bankImg SOL"></div>
+						</c:when>
+						
+						<c:when test="${annuitySaving.comName eq '미래에셋자산운용'}">
+						<div class= "bankImg MRAS"></div>
+						</c:when>
 						<c:otherwise>이미지<br>준비중</c:otherwise>
 						</c:choose>
 						</div>
@@ -126,7 +202,7 @@
 						<dd class="text03">${annuitySaving.prdName }</dd>
 						<dd class="text02">${annuitySaving.pnsnKindName }</dd>
 						<dd class="text04">${annuitySaving.prdtTypeName }</dd>
-						<!-- <dd>최고 연 <strong>3.25%</strong> 36개월</dd> -->
+						<dd>연평균 수익율 <strong>${annuitySaving.avgPrftRate}%</strong></dd>
 					</dl>
 				</div>
 			</td>
@@ -147,15 +223,10 @@
 		</tr>
 		</table>									
 	</c:forEach>
-	<div class="btn_set btn_center" id="js-btn-wrap">
-							<div class="btn btn03">
-								<a href="javascript:;" id="load">더보기</a>
-							</div>
-						</div>
-	</div>
+	
 	</section>
 	</tbody>
-	 </table> 
+	</table> 
 	</div>
 	
 	
@@ -163,12 +234,17 @@
 	<script id="compare-template" type="text/template">
 		<li class="prod_lists">
 		<div class="oo">
+			<div class="id6">
+				<input type="checkbox" name="Chk_list" class="chkDelete" value="null">
+				<input class="prdName" type="hidden" value="">
+			</div>
+			<div class="oo_detail">
 			<input type="hidden" class="comName" value=""><span class="comNameSpan"></span><br>
 			<input type="hidden" class="prdName" value=""><span class="prdNameSpan"></span><br>
-			<input type="hidden" class="pnsnKindName" value="">
+			<input type="hidden" class="pnsnKindName" value=""><span class="pnsnKindNameSpan"></span><br>
 			<input type="hidden" class="saleStart" value="">
-			<input type="hidden" class="prdtTypeName" value="">
-			<input type="hidden" class="avgPrftRate" value="">
+			<input type="hidden" class="prdtTypeName" value=""><span class="prdtTypeNameSpan"></span><br>
+			<input type="hidden" class="avgPrftRate" value="">연평균 수익율 <span class="avgPrftRateSpan"></span>%<br>
 			<input type="hidden" class="dclsRate" value="">
 			<input type="hidden" class="guarRate" value="">
 			<input type="hidden" class="btrmPrftRate1" value="">
@@ -181,10 +257,8 @@
 			<input type="hidden" class="payPeriod" value="">
 			<input type="hidden" class="pnsnStartAge" value="">
 			<input type="hidden" class="pnsnRecAmt" value="">
-			<div class="id6">
-				<input type="checkbox" name="Chk_list" class="chkDelete" value="null">
-				<input class="prdName" type="hidden" value="">
 			</div>
+			
 		</div>
 		</li>
 	</script>
@@ -200,9 +274,12 @@
 				$(html).find(".prdName").val($(this).data("prdname"));
 				$(html).find(".prdNameSpan").text($(this).data("prdname"));
 				$(html).find(".pnsnKindName").val($(this).data("pnsnkindname"));
+				$(html).find(".pnsnKindNameSpan").text($(this).data("pnsnkindname"));
 				$(html).find(".saleStart").val($(this).data("salestart"));
 				$(html).find(".prdtTypeName").val($(this).data("prdttypename"));
+				$(html).find(".prdtTypeNameSpan").text($(this).data("prdttypename"));
 				$(html).find(".avgPrftRate").val($(this).data("avgprftrate"));
+				$(html).find(".avgPrftRateSpan").text($(this).data("avgprftrate"));
 				$(html).find(".dclsRate").val($(this).data("dclsrate"));
 				$(html).find(".dclsRateSpan").text($(this).data("dclsrate"));
 				$(html).find(".guarRate").val($(this).data("guarrate"));

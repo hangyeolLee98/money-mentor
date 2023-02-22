@@ -32,6 +32,7 @@ jQuery.randerPlan = function(){
 									`);	
 			}
 			else if(result.length == 0){
+				$('.warning-text').empty();
 				$('#calender-view').append(`
 										<div class="warning-text">
 											등록된 일정이 없습니다. 일정을 등록해주세요.

@@ -25,7 +25,6 @@
 	background-color:white;
 	padding-left:10px;
 	border-left:0.5px dashed rgb(64 60 67 / 60%);
-    height: 865px;
 }
 #calender-head{
 	display:flex;

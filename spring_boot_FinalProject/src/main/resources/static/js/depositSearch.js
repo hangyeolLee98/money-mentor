@@ -7,9 +7,7 @@
 	$.ajax({
 		type:"post",
 		url:"/depositListAll",
-		
 		success:function(result){
-		 
 		  $('#searchResultBox').html(result);
 		},
 		error:function(){
@@ -21,14 +19,12 @@
  	
  		event.preventDefault(); 		
  		
- 		//var formData = $(this).serialize();
+ 		
  		var prdName = $('#prdName').val();
  		var joinWay = $('input:radio[name="joinway"]:checked').val();
  		var saveTrm =$('input:radio[name="saveTrm"]:checked').val();
- 		//var pnsnKindName = $('input:radio[name="pnsnKindName"]:checked').val();
  		
- 		//var formData = $(this).serialize();
- 		//alert(formData);
+ 		
  		$.ajax({
  			type:"post",
  			url:"/depositSearch",

@@ -5,8 +5,6 @@
  
  function toggleBtn1(){ 
 
-
-	
 	// 토글 할 버튼 선택 (btn1)
 	const btn1 = document.getElementById('btn1');
 				  
@@ -14,57 +12,8 @@
 	if(btn1.style.display == 'none') {
 	   btn1.style.display = 'block';
 	}
- 	/*$.ajax({
- 			type:"post",
- 			url:"/SavingCompare",
- 			data:{"savingID": savingID},
- 				
- 			success:function(result){
- 			
- 			//console.log('result >>>' + JSON.stringify(result));
-
- 			$('.prod_list').append('<li class="prod_lists">' +  
-	 			'<div class="oo">' + 
-	 			'<input  type="hidden" class="comName" value="'+result.comName+ '"/>'+ result.comName + '</input>' + '<br>' +
-	 			'<input  type="hidden" class="prdName" value="'+result.prdName+ '"/>'+ result.prdName + '</input>' +'<br>' + 
-	 			'<input  type="hidden" class="joinWay" value="'+result.joinWay + '"/>'+ '</input>' +
-	 			'<input  type="hidden" class="interest" value="'+result.interest + '"/>'+ '</input>' +
-	 			'<input  type="hidden" class="spclCnd" value="'+result.spclCnd + '"/>'+ '</input>' +
-	 			'<input  type="hidden" class="maxLimit" value="'+result.maxLimit + '"/>'+ '</input>' +
-	 			'<input  type="hidden" class="joinMember" value="'+result.joinMember + '"/>'+ '</input>' +
-	 			'<input  type="hidden" class="etcNote" value="'+result.etcNote+ '"/>'+ '</input>' +
-	 			'<input  type="hidden" class="intrRate" value="'+result.intrRate + '"/>'+'</input>' +
-	 			'<input  type="hidden" class="intrRate2" value="'+result.intrRate2+ '"/>'+result.intrRate2 + '</input>' +'<br>' +
-	 			'<input  type="hidden" class="saveTrm" value="'+result.saveTrm+ '"/>'+ result.saveTrm +'</input>' +'<br>' +
-	 			'<input  type="hidden" class="rsrvTypeName" value="'+result.rsrvTypeName+ '"/>'+result.rsrvTypeName+ '</input>' +
-	 			'<input  type="hidden" class="intrRateTypeName" value="'+result.intrRateTypeName+ '"/>'+'</input>' +
-	 			
-	 			
-	 
-	 				'<div class="id6">' + 
-	 					'<input type="checkbox" name="Chk_list" class="chkDelete" value="'+ result.savingID  +'"/>'+ 
-	 					'<input class="prdName" type="hidden" value="' +result.prdName + '"/>' + 
-	 				'</div>' +
-	 				
-	 					
-	 			'</div>'+
-	 		'</li>');
-	 		
-
- 		// 비교 임시테이블에 저장하기위함 함수호출
- 
- 												
- 			},
- 			error:function(){
- 				alert("실패");
- 			}
- 			
- 			
- 		}); // ajax 종료 
- 		
- 		*/
-
-    }	
+ 	
+}	
     $(function(){
     
 	
@@ -105,12 +54,12 @@
  		var checked = $('.chkDelete').is(':checked');
  		
  		if(checked){ // 하나라도 선택한 경우
- 		var answer = confirm("선택된 상품을 삭제하시겠습니까?");
+ 		var answer = confirm("전체 상품을 삭제하시겠습니까?");
  		if(answer){
  		 for(var i=$('.chkDelete').length-1; i>-1; i--){ 
 
-﻿                    $('.chkDelete').eq(i).closest('.oo').remove(); 
- 		
+﻿        $('.chkDelete').eq(i).closest('.oo').remove(); 
+ 		$("#allCheck").prop("checked", false); // 해제
  		
  		}
  		   

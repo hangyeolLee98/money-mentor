@@ -59,5 +59,18 @@ $(document).ready(function(){
            alert("적금실패");
         }
   }); // 적금 ranking end
+    // 연금 ranking
+    $.ajax({
+        type:"post",
+        url:"/annRandom",
+        data:{"annuitySavingID" : $("#annuitySavingID").val()},
+        success:function(result){
+        $('.ann_Img_div').html(result);
+                                   
+        },
+        error:function(){
+           alert("연금실패");
+        }
+  }); // 연금 ranking end
 
 });

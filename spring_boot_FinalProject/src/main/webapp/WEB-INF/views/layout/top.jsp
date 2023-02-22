@@ -37,7 +37,12 @@
 							<li id="menu1_4"><div>My Momentor</div>
 								<ul class="hd_menu_sub">
 									<li><a href="<c:url value='/profile/calender'/>">캘린더</a></li>
-									<li><a href="<c:url value='/user/assetInfoForm/${sessionScope.sid}'/>">정보입력</a></li>
+									<c:if test="${empty sessionScope.sid}">
+										<li><a href="<c:url value='/user/loginForm'/>">정보입력</a></li>
+									</c:if>
+									<c:if test="${not empty sessionScope.sid}">
+										<li><a href="<c:url value='/user/assetInfoForm/${sessionScope.sid}'/>">정보입력</a></li>
+									</c:if>
 								</ul>
 							</li>
 						</ul>

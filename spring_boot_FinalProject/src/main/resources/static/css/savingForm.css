@@ -144,6 +144,9 @@ a:hover {
         
        border:1px solid transparent; 
    
+        /* background-image:linear-gradient(#fff, #fff),linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+        border-image:linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+        border-image-slice: 1; */
         background-image:linear-gradient(#fff, #fff),linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
         border-image:linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
         border-image-slice: 1;
@@ -187,6 +190,7 @@ a:hover {
 	
 .btn_in a:nth-child(2) {
     background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    
     
 }
 
@@ -361,7 +365,7 @@ input[type="text"] {
 	font-size:20px;
 	font-weight: bold;
 	/* color:#232323; */
-	color:#597bb6;
+	color:#0f4b81;
 }
 .text04{
 	font-size:16px;
@@ -482,7 +486,7 @@ input[type="text"] {
   max-width: 1100px;    
   border-radius:10px;       
   overflow:hidden;         
-  background-color:#00C39F;  
+  background-color:#0f4b81;  
   box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3); 
 }
 .head-title{
@@ -538,56 +542,15 @@ input[type="text"] {
   cursor:pointer;                
 }
 .pop-btn.confirm{                 
-  border-right:1px solid #00C39F; 
+  border-right:1px solid #0f4b81; 
 }
 
-/* 모달 내부 */
 
-.imgtr{
-    text-align: left;
-    padding-left: 10px;
-       
-}
-.idtr{
-	
-	padding-left: 31px;
-}
-
-.destr{
-	width: 480px;
-	
-}
-.imgth{
-	padding-left: 10px;
-    text-align: -webkit-left;
-   width: 200px;
-    padding-block: 20px;
-}
-.idth{
-	padding-left: 30px;
-   padding-block: 20px;
-	
-}
-
-.desth{
-	padding-left: 30px;
- padding-block: 20px;
-	
-}
-
-.feeth{
-	width: 150px;
-	padding-left: 30px;
- padding-block: 20px;
-}
 .modallist{
 	  padding: 20px 0px;
 	
 }
 
-.modallist thead{ 
-	/* border-top: 2px solid #c1bdba */
-}
 .modallist tbody{ 	
 	
 	border-top:3px  solid #c1bdba;
@@ -595,11 +558,11 @@ input[type="text"] {
 	}
 	
 .modallist th {
-	width:180px;
-	height:50px;
-	text-align:left;
-	padding-left:10px;
-	background: #f5f5f5;
+	width: 198px;
+    height: 50px;
+    text-align: left;
+    padding-left: 10px;
+    background: #f5f5f5;
     color: #222;
 }
 .modallist td{
@@ -607,10 +570,7 @@ input[type="text"] {
 	
 }
 .line {
-	margin-bottom:20px;
-    /* border-bottom: 1px solid #c1bdba; */
-
-  
+	margin-bottom:20px; 
 } 
   
 
@@ -629,18 +589,42 @@ input[type="text"] {
   scrollbar-width: none; /* 파이어폭스 */
 }
 
-/* 상품비교 버튼들 */
-.comp_prod_selector button{
+.btn_layer_toggle{
+	margin-bottom: 1px;
+    height: 35px;
+    border: 3px solid #00000075;
+    color: #00000075;
+    font-size: 16px;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    box-shadow: 3px 3px #222;
+    border-radius: 5px;
+    padding: 0 11px;
+}
 
-	height: 36px;
-	 border: 3px solid #00000075;
-   	 color: #00000075;
-	 font-size: 16px;
-	 background-color: #fdfdfd;
-	 cursor: pointer;
-	 box-shadow: 3px 3px #222;
-	border-radius: 5px;
-	 padding: 0 20px;
+.allCheckBox{
+	width: 10px;
+    margin-left: 8px;
+    padding-top: 60px;
+    height: 5px;
+}
+
+/* 상품비교 버튼들 */
+ .comp_prod_selector .btn_compsel{
+
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    height: 36px;
+    border: 3px solid #00000075;
+    color: #00000075;
+    font-size: 16px;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    box-shadow: 3px 3px #222;
+    border-radius: 5px;
+    padding: 0 20px;
 	 
 }
 .comp_prod_selector button:hover{opacity: 0.7;}
@@ -658,9 +642,8 @@ h4 {
     margin-inline-start: 43px;
     margin-inline-end: 0px;
     font-weight: bold;
-    
     margin-right: auto;
-    width: 1028px;
+    width: 1085px;
     float: left;
 }
 
@@ -670,16 +653,14 @@ h4 {
     margin-left: auto; 
     margin-right: auto; 
     width: 1100px;
-    z-index: 1;
-   
-    
-  
+    z-index: 1;  
 }
 
 .comp_prod_selector .compsel_head {
     height: 8px;
     line-height: 38px;
-   background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+   /* background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed); */
+    background-color: #81b2de;
     color: #fff;
     overflow: hidden;
     padding: 0 0 41px;
@@ -704,14 +685,14 @@ h4 {
 
 .comp_prod_selector .compsel_prods {
 	display:flex;
-	background-color:#fff;
-   
+	/* background-color:#fff; */
+   background-color:#597bb6;
     overflow: auto;
     float: left;
-     border-radius: 10px;
+    /*  border-radius: 10px; */
     margin-left: auto;
     margin-right: auto;
-    width: 1051px;
+    width: 1100px;
 }
 .comp_prod_selector .compsel_opt_area {
     position: absolute;
@@ -720,15 +701,12 @@ h4 {
     right: 0;
     top: 0;
     bottom: 0;
-    background: #bdbdff;
+    background: #597bb6;
     float: right;
    
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    font-size: 60px;
-   
-    
-    
+    font-size: 60px;   
 }
 
 .comp_prod_selector .compsel_body:after {
@@ -738,33 +716,27 @@ h4 {
 }
 
 .btn_compsel{
-	
 	width: 130px;
-   
 }
-	.prod_list{
+
+.prod_list{
 	display: flex;
 	width: 922px;
-	height:300px;
-	
-	background-color: rgb(23 167 255 / 11%);
-	
-	
-	}
+	height:300px;	
+}
 
-	.head_opt{
+.head_opt{
 	display: inline;
     float: right;
     margin-block-start: -4px;
-        margin-inline-end: 36px;
-	}
-   
+    margin-inline-end: 36px;
+}
     
 .logo{
 	display:inline-block;
 	padding:10px 0 10px 0;
-	
 }
+
 .list{
 	display:inline-block;
 	padding-left:10px;
@@ -828,7 +800,7 @@ h4 {
    width: 60px;   
    height: 60px;  
    background-color: rgb(142 211 255 / 68%);
-   background-image: url("https://w.namu.la/s/22a95794f01dc71e3a2cf0fc67996e9bd2022c8ff3ccc4bce01716314679daebea03c4d91a71ba76c01363651230e0702a4ea2f16fb0fd5b0861c5761065ee4fd6ca4744062f119fd6f1cc257d27a134a5f25189c8ca56e0057b95b7fe111b1b");
+   background-image: url("/image/기업은행.svg");
    background-size: 236px 53px;
    background-repeat: no-repeat;
    border-radius: 30px;
@@ -872,11 +844,11 @@ h4 {
     width: 60px;
     height: 60px;
     background-color: rgb(84 184 238 / 28%);
-    background-image: url("https://w.namu.la/s/696eee01e60b49028bb167c8330ba10f72f7e1831c7e0165f529e9543a38f789fe98a4745b614c3ae680da9c962c37a8624be913d37c3d8ab28676f80aeb478e92fae5c9d4420c87e99b793f453c69541769a52ad5b1adca1816c688d98f0823");
-    background-size: 213px 56px;
+    background-image: url(/image/전북은행.png);
+    background-size: 186px 38px;
     background-repeat: no-repeat;
     border-radius: 30px;
-    background-position: 10px 2px;
+    background-position: 10px 11px;
     margin-right: 1px;
 }
 .Kakao{
@@ -949,13 +921,13 @@ h4 {
 
 .Acuon{
    	width: 60px;
-   	height: 60px;
-   	background-color: rgb(211 209 209 / 64%);
-   	background-image: url("https://w.namu.la/s/c15a50585273f1c2dcbb4431de915c15e882cd5ddfb55e816b68906238e3c7c2a1f4383163acea9f4ce259243f2c565c62a6d552351605850e7a953b28da5de017a9bdc5973deb4d8ffa2ae79132d67e9258a790205d6387351bd78571d4aaef");
-   	background-size: 410px 60px;
+    height: 60px;
+    background-color: rgb(211 209 209 / 64%);
+    background-image: url(/image/애큐온저축은행.png);
+    background-size: 196px 110px;
     background-repeat: no-repeat;
     border-radius: 30px;
-    background-position: -17.75px -1px;
+    background-position: -67.75px -4px;
     margin-right: 1px;
 } 
 
@@ -981,20 +953,473 @@ h4 {
     background-position: -17.75px 9.5px;
     margin-right: 1px;
 } 
+.MG{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(99 23 255 / 10%);
+    background-image: url(/image/민국저축은행.png);
+    background-size: 194px 53px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 12.25px 3.5px;
+    margin-right: 1px;
+} 
+.PR{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(23 95 255 / 10%);
+    background-image: url(/image/푸른저축은행로고.png);
+    background-size: 58px 58px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 1.25px 1.5px;
+    margin-right: 1px;
+} 
+.HB{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(24 175 255 / 17%);
+    background-image: url(/image/HB저축은행.png);
+    background-size: 200px 49px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 11.25px 3.5px;
+    margin-right: 1px;
+} 
+.KUYS{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(255 27 165 / 11%);
+    background-image: url(/image/키움예스저축은행.png);
+    background-size: 54px 54px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 4.25px 1.5px;
+    margin-right: 1px;
+} 
+.KU{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(23 95 255 / 10%);
+    background-image: url(/image/키움저축은행.png);
+    background-size: 58px 58px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 1.25px 1.5px;
+    margin-right: 1px;
+} 
+.SBI{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(3 23 163 / 89%);
+    background-image: url(/image/SBI저축은행.png);
+    background-size: 48px 33px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 6.25px 8.5px;
+    margin-right: 1px;
+} 
+.BARO{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(30 168 255 / 23%);
+    background-image: url(/image/바로저축은행.png);
+    background-size: 138px 39px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 12.25px 9.5px;
+    margin-right: 1px;
+} 
+.DAOL{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(149 147 152 / 10%);
+    background-image: url(/image/다올저축은행.png);
+    background-size: 111px 130px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 4.25px 5.5px;
+    margin-right: 1px;
+} 
+.KOREA{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(247 92 196 / 10%);
+    background-image: url(/image/고려저축은행.png);
+    background-size: 129px 52px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 16.25px 4.5px;
+    margin-right: 1px;
+} 
+.JINJU{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(40 207 116 / 13%);
+    background-image: url(/image/진주저축은행.png);
+    background-size: 129px 41px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 10.25px 9.5px;
+    margin-right: 1px;
+} 
+.KJ{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(255 181 14 / 11%);
+    background-image: url(/image/국제저축은행.png);
+    background-size: 74px 51px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 5.25px 5.5px;
+    margin-right: 1px;
+} 
+.HH{
+    width: 60px;
+    height: 60px;
+    background-color: rgb(255 191 14 / 11%);
+    background-image: url(/image/한화생명보험주식회사.png);
+    background-size: 131px 51px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 5.25px 5.5px;
+    margin-right: 1px;
+} 
+.DY{
+    width: 60px;
+    height: 60px;
+    background-color: rgb(97 195 240 / 18%);
+    background-image: url(/image/동양저축은행.png);
+    background-size: 332px 53px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 12.25px 1.5px;
+    margin-right: 1px;
+} 
+.DDBB{
+    width: 60px;
+    height: 60px;
+    background-color: rgb(97 195 240 / 18%);
+    background-image: url(/image/더블저축은행.png);
+    background-size: 294px 66px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: -1.75px -3.5px;
+    margin-right: 1px;
+} 
+.Samho{
+    width: 60px;
+    height: 60px;
+    background-color: rgb(97 195 240 / 18%);
+    background-image: url(/image/삼호저축은행.png);
+    background-size: 306px 68px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 1.25px -4.5px;
+    margin-right: 1px;
+} 
+.YC{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(162 169 172 / 18%);
+    background-image: url(/image/융창저축은행.png);
+    background-size: 229px 56px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 2.25px 12.5px;
+    margin-right: 1px;
+} 
+.Smart{
+    width: 60px;
+    height: 60px;
+    background-color: rgb(255 180 69 / 17%);
+    background-image: url(/image/스마트저축은행.png);
+    background-size: 117px 45px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 1.25px 10.5px;
+    margin-right: 1px;
+} 
+.Star{
+    width: 60px;
+    height: 60px;
+    background-color: rgb(162 169 172 / 18%);
+    background-image: url(/image/스타저축은행.png);
+    background-size: 171px 60px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 4.25px -1.5px;
+    margin-right: 1px;
+} 
+.SR{
+    width: 60px;
+    height: 60px;
+    background-color: rgb(129 159 233 / 13%);
+    background-image: url(/image/세람저축은행.png);
+    background-size: 166px 60px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 11.25px -1.5px;
+    margin-right: 1px;
+} 
+.SangSangIn{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(129 204 233 / 13%);
+    background-image: url(/image/상상인저축은행.png);
+    background-size: 280px 67px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 5.25px -6.5px;
+    margin-right: 1px;
+} 
+.HT{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(233 188 129 / 13%);
+    background-image: url(/image/한국투자저축은행.svg);
+    background-size: 196px 66px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 1.25px 0.5px;
+    margin-right: 1px;
+} 
+.Cheongju{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(241 15 15 / 13%);
+    background-image: url(/image/청주저축은행.png);
+    background-size: 296px 73px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 7.25px -6.5px;
+    margin-right: 1px;
+} 
+.GH{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(15 104 241 / 13%);
+    background-image: url(https://www.kuemhwabank.co.kr/img/logo67/153.png);
+    background-size: 296px 73px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 10.25px -6.5px;
+    margin-right: 1px;
+} 
+.IC{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(15 104 241 / 13%);
+    background-image: url(https://www.incheonbank.com/img/logo67/158.png);
+    background-size: 191px 66px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 1.25px -3.5px;
+    margin-right: 1px;
+} 
+.MA{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(255 236 68 / 39%);
+    background-image: url(/image/모아저축은행.png);
+    background-size: 258px 66px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 8.25px -4.5px;
+    margin-right: 1px;
+} 
+.Daeback{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(212 212 212 / 30%);
+    background-image: url(https://www.debecbank.co.kr/img/logo67/207.png);
+    background-size: 258px 66px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 10.25px -2.5px;
+    margin-right: 1px;
+} 
+.BR{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(244 212 241 / 30%);
+    background-image: url(https://www.bulimbank.co.kr/img/logo67/310.png);
+    background-size: 224px 45px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 13.25px 3.5px;
+    margin-right: 1px;
+} 
+.YG{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(244 235 212 / 30%);
+    background-image: url(https://yjbank.co.kr/img/logo.gif);
+    background-size: 192px 37px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 12.25px 11.5px;
+    margin-right: 1px;
+} 
+.PP{
+	width: 60px;
+	height: 60px;
+	background-color: rgb(255 0 0 / 15%);
+	background-image: url(/image/페퍼저축은행.png);
+	background-size: 46px 26px;
+	background-repeat: no-repeat;
+	border-radius: 30px;
+	background-position: 7.25px 17.5px;
+	margin-right: 1px;
+} 
+.CK{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(0 36 255 / 8%);
+    background-image: url(https://www.cksavingsbank.co.kr/img/logo67/351.png);
+    background-size: 198px 41px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 8.25px 10.5px;
+    margin-right: 1px;
+}
+.DMSH{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(0 141 255 / 8%);
+    background-image: url(https://www.daemyungbank.co.kr/img/logo67/401.png);
+    background-size: 198px 41px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 3.25px 10.5px;
+    margin-right: 1px;
+}
+.AS{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(0 141 255 / 8%);
+    background-image: url(https://www.asanbank.co.kr/img/logo67/460.png);
+    background-size: 198px 41px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 1.25px 9.5px;
+    margin-right: 1px;
+}
+.DHJC{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(4 185 102 / 8%);
+    background-image: url(https://www.daehanbank.co.kr/img/logo67/554.png);
+    background-size: 198px 41px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 5.25px 10.5px;
+    margin-right: 1px;
+}
+.STR{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(152 174 164 / 8%);
+    background-image: url(https://www.centralbank.co.kr/img/logo67/565.png);
+    background-size: 275px 55px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 5.25px 2.5px;
+    margin-right: 1px;
+}
+.Dream{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(163 169 166 / 8%);
+    background-image: url(https://www.dreamsb.com/img/logo67/605.png);
+    background-size: 238px 55px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 5.25px 2.5px;
+    margin-right: 1px;
+}
+.MS{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(152 174 164 / 8%);
+    background-image: url(https://www.samilbank.co.kr/img/logo67/610.png);
+    background-size: 298px 55px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 12.25px 1.5px;
+    margin-right: 1px;
+}
+.OS{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(182 183 185 / 8%);
+    background-image: url(https://www.osungbank.co.kr/img/logo67/616.png);
+    background-size: 225px 40px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 2.25px 10.5px;
+    margin-right: 1px;
+}
+.SOL{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(182 183 185 / 8%);
+    background-image: url(https://www.soulbrainsb.co.kr/image/new_main/logo.png);
+    background-size: 146px 40px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 3.25px 8.5px;
+    margin-right: 1px;
+}
+.KBLIFE{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(182 183 185 / 8%);
+    background-image: url(/image/교보생명보험주식회사.png);
+    background-size: 56px 32px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 3.25px 8.5px;
+    margin-right: 1px;
+}
+.MRAS{
+	width: 60px;
+    height: 60px;
+    background-color: rgb(182 183 185 / 8%);
+    background-image: url(https://investments.miraeasset.com/assets/img/pc/logo_header.png);
+    background-size: 58px 40px;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: 4.25px 5.5px;
+    margin-right: 1px;
+}
+
+ 
 li{
 	display:inline-block;
 }
 
 .oo{
 	background-color: #fff;
-    margin: 65px 0 65px;
+    margin: 50px 0 65px;
     width: 287px;
     height: 150px;
     margin-left: 15px;
     border-radius: 10px;
     padding: 10px 0 10px 0;
 }
-
+.oo_detail{
+	margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 5px;
+    display: inline-block;
+}
+.chkDelete{
+	margin-left: 262px;
+}
+.id6{
+	display:inline-block;
+}
 .comNameSpan{
 	font-size:17px;
 	color: #9B9B9B;
@@ -1006,3 +1431,29 @@ li{
 	/* color:#232323; */
 	color:#0F4B81;
 }
+.rsrvTypeNameSpan,
+.rpayTypeNameSpan,
+.crdtTypeNameSpan,
+.pnsnKindNameSpan,
+.prdtTypeNameSpan{
+	font-size:15px;
+}
+.intrRate2Span,
+.loanLimitSpan,
+.crdtGradeAvgSpan,
+.avgPrftRateSpan{
+	font-size:17px;
+	color: #00c39f;
+}
+.compselText{
+	position: absolute;
+    margin-top: 255px;
+    margin-left: 20px;
+    height: 10px;
+    color:#fff;
+}
+
+.opt_select{
+	margin-top: 88px;
+}
+

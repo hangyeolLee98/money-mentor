@@ -28,12 +28,12 @@
 	</resultMap>
 
 	<insert id="insertSavingBase" parameterType="com.spring_boot_momentor.model.SavingBaseVO"> 
-		insert into SavingBase (savingID, dclsMonth, comNum, prdNum, comName, prdName, joinWay, interest, spclCnd, maxLimit, joinMember, etcNote, dclsStart) 
+		insert into savingBase (savingID, dclsMonth, comNum, prdNum, comName, prdName, joinWay, interest, spclCnd, maxLimit, joinMember, etcNote, dclsStart) 
 		values (#{savingID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{comName}, #{prdName}, #{joinWay}, #{interest}, #{spclCnd}, #{maxLimit}, #{joinMember}, #{etcNote}, #{dclsStart}) 
 	</insert>
 	
 	<insert id="insertSavingOption" parameterType="com.spring_boot_momentor.model.SavingOptionVO"> 
-		insert into SavingOption (savingID, dclsMonth, comNum, prdNum, intrRate, intrRate2, saveTrm, rsrvTypeName, intrRateTypeName) 
+		insert into savingOption (savingID, dclsMonth, comNum, prdNum, intrRate, intrRate2, saveTrm, rsrvTypeName, intrRateTypeName) 
 		values (#{savingID}, #{dclsMonth}, #{comNum}, #{prdNum}, #{intrRate}, #{intrRate2}, #{saveTrm}, #{rsrvTypeName}, #{intrRateTypeName}) 
 	</insert>
 	
@@ -42,12 +42,12 @@
 		<!--  SELECT * FROM savingBase as sb	inner join savingOption as so
 		on sb.savingID = so.savingID -->
 		
-	SELECT sb.savingID, comName, prdName, joinWay, interest, spclCnd, maxLimit, joinMember, etcNote, intrRate,<!-- intrRate,MAX(intrRate2) as intrRate2-->intrRate2, saveTrm,rsrvTypeName, intrRateTypeName
-		FROM SavingBase as sb
+	SELECT sb.savingID, comName, prdName, joinWay, interest, spclCnd, maxLimit, joinMember, etcNote, intrRate, intrRate,MAX(intrRate2) as intrRate2, MAX(saveTrm) as saveTrm,rsrvTypeName, intrRateTypeName
+		FROM savingBase as sb
 		inner join savingOption as so
 		on sb.savingID = so.savingID
-		<!-- group by prdName
-		  -->
+		group by prdName
+		
 	</select>	
 <!-- 		
 	WHERE prdName like CONCAT('%', #{prdName}, '%') OR
@@ -56,7 +56,7 @@
 			  saveTrm = #{saveTrm} -->
 	<!--   적금 검색   -->
 	<select id="savingSearch" resultMap="savingResult"> 
-	SELECT * FROM SavingBase as sb	inner join SavingOption as so
+	SELECT * FROM savingBase as sb	inner join savingOption as so
 		on sb.savingID = so.savingID 
 		
 		WHERE comName like CONCAT('%', #{prdName}, '%') AND
@@ -71,7 +71,7 @@
 	<!-- 적금 비교 넣기 -->
 	<select id="SavingCompare" resultMap="savingResult" parameterType="string">
 		SELECT b.comName, b.prdName, joinWay, interest, spclCnd, maxLimit, joinMember, etcNote, intrRate, intrRate2, saveTrm, rsrvTypeName, intrRateTypeName
-		FROM SavingBase b, SavingOption o
+		FROM savingBase b, savingOption o
 		where b.savingID = o.savingID AND b.savingID = #{savingID} 
 	
 	</select>
@@ -79,7 +79,7 @@
 	<!-- 적금 비교 모달 -->
 	<select id="SavingCompareModal" resultMap="savingResult" parameterType="string">
 		SELECT b.comName, b.prdName, joinWay, interest, spclCnd, maxLimit, joinMember, etcNote, intrRate, intrRate2, saveTrm, rsrvTypeName, intrRateTypeName
-		FROM SavingBase b, SavingOption o
+		FROM savingBase b, savingOption o
 		where b.savingID = o.savingID AND b.savingID = #{savingID}
 	</select>
 </mapper>  

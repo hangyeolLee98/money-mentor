@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring_boot_momentor.model.AnnuitySavingBaseVO;
 import com.spring_boot_momentor.model.CardVO;
 import com.spring_boot_momentor.model.InsuVO;
 import com.spring_boot_momentor.model.SavingBaseVO;
@@ -100,6 +101,12 @@ SCService scservice;
 		ArrayList<SavingBaseVO> savRandom = scservice.savRandom();
 		model.addAttribute("savRandom", savRandom);
 		return "indexRanking/savRanking";
+	}
+	@RequestMapping("/annRandom")
+	public String annRandom(Model model) {
+		ArrayList<AnnuitySavingBaseVO> annRandom = scservice.annRandom();
+		model.addAttribute("annRandom", annRandom);
+		return "indexRanking/annRanking";
 	}
 	
 	

@@ -45,12 +45,7 @@ function productCompare1(){
         			if(popup.style.display == 'none') {
         				popup.style.display = 'flex';
         			} 
-    			});
-    			
-    			
-    
-
-    		
+    			}); 		
     	};
 
 $(function(){

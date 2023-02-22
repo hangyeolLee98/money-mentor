@@ -17,30 +17,29 @@
 			</div>
 			<section>
 				<c:forEach items="${cal}" var="cal">
-				<script>
-				$(document).ready(function(){
-					  $(".prd-option").each(function(){
-						  console.log($('.prd-option').val());
-					    if($(this).val()=="${cal.prdType}"){
-					      $(this).attr("selected","selected"); // attr적용안될경우 prop으로 
-					    }
-					  });
-					});
-				</script>
 					<table>
 						<tbody>
 							<tr class="prdName">
 								<td class="prd-table-title">상품 이름</td>
 								<td><input placeholder="${cal.prdName}" type="text" id="prdName" class="prdName" name="prdName"></td>
 							</tr>
+							<script>
+								$(document).ready(function(){
+								  $(".prd-option").each(function(){
+								    if($(this).val()=="${cal.prdType}"){
+								      $(this).attr("selected","selected"); // attr적용안될경우 prop으로 
+								    }
+								  });
+								});
+							</script>
 							<tr class="prdType">
 								<td>상품 종류</td>
 								<td>
 									<select id="prd-type-select" name="prdType" disabled>
 										<option class="prd-option" value="card">카드</option>
 										<option class="prd-option" value="insu">보험</option>
-										<option value="deposit">예금</option>
-										<option value="saving">적금</option>
+										<option class="prd-option" value="deposit">예금</option>
+										<option class="prd-option" value="saving">적금</option>
 									</select>
 								</td>
 							</tr>
